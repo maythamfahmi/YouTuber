@@ -59,7 +59,8 @@ namespace YouTuber.Console
                 System.Console.WriteLine("example: -l https://www.youtube.com/watch?v=y9ajRIgTJNA");
                 System.Console.WriteLine("example: -l y9ajRIgTJNA;pYlYt9iuJdc;NcumhqTDPpE");
                 System.Console.WriteLine("[download.txt]       Create your own list\n");
-                System.Console.WriteLine("Note: By using this app you agree with license agreement.");
+                System.Console.WriteLine("Note: Please read README.md.");
+                System.Console.WriteLine("By using this App, you agree to be bound by the terms and conditions of this Agreement");
             }
         }
 

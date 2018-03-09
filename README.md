@@ -29,3 +29,7 @@ If you find bugs, please [report](https://github.com/maythamfahmi/YouTuber/issue
 
 ### How to use
 Complie and Run the console program and followed by `-h`
+
+### License
+
+[MIT License](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE)
