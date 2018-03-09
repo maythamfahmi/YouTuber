@@ -4,13 +4,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("YouTubeService")]
-[assembly: AssemblyDescription("Convert Youtube url or YouTube video Id to Mp3 sound file.")]
+[assembly: AssemblyTitle("YouTuber.Console")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Maytham Fahmi")]
-[assembly: AssemblyProduct("YouTubeService")]
-[assembly: AssemblyCopyright("Copyright © 2018")]
-[assembly: AssemblyTrademark("Maytham Fahmi")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("YouTubeService.Console")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f00862f0-545a-449f-99d3-545de580514d")]
+[assembly: Guid("8a862b03-45ee-47f7-ac91-08f56ac01a81")]
 
 // Version information for an assembly consists of the following four values:
 //
