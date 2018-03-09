@@ -24,7 +24,7 @@ If you find an issue, please file a report [here](https://github.com/maythamfahm
 
 ### Contributors
 I welcome contributors to join developing this tool.
-If you like so, please email me: mailto:maythamfahmi@itbackyard.com.
+If you like so, please email me: maythamfahmi@itbackyard.com.
 If you find bugs, please [report](https://github.com/maythamfahmi/YouTuber/issues).
 
 ### How to use
