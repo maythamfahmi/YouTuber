@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("YouTubeService")]
-[assembly: AssemblyDescription("Convert Youtube url or YouTube video Id to Mp3 sound file.")]
+[assembly: AssemblyDescription("Download your own private video sound track from YouTube.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Maytham Fahmi")]
 [assembly: AssemblyProduct("YouTubeService")]
