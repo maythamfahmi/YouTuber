@@ -2,6 +2,10 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE) <!-- [![Build Status](https://travis-ci.org/maythamfahmi/YouTuber.svg?branch=master)](https://travis-ci.org/maythamfahmi/YouTuber) -->
 
+<a href="https://github.com/maythamfahmi/wet-extractor/blob/master/LICENSE">
+    <img src="https://github.com/maythamfahmi/YouTuber/logo.png" align="right" height="140" width="140" >
+</a>
+
 ### Overview
 This little software is made for learning purpose and to demonstrate some primitive programing logic. 
 This software should be used own private uploaded materials. 
@@ -33,3 +37,5 @@ Complie and Run the console program and followed by `-h`
 ### License
 
 [MIT License](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE)
+
+[1]: http://youtube.com
