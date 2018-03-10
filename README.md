@@ -3,7 +3,7 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE) <!-- [![Build Status](https://travis-ci.org/maythamfahmi/YouTuber.svg?branch=master)](https://travis-ci.org/maythamfahmi/YouTuber) -->
 
 <a href="https://github.com/maythamfahmi/wet-extractor/blob/master/LICENSE">
-    <img src="https://github.com/maythamfahmi/YouTuber/logo.png" align="right" height="140" width="140" >
+    <img src="http://dev.itbackyard.dk/youtuber/image/logo.png" align="right" height="140" width="140" >
 </a>
 
 ### Overview
@@ -22,6 +22,7 @@ Third party packages/libraries:
 - NUnit
 - Shouldly
 - VideoLibrary
+- Costura.Fody
 
 ### Issue Tracking
 If you find an issue, please file a report [here](https://github.com/maythamfahmi/YouTuber/issues)
