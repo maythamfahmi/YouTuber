@@ -42,7 +42,9 @@ namespace YouTuber.Client
                 return null;
             }
 
-            _set.Add(url);
+            lock(_set){
+                _set.Add(url);
+            }
 
             var youtube = YouTube.Default;
             var video = youtube.GetVideoAsync(uri);
@@ -64,7 +66,7 @@ namespace YouTuber.Client
             {
                 return "Unknown error please report a bug!";
             }
-
+            
             CreateFolder(BaseFolder);
 
             File.WriteAllBytes(video.Result.FullName, video.Result.GetBytes());
