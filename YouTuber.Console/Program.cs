@@ -42,25 +42,22 @@ namespace YouTuber.Console
             {
                 if (string.IsNullOrWhiteSpace(args[1]))
                 {
-                    System.Console.WriteLine("example: -l https://www.youtube.com/watch?v=y9ajRIgTJNA");
-                    System.Console.WriteLine(
-                        "example: -l https://www.youtube.com/watch?v=y9ajRIgTJNA;https://www.youtube.com/watch?v=pYlYt9iuJdc;https://www.youtube.com/watch?v=NcumhqTDPpE");
                 }
                 else
                 {
-                    Service.YoutubeToMp3(GetList(args[1]));
+                    try
+                    {
+                        Service.YoutubeToMp3(GetList(args[1]));
+                    }
+                    catch
+                    {
+                        Help("download");
+                    }
                 }
             }
             else if (input == "-h" || input == "--help" || input.Any())
             {
-                System.Console.WriteLine("[-h | --help]        Get help");
-                System.Console.WriteLine("[-d | --dummy]       Download sample files");
-                System.Console.WriteLine("[-l | --list]        Download directly, use ';' as seperator for multiple urls/Ids");
-                System.Console.WriteLine("example: -l https://www.youtube.com/watch?v=y9ajRIgTJNA");
-                System.Console.WriteLine("example: -l y9ajRIgTJNA;pYlYt9iuJdc;NcumhqTDPpE");
-                System.Console.WriteLine("[download.txt]       Create your own list\n");
-                System.Console.WriteLine("Note: Please read README.md.");
-                System.Console.WriteLine("By using this App, you agree to be bound by the terms and conditions of this Agreement");
+                Help();
             }
         }
 
@@ -72,6 +69,29 @@ namespace YouTuber.Console
         public static IEnumerable<string> GetList(string input)
         {
             return input.Split(';').ToList();
+        }
+
+        public static void Help(string help = "all")
+        {
+            if (help == "all")
+            {
+                System.Console.WriteLine("[-h | --help]        Get help");
+                System.Console.WriteLine("[-d | --dummy]       Download sample files");
+                System.Console.WriteLine(
+                    "[-l | --list]        Download directly, use ';' as seperator for multiple urls/Ids");
+                System.Console.WriteLine("example: -l https://www.youtube.com/watch?v=y9ajRIgTJNA");
+                System.Console.WriteLine("example: -l y9ajRIgTJNA;pYlYt9iuJdc;NcumhqTDPpE");
+                System.Console.WriteLine("[download.txt]       Create your own list\n");
+                System.Console.WriteLine("Note: Please read README.md.");
+                System.Console.WriteLine(
+                    "By using this App, you agree to be bound by the terms and conditions of this Agreement");
+            }
+            else if (help == "download")
+            {
+                System.Console.WriteLine("example: -l https://www.youtube.com/watch?v=y9ajRIgTJNA");
+                System.Console.WriteLine(
+                    "example: -l https://www.youtube.com/watch?v=y9ajRIgTJNA;https://www.youtube.com/watch?v=pYlYt9iuJdc;https://www.youtube.com/watch?v=NcumhqTDPpE");
+            }
         }
     }
 }
