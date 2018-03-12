@@ -7,10 +7,10 @@
 </a>
 
 ### Overview
-This little software is made for learning purpose and to demonstrate some primitive programing logic. 
+This little software is made for learning purpose and to demonstrate some primitive programming logic. 
 This software should be used own private uploaded materials. 
 This software is made as is and developer is not responsible for its usage.
-It is highly encourged to read and respect [YouTube][1] policy and copyright note.
+It is highly encouraged to read and respect [YouTube][1] policy and copyright note.
 You are welcome to continue improving it for learning purpose.
 The software is license under MIT license agreement.
 
