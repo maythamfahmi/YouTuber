@@ -1,6 +1,9 @@
-## YouTuber
+[
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE)
+![.NET Core](https://github.com/maythamfahmi/YouTuber/workflows/.NET%20Core/badge.svg)
+<!-- [![Build Status](https://travis-ci.org/maythamfahmi/YouTuber.svg?branch=master)](https://travis-ci.org/maythamfahmi/YouTuber) -->
 
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE) <!-- [![Build Status](https://travis-ci.org/maythamfahmi/YouTuber.svg?branch=master)](https://travis-ci.org/maythamfahmi/YouTuber) -->
+## YouTuber
 
 <a href="https://github.com/maythamfahmi/wet-extractor/blob/master/LICENSE">
     <img src="http://dev.itbackyard.dk/youtuber/image/logo.png" align="right" height="140" width="140" >
