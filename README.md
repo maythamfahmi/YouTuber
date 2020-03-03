@@ -3,6 +3,13 @@
 ![.NET Core](https://github.com/maythamfahmi/YouTuber/workflows/.NET%20Core/badge.svg)
 <!-- [![Build Status](https://travis-ci.org/maythamfahmi/YouTuber.svg?branch=master)](https://travis-ci.org/maythamfahmi/YouTuber) -->
 
+---
+**NOTE**
+
+Youtuber is getting refactored, new version on its way.
+
+---
+
 ## YouTuber
 
 <a href="https://github.com/maythamfahmi/wet-extractor/blob/master/LICENSE">
