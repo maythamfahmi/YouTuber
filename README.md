@@ -13,7 +13,7 @@ Youtuber is getting refactored, new version on its way.
 ## YouTuber
 
 <a href="https://github.com/maythamfahmi/wet-extractor/blob/master/LICENSE">
-    <img src="http://dev.itbackyard.dk/youtuber/image/logo.png" align="right" height="140" width="140" >
+    <img src="https://github.com/maythamfahmi/YouTuber/blob/master/logo.png" align="right" height="140" width="140" >
 </a>
 
 ### Overview
