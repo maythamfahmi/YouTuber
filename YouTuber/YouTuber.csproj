@@ -30,6 +30,7 @@
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <DebugType>none</DebugType>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     </PropertyGroup>
 

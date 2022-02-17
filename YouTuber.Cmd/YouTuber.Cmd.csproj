@@ -30,6 +30,7 @@
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <DebugType>none</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
