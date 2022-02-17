@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTuber", "YouTuber\YouTub
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTuber.Test", "YouTuber.Test\YouTuber.Test.csproj", "{4104E563-C495-46BD-9765-3B2DC3B027CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTuber.Cmd", "YouTuber.Console\YouTuber.Cmd.csproj", "{8A862B03-45EE-47F7-AC91-08F56AC01A81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTuber.Cmd", "YouTuber.Cmd\YouTuber.Cmd.csproj", "{252AD863-8BDC-4428-B33A-5F02F21BDD10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{4104E563-C495-46BD-9765-3B2DC3B027CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4104E563-C495-46BD-9765-3B2DC3B027CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4104E563-C495-46BD-9765-3B2DC3B027CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A862B03-45EE-47F7-AC91-08F56AC01A81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A862B03-45EE-47F7-AC91-08F56AC01A81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A862B03-45EE-47F7-AC91-08F56AC01A81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A862B03-45EE-47F7-AC91-08F56AC01A81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{252AD863-8BDC-4428-B33A-5F02F21BDD10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{252AD863-8BDC-4428-B33A-5F02F21BDD10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{252AD863-8BDC-4428-B33A-5F02F21BDD10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{252AD863-8BDC-4428-B33A-5F02F21BDD10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

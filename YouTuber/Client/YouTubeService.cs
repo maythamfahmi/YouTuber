@@ -48,16 +48,16 @@ namespace YouTuber.Client
             {
                 var getUri = video.Result.Uri;
             }
-            catch (AggregateException ignore)
+            catch (AggregateException)
             {
                 return "Looks like this is invalid url/id";
             }
-            catch (InvalidOperationException ignore)
+            catch (InvalidOperationException)
             {
                 return
                     $"{CleanFilename(video.Result.FullName)} video is properly copyright protected or locked by provider!";
             }
-            catch (Exception ignore)
+            catch (Exception)
             {
                 return "Unknown error please report a bug!";
             }
@@ -66,30 +66,16 @@ namespace YouTuber.Client
 
             File.WriteAllBytes(video.Result.FullName, video.Result.GetBytes());
 
-            //var inputFile = new MediaFile {Filename = video.Result.FullName};
-            //var outputFile = new MediaFile {Filename = $"{BaseFolder}\\{CleanFilename(video.Result.FullName)}.mp3"};
-
-            //using (var engine = new Engine())
-            //{
-            //    engine.GetMetadata(inputFile);
-            //    engine.Convert(inputFile, outputFile);
-            //}
-
-            //TryToDelete(inputFile.Filename);
-            return
-                $"{CleanFilename(video.Result.FullName)} sound is ready and saved under {BaseFolder}";
+            return $"{CleanFilename(video.Result.FullName)} sound is ready and saved under {BaseFolder}";
         }
 
         public virtual IEnumerable<string> FileToList(string file)
         {
-            string[] results;
-            using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read))
-            {
-                using (var sr = new StreamReader(fs))
-                {
-                    results = sr.ReadToEnd().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                }
-            }
+            using var fs = new FileStream(file, FileMode.Open, FileAccess.Read);
+            using var sr = new StreamReader(fs);
+            var results = sr.ReadToEnd()
+                .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
             return results;
         }
 
@@ -118,15 +104,6 @@ namespace YouTuber.Client
             return uri;
         }
 
-        private static void TryToDelete(string file)
-        {
-            try
-            {
-                File.Delete(file);
-            }
-            catch (IOException ex)
-            {
-            }
-        }
     }
+
 }

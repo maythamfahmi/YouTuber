@@ -17,5 +17,11 @@
     <ItemGroup>
       <ProjectReference Include="..\YouTuber\YouTuber.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Resources\YoutubeList.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
     
 </Project>
