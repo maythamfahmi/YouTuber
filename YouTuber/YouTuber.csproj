@@ -38,13 +38,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+        <None Include="..\LICENSE.txt" Pack="true" PackagePath="\" />
         <None Include="..\README.md" Pack="true" PackagePath="\" />
         <None Include="..\logo.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="..\LICENSE">
+        <Content Include="..\LICENSE.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>

@@ -20,7 +20,7 @@
         <Title>YouTuber.Cmd</Title>
         <Product>YouTuber.Cmd</Product>
         <RootNamespace>YouTuber.Cmd</RootNamespace>
-        <AssemblyName>GetYouTube</AssemblyName>
+        <AssemblyName>DownloadYouTube</AssemblyName>
         <PackageDescription>Simple and fast command line to download youtube videos.</PackageDescription>
         <PackageTags>YouTube; Download</PackageTags>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -34,6 +34,13 @@
 
     <ItemGroup>
       <Content Include="icon.ico" />
+      <None Include="..\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\README.md">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
