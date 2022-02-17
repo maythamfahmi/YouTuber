@@ -21,7 +21,11 @@ namespace YouTuber.Cmd
             debugMode = true;
 #endif
             var input = args.Length == 0 ? "" : args[0];
-            if (input is "-d" or "--dummy" || debugMode)
+            if (string.IsNullOrEmpty(input))
+            {
+                Help();
+            }
+            else if (input is "-d" or "--dummy" || debugMode)
             {
                 CreateSampleList();
                 Service.YoutubeToMp3(ShortVideos);
@@ -81,17 +85,17 @@ namespace YouTuber.Cmd
                     Console.WriteLine("[-d | --dummy]       Download sample files");
                     Console.WriteLine(
                         "[-l | --list]        Download directly, use ';' as seperator for multiple urls/Ids");
-                    Console.WriteLine("example: -l https://www.youtube.com/watch?v=y9ajRIgTJNA");
-                    Console.WriteLine("example: -l y9ajRIgTJNA;pYlYt9iuJdc;NcumhqTDPpE");
+                    Console.WriteLine("example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c");
+                    Console.WriteLine("example: -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw");
                     Console.WriteLine("[download.txt]       Create your own list\n");
                     Console.WriteLine("Note: Please read README.md.");
                     Console.WriteLine(
                         "By using this App, you agree to be bound by the terms and conditions of this Agreement");
                     break;
                 case "download":
-                    Console.WriteLine("example: -l https://www.youtube.com/watch?v=y9ajRIgTJNA");
+                    Console.WriteLine("example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c");
                     Console.WriteLine(
-                        "example: -l https://www.youtube.com/watch?v=y9ajRIgTJNA;https://www.youtube.com/watch?v=pYlYt9iuJdc;https://www.youtube.com/watch?v=NcumhqTDPpE");
+                        "example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c;https://www.youtube.com/watch?v=dVsZm7_sqfw;https://www.youtube.com/watch?v=3rJfBFamlIw");
                     break;
             }
         }
