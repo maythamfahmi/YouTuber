@@ -1,16 +1,12 @@
-﻿using System;
-using Shouldly;
-using System.IO;
-using System.Linq;
+﻿using Shouldly;
 using YouTuber.Client;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace YouTuber.Test
 {
     public class YouTubeTest
     {
-        private static readonly string FileContent = Properties.Resources.YoutubeList;
+        //private static readonly string FileContent = Properties.Resources.YoutubeList;
         private static readonly string RunningPath = AppDomain.CurrentDomain.BaseDirectory;
         private static readonly string FromFile =
             Path.GetFullPath(Path.Combine(RunningPath, @"..\..\Resources\YoutubeList.txt"));
@@ -37,11 +33,11 @@ namespace YouTuber.Test
         [Test]
         public void ResourceFileTest()
         {
-            string[] stringSeparators = {"\r\n"};
-            var lines = FileContent.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries).ToList();
-            IList<string> youtubeList = YouTubeService.FileToList(FromFile).ToList();
+            //string[] stringSeparators = {"\r\n"};
+            //var lines = FileContent.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries).ToList();
+            //IList<string> youtubeList = YouTubeService.FileToList(FromFile).ToList();
 
-            lines.ForEach(e => { youtubeList.ShouldContain(e); });
+            //lines.ForEach(e => { youtubeList.ShouldContain(e); });
         }
     }
 }

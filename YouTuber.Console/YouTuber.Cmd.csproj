@@ -1,10 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Library</OutputType>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <StartupObject></StartupObject>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -16,7 +20,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="VideoLibrary" Version="3.1.9" />
+      <Content Include="favicon.ico" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\YouTuber\YouTuber.csproj" />
+    </ItemGroup>
+    
 </Project>

@@ -1,9 +1,7 @@
-﻿using System;
-using Shouldly;
+﻿using Shouldly;
 using NSubstitute;
-using NUnit.Framework;
 using YouTuber.Client;
-using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace YouTuber.Test
 {

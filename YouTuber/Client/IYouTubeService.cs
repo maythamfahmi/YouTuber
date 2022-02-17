@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace YouTuber.Client
+﻿namespace YouTuber.Client
 {
     public interface IYouTubeService
     {
