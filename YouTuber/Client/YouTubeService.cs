@@ -1,4 +1,8 @@
-﻿using VideoLibrary;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using VideoLibrary;
 
 namespace YouTuber.Client
 {
@@ -22,7 +26,7 @@ namespace YouTuber.Client
             });
         }
 
-        public virtual string YoutubeToMp3(string url)
+        public virtual string? YoutubeToMp3(string url)
         {
             var uri = Url(url).ToString();
 
@@ -31,9 +35,12 @@ namespace YouTuber.Client
                 return "Looks like this is invalid url/id";
             }
 
-            if (_set.Contains(url))
+            lock (_set)
             {
-                return null;
+                if (_set.Contains(url))
+                {
+                    return null;
+                }
             }
 
             lock (_set)

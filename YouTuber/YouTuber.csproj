@@ -1,22 +1,51 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Library</OutputType>
-        <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <Optimize>True</Optimize>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <Optimize>True</Optimize>
+        <LangVersion>8.0</LangVersion>
+        <PackageId>YouTuber</PackageId>
+        <RepositoryType>git</RepositoryType>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/maythamfahmi/YouTuber</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/maythamfahmi/YouTuber</PackageProjectUrl>
+        <ApplicationIcon>icon.ico</ApplicationIcon>
+        <PackageIcon>logo.png</PackageIcon>
+        <PackageIconUrl>https://raw.githubusercontent.com/maythamfahmi/CryptoNet/main/logo.png</PackageIconUrl>
+        <Company>NextBix</Company>
+        <Authors>Maytham Fahmi</Authors>
+        <MinClientVersion>2.0.0</MinClientVersion>
+        <Version>2.0.0</Version>
+        <Title>YouTuber</Title>
+        <Product>YouTuber</Product>
+        <RootNamespace>YouTuber</RootNamespace>
+        <AssemblyName>YouTuber</AssemblyName>
+        <PackageDescription>Simple library to download youtube videos package.</PackageDescription>
+        <PackageTags>YouTube; Download</PackageTags>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Copyright>Copyright © 2018</Copyright>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="VideoLibrary" Version="3.1.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\logo.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\LICENSE">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>
