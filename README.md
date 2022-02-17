@@ -5,7 +5,7 @@
 </a>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE)
-[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.0-beta.0?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0-beta.0)
+[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.0.0?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0.0)
 
 
 # Introdution
