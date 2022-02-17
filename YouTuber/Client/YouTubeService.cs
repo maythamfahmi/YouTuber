@@ -1,10 +1,8 @@
 ﻿using System;
-using System.IO;
-using MediaToolkit;
-using VideoLibrary;
-using MediaToolkit.Model;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using VideoLibrary;
 
 namespace YouTuber.Client
 {
@@ -28,7 +26,7 @@ namespace YouTuber.Client
             });
         }
 
-        public virtual string YoutubeToMp3(string url)
+        public virtual string? YoutubeToMp3(string url)
         {
             var uri = Url(url).ToString();
 
@@ -37,12 +35,16 @@ namespace YouTuber.Client
                 return "Looks like this is invalid url/id";
             }
 
-            if (_set.Contains(url))
+            lock (_set)
             {
-                return null;
+                if (_set.Contains(url))
+                {
+                    return null;
+                }
             }
 
-            lock(_set){
+            lock (_set)
+            {
                 _set.Add(url);
             }
 
@@ -53,48 +55,34 @@ namespace YouTuber.Client
             {
                 var getUri = video.Result.Uri;
             }
-            catch (AggregateException ignore)
+            catch (AggregateException)
             {
                 return "Looks like this is invalid url/id";
             }
-            catch (InvalidOperationException ignore)
+            catch (InvalidOperationException)
             {
                 return
                     $"{CleanFilename(video.Result.FullName)} video is properly copyright protected or locked by provider!";
             }
-            catch (Exception ignore)
+            catch (Exception)
             {
                 return "Unknown error please report a bug!";
             }
-            
+
             CreateFolder(BaseFolder);
 
             File.WriteAllBytes(video.Result.FullName, video.Result.GetBytes());
 
-            var inputFile = new MediaFile {Filename = video.Result.FullName};
-            var outputFile = new MediaFile {Filename = $"{BaseFolder}\\{CleanFilename(video.Result.FullName)}.mp3"};
-
-            using (var engine = new Engine())
-            {
-                engine.GetMetadata(inputFile);
-                engine.Convert(inputFile, outputFile);
-            }
-
-            TryToDelete(inputFile.Filename);
-            return
-                $"{CleanFilename(video.Result.FullName)} sound is ready and saved under {BaseFolder}";
+            return $"{CleanFilename(video.Result.FullName)} sound is ready and saved under {BaseFolder}";
         }
 
         public virtual IEnumerable<string> FileToList(string file)
         {
-            string[] results;
-            using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read))
-            {
-                using (var sr = new StreamReader(fs))
-                {
-                    results = sr.ReadToEnd().Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
-                }
-            }
+            using var fs = new FileStream(file, FileMode.Open, FileAccess.Read);
+            using var sr = new StreamReader(fs);
+            var results = sr.ReadToEnd()
+                .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
             return results;
         }
 
@@ -123,15 +111,6 @@ namespace YouTuber.Client
             return uri;
         }
 
-        private static void TryToDelete(string file)
-        {
-            try
-            {
-                File.Delete(file);
-            }
-            catch (IOException ex)
-            {
-            }
-        }
     }
+
 }

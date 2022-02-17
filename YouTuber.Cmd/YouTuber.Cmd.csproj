@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <LangVersion>8.0</LangVersion>
-        <PackageId>YouTuber</PackageId>
+        <PackageId>YouTuber.Cmd</PackageId>
         <RepositoryType>git</RepositoryType>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/maythamfahmi/YouTuber</RepositoryUrl>
@@ -16,11 +17,11 @@
         <Authors>Maytham Fahmi</Authors>
         <MinClientVersion>2.0.0</MinClientVersion>
         <Version>2.0.0</Version>
-        <Title>YouTuber</Title>
-        <Product>YouTuber</Product>
-        <RootNamespace>YouTuber</RootNamespace>
-        <AssemblyName>YouTuber</AssemblyName>
-        <PackageDescription>Simple library to download youtube videos package.</PackageDescription>
+        <Title>YouTuber.Cmd</Title>
+        <Product>YouTuber.Cmd</Product>
+        <RootNamespace>YouTuber.Cmd</RootNamespace>
+        <AssemblyName>GetYouTube</AssemblyName>
+        <PackageDescription>Simple and fast command line to download youtube videos.</PackageDescription>
         <PackageTags>YouTube; Download</PackageTags>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -28,25 +29,15 @@
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="VideoLibrary" Version="3.1.9" />
+      <Content Include="icon.ico" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="..\LICENSE" Pack="true" PackagePath="\" />
-        <None Include="..\README.md" Pack="true" PackagePath="\" />
-        <None Include="..\logo.png" Pack="true" PackagePath="\" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="..\LICENSE">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
+      <ProjectReference Include="..\YouTuber\YouTuber.csproj" />
     </ItemGroup>
 
 </Project>
