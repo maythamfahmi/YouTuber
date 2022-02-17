@@ -31,28 +31,6 @@ https://github.com/maythamfahmi/YouTuber
 
 #### [![Release%20Code](https://img.shields.io/badge/release%20code-1.0.1-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/1.0.1)
 
-
-### Developer
-
-#### How to start
-- Clone
-- Build
-- Start Cmd project
-
-#### OS target
-- Tested on Windows 10/11
-#### Language
-- C# Sharp
-- Standard 2
-- Dotnet 6
-#### 3rd party dependency
-Third party packages/libraries:
-- VideoLibrary
-
-## Issues
-
-Please report issues [here](https://github.com/maythamfahmi/YouTuber/issues).
-
 ## How to use
 
 ### Example 1, Help
@@ -80,7 +58,7 @@ It will download following link:
 https://www.youtube.com/watch?v=Kv3RfdHZ25c
 ```
 
-### Example 2 Download multiple videos based on youtube video id
+### Example 3 Download multiple videos based on youtube video id
 Run following command to download 3 videos
 
 ```DownloadYouTube.exe -l y9ajRIgTJNA;pYlYt9iuJdc;NcumhqTDPpE```
@@ -93,14 +71,35 @@ https://www.youtube.com/watch?v=dVsZm7_sqfw
 https://www.youtube.com/watch?v=3rJfBFamlIw
 ```
 
-### Example 2 Download multiple videos based on youtube video url
+### Example 4 Download multiple videos based on youtube video url
 Run following command to download 3 samples videos. It will create download.txt list file of the 3 videos (You can add your own videos).
 
 ```DownloadYouTube.exe -d```
 
 It will download video from download.txt
 
+<hr />
 
+### Developer
+
+#### How to start
+- Clone
+- Build
+- Start Cmd project
+
+#### OS target
+- Tested on Windows 10/11
+#### Language
+- C# Sharp
+- Standard 2
+- Dotnet 6
+#### 3rd party dependency
+Third party packages/libraries:
+- VideoLibrary
+
+## Issues
+
+Please report issues [here](https://github.com/maythamfahmi/YouTuber/issues).
 
 ## Contributing
 
