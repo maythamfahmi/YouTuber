@@ -17,22 +17,17 @@ Youtuber is getting refactored, new version on its way.
 </a>
 
 ### Overview
-This little software is made for learning purpose and to demonstrate some primitive programming logic. 
-This software should be used own private uploaded materials. 
-This software is made as is and developer is not responsible for its usage.
-It is highly encouraged to read and respect [YouTube][1] policy and copyright note.
+Youtuber is a little command line software for downloading own content on youtube. 
+It is highly encouraged to read and respect [YouTube][1] policy and content owner copyright.
 You are welcome to continue improving it for learning purpose.
 The software is license under MIT license agreement.
 
 ### Packages
 Third party packages/libraries:
-- MediaToolkit
-- Newtonsoft.Json
 - NSubstitute
 - NUnit
 - Shouldly
 - VideoLibrary
-- Costura.Fody
 
 ### Issue Tracking
 If you find an issue, please file a report [here](https://github.com/maythamfahmi/YouTuber/issues)
