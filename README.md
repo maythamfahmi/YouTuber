@@ -24,7 +24,7 @@ https://github.com/maythamfahmi/YouTuber
 
 ## Versions
 
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.0.0_beta.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0-beta.0)
+#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.0.0.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0.0)
 - Net 6
 - Standard 2.0
 - Documentation improvement
