@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTuber", "YouTuber\YouTub
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTuber.Test", "YouTuber.Test\YouTuber.Test.csproj", "{4104E563-C495-46BD-9765-3B2DC3B027CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTuber.Cmd", "YouTuber.Cmd\YouTuber.Cmd.csproj", "{252AD863-8BDC-4428-B33A-5F02F21BDD10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTuber.Cmd", "YouTuber.Cmd\YouTuber.Cmd.csproj", "{252AD863-8BDC-4428-B33A-5F02F21BDD10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

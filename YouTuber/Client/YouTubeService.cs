@@ -71,9 +71,11 @@ namespace YouTuber.Client
 
             CreateFolder(BaseFolder);
 
-            File.WriteAllBytes(video.Result.FullName, video.Result.GetBytes());
+            var path = Path.Combine(BaseFolder, video.Result.FullName);
 
-            return $"{CleanFilename(video.Result.FullName)} sound is ready and saved under {BaseFolder}";
+            File.WriteAllBytes(path, video.Result.GetBytes());
+
+            return $"{CleanFilename(video.Result.FullName)} video is ready and saved under {BaseFolder}";
         }
 
         public virtual IEnumerable<string> FileToList(string file)
