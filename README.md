@@ -37,7 +37,7 @@ https://github.com/maythamfahmi/YouTuber
 ## How to use
 
 ### Example 1, Help
-```DownloadYouTube.exe -h```
+```./DownloadYouTube -h```
 
 Result
 
@@ -51,7 +51,7 @@ example: -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw
 ```
 
 ### Example 2, Download a single video based on youtube url
-```DownloadYouTube.exe -l https://www.youtube.com/watch?v=Kv3RfdHZ25c```
+```./DownloadYouTube -l https://www.youtube.com/watch?v=Kv3RfdHZ25c```
 
 It will download following link:
 
@@ -60,7 +60,7 @@ https://www.youtube.com/watch?v=Kv3RfdHZ25c
 ```
 
 ### Example 3 Download multiple videos based on youtube video id
-```DownloadYouTube.exe -l y9ajRIgTJNA;pYlYt9iuJdc;NcumhqTDPpE```
+```./DownloadYouTube -l y9ajRIgTJNA;pYlYt9iuJdc;NcumhqTDPpE```
 
 It will download 3 youtube videos of following link:
 
@@ -71,7 +71,7 @@ https://www.youtube.com/watch?v=3rJfBFamlIw
 ```
 
 ### Example 4 Download multiple videos based on youtube video url
-```DownloadYouTube.exe -d```
+```./DownloadYouTube -d```
 
 It will download 3 samples videos. It will create download.txt list file of the 3 videos (You can add your own videos).
 
