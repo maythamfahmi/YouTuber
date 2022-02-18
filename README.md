@@ -1,38 +1,29 @@
-# YouTuber
-
 <a href="https://github.com/maythamfahmi/wet-extractor/blob/master/LICENSE">
-    <img src="https://github.com/maythamfahmi/YouTuber/blob/master/logo.png" align="right" height="140" width="140" >
+<img 
+    style="display: block; margin-left: auto; margin-right: auto; height: 140px; width: 140px;"
+    src="https://github.com/maythamfahmi/YouTuber/blob/master/logo.png" 
+    alt="YouTuber logo">
+</img>
 </a>
+
+# YouTuber
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE)
 [![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.0.0?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0.0)
 
 
-# Introdution
+## Introdution
 :rocket: Youtuber is a cross platform command line Open Source software for downloading YouTube content. 
 It is highly encouraged to read and respect [YouTube][1] policy and other content creators and owners copyright.
 
-## Installation
+## Download
 
 You can download YouTuber via [Releases](https://github.com/maythamfahmi/YouTuber/releases).
+
 Avaibale versions:
 - DownloadYouTube-Win32.exe for Windows 10, 11
 - DownloadYouTube-Win64.exe for Windows 10, 11
 - DownloadYouTube-Linux64 for Linux 64
-
-
-## Website
-
-https://github.com/maythamfahmi/YouTuber
-
-## Versions
-
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.0.0.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0.0)
-- Net 6
-- Standard 2.0
-- Documentation improvement
-
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-1.0.1-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/1.0.1)
 
 ## How to use
 
@@ -75,15 +66,28 @@ https://www.youtube.com/watch?v=3rJfBFamlIw
 
 It will download 3 samples videos. It will create download.txt list file of the 3 videos (You can add your own videos).
 
+## Website
+
+https://github.com/maythamfahmi/YouTuber
+
+## Versions
+
+#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.0.0.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0.0)
+- Net 6
+- Standard 2.0
+- Documentation improvement
+
+#### [![Release%20Code](https://img.shields.io/badge/release%20code-1.0.1-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/1.0.1)
+
 <be />
 <be />
 <hr />
 <be />
 <be />
 
-### Developer
+## Developer
 
-#### How to start
+### How to start
 - git clone https://github.com/maythamfahmi/YouTuber
 - dotnet build
 - cd YouTuber.Cmd
