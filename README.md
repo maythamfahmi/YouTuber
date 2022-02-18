@@ -9,14 +9,17 @@
 
 
 # Introdution
-:rocket: Youtuber is a little command line software for downloading own youtube content. 
-It is highly encouraged to read and respect [YouTube][1] policy and content owner copyright.
-You are welcome to continue improving it for learning purpose.
-The software is license under MIT license agreement.
+:rocket: Youtuber is a cross platform command line Open Source software for downloading YouTube content. 
+It is highly encouraged to read and respect [YouTube][1] policy and other content creators and owners copyright.
 
 ## Installation
 
 You can download YouTuber via [Releases](https://github.com/maythamfahmi/YouTuber/releases).
+Avaibale versions:
+- DownloadYouTube-Win32.exe for Windows 10, 11
+- DownloadYouTube-Win64.exe for Windows 10, 11
+- DownloadYouTube-Linux64 for Linux 64
+
 
 ## Website
 
@@ -34,9 +37,9 @@ https://github.com/maythamfahmi/YouTuber
 ## How to use
 
 ### Example 1, Help
-Run following command to get help
-
 ```DownloadYouTube.exe -h```
+
+Result
 
 ```
 [-h | --help]        Get help
@@ -48,8 +51,6 @@ example: -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw
 ```
 
 ### Example 2, Download a single video based on youtube url
-Run following command to download 1 video
-
 ```DownloadYouTube.exe -l https://www.youtube.com/watch?v=Kv3RfdHZ25c```
 
 It will download following link:
@@ -59,8 +60,6 @@ https://www.youtube.com/watch?v=Kv3RfdHZ25c
 ```
 
 ### Example 3 Download multiple videos based on youtube video id
-Run following command to download 3 videos
-
 ```DownloadYouTube.exe -l y9ajRIgTJNA;pYlYt9iuJdc;NcumhqTDPpE```
 
 It will download 3 youtube videos of following link:
@@ -72,23 +71,27 @@ https://www.youtube.com/watch?v=3rJfBFamlIw
 ```
 
 ### Example 4 Download multiple videos based on youtube video url
-Run following command to download 3 samples videos. It will create download.txt list file of the 3 videos (You can add your own videos).
-
 ```DownloadYouTube.exe -d```
 
-It will download video from download.txt
+It will download 3 samples videos. It will create download.txt list file of the 3 videos (You can add your own videos).
 
+<be />
+<be />
 <hr />
+<be />
+<be />
 
 ### Developer
 
 #### How to start
-- Clone
-- Build
-- Start Cmd project
+- git clone https://github.com/maythamfahmi/YouTuber
+- dotnet build
+- cd YouTuber.Cmd
+- dotnet run
 
 #### OS target
-- Tested on Windows 10/11
+- Tested on Windows 10 and 11
+- Ubuntu 20.xx
 #### Language
 - C# Sharp
 - Standard 2
