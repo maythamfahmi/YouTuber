@@ -11,7 +11,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE)
 [![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.0.0?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0.0)
 
-
 ## Introdution
 :rocket: Youtuber is a cross platform command line Open Source software for downloading YouTube content. 
 It is highly encouraged to read and respect [YouTube][1] policy and other content creators and owners copyright.
