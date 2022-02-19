@@ -12,14 +12,14 @@
 [![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.1?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.1)
 
 ## Introdution
-:rocket: Youtuber is a cross platform command line Open Source software for downloading YouTube content. 
+:rocket: **YouTuber** is a fast command line for downloading YouTube videos. 
+**YoutTuber** is a cross platform (Windows and Ubuntu) Open Source software licensed under MIT License.
 It is highly encouraged to read and respect [YouTube][1] policy and other content creators and owners copyright.
 
 ## Download and install
+You can find downloadyoutube.zip and download **YouTuber** via [Releases](https://github.com/maythamfahmi/YouTuber/releases).
 
-You can find downloadyoutube.zip and download YouTuber via [Releases](https://github.com/maythamfahmi/YouTuber/releases).
-
-Extract the zip file and extract the version that fits your operating system. Follow the examples below under How to use.
+Extract the zip file and extract the version that fits your operating system. Follow the examples below under **How to use**.
 
 Avaibale versions:
 - DownloadYouTube-Win32.exe for Windows 10, 11
