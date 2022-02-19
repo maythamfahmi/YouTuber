@@ -3,9 +3,9 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - 'disabled-v*'
     branches: 
-      - 'feature/-cd*'
+      - 'disabled-feature/-cd*'
 
 jobs:
   build:
