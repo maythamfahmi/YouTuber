@@ -108,10 +108,12 @@ From you console:
 
 After merging to master, create tag release:
 
+```
 git tag v2.x.x -a -m "Release description"
 git push --tags
+```
 
-For pre-release, just tag with -pre like v2.x.x-pre.
+For pre-release, just tag with ```-pre``` like ```v2.x.x-pre```.
 
 Rememebr to update readme badge and versions.
 
