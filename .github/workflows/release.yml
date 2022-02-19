@@ -2,9 +2,11 @@ name: Release
 
 on:
   push:
-    branches: [ master, "feature/cd*" ]
-  pull_request:
-    branches: [ master ]
+    branches: 
+      - master
+      - "feature/cd*"
+    tags:
+      - 'v*'
 
 jobs:
   build:
@@ -24,12 +26,21 @@ jobs:
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish /p:PublishProfile=Release-linux-x64
+      run: |
+        dotnet publish /p:PublishProfile=Release-win-x86
+        dotnet publish /p:PublishProfile=Release-win-x64
+        dotnet publish /p:PublishProfile=Release-linux-x64
     - name: Upload DownloadYouTube Build Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: DownloadYouTube-linux-x64
-        path: /home/runner/work/YouTuber/YouTuber/Software/linux-x64/
+        name: |
+          DownloadYouTube-win-x86
+          DownloadYouTube-win-x64
+          DownloadYouTube-linux-x64
+        path: | 
+          /home/runner/work/YouTuber/YouTuber/Software/win-x86/
+          /home/runner/work/YouTuber/YouTuber/Software/win-x64/
+          /home/runner/work/YouTuber/YouTuber/Software/linux-x64/
     - name: Build project # This would actually build your project, using zip for an example artifact
       run: |
         zip --junk-paths my-artifact README.md
