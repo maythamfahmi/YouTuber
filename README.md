@@ -9,7 +9,7 @@
 # YouTuber
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE.txt)
-[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.1?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.1)
+[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.3?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.3)
 
 ## Introdution
 :rocket: **YouTuber** is a fast command line for downloading YouTube videos. 
@@ -73,7 +73,7 @@ https://github.com/maythamfahmi/YouTuber
 
 ## Versions
 
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.0.1-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.1)
+#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.0.3-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.3)
 - Net 6
 - Standard 2.0
 - Documentation improvement
