@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-    branches: 
-      - 'disabled-feature/-cd*'
 
 jobs:
   build:
@@ -18,12 +16,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-    #- name: Restore .NET dependencies
-    #  run: dotnet restore
-    #- name: Build .NET
-    #  run: dotnet build --no-restore
-    #- name: Test .NET
-    #  run: dotnet test --no-build --verbosity normal
+    - name: Restore .NET dependencies
+      run: dotnet restore
+    - name: Build .NET
+      run: dotnet build --no-restore
+    - name: Test .NET
+      run: dotnet test --no-build --verbosity normal
     - name: Publish .NET
       run: |
         dotnet publish /p:PublishProfile=Release-win-x86
@@ -42,7 +40,7 @@ jobs:
       with:
         name: DownloadYouTube
         path: artifact
-    - name: Build project # This would actually build your project, using zip for an example artifact
+    - name: Build project
       run: |
         cd artifact
         zip -r downloadyoutube ./
@@ -62,7 +60,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./artifact/downloadyoutube.zip
         asset_name: downloadyoutube.zip
         asset_content_type: application/zip
