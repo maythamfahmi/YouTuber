@@ -35,9 +35,9 @@ jobs:
       with:
         name: DownloadYouTube
         path: | 
-          /home/runner/work/artifact/YouTuber/YouTuber/Software/win-x86/
-          /home/runner/work/artifact/YouTuber/YouTuber/Software/win-x64/
-          /home/runner/work/artifact/YouTuber/YouTuber/Software/linux-x64/
+          /home/runner/work/YouTuber/YouTuber/Software/win-x86/
+          /home/runner/work/YouTuber/YouTuber/Software/win-x64/
+          /home/runner/work/YouTuber/YouTuber/Software/linux-x64/
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -55,6 +55,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ../work/artifact/DownloadYouTube.zip
+        asset_path: /home/runner/work/*.zip
         asset_name: DownloadYouTube.zip
         asset_content_type: application/zip
