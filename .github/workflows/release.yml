@@ -39,7 +39,7 @@ jobs:
           /home/runner/work/YouTuber/YouTuber/Software/win-x64/
           /home/runner/work/YouTuber/YouTuber/Software/linux-x64/
     - name: Download Published Artifact
-    - uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v2
       with:
         name: DownloadYouTube
         path: artifact
