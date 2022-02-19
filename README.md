@@ -9,7 +9,7 @@
 # YouTuber
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE)
-[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.0.0?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0.0)
+[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.0?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0)
 
 ## Introdution
 :rocket: Youtuber is a cross platform command line Open Source software for downloading YouTube content. 
@@ -71,7 +71,7 @@ https://github.com/maythamfahmi/YouTuber
 
 ## Versions
 
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.0.0.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0.0)
+#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.0.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.0)
 - Net 6
 - Standard 2.0
 - Documentation improvement
@@ -102,6 +102,18 @@ https://github.com/maythamfahmi/YouTuber
 #### 3rd party dependency
 Third party packages/libraries:
 - VideoLibrary
+
+## Create Release
+From you console:
+
+After merging to master, create tag release:
+
+git tag v2.x.x -a -m "Release description"
+git push --tags
+
+For pre-release, just tag with -pre like v2.x.x-pre.
+
+Rememebr to update readme badge and versions.
 
 ## Issues
 
