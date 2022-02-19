@@ -1,4 +1,4 @@
-<a href="https://github.com/maythamfahmi/wet-extractor/blob/master/LICENSE">
+<a href="https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE.txt">
 <img 
     style="display: block; margin-left: auto; margin-right: auto; height: 140px; width: 140px;"
     src="https://github.com/maythamfahmi/YouTuber/blob/master/logo.png" 
@@ -8,7 +8,7 @@
 
 # YouTuber
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE.txt)
 [![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.1?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.1)
 
 ## Introdution

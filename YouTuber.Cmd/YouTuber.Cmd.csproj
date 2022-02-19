@@ -30,7 +30,8 @@
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-        <DebugType>portable</DebugType>
+        <!--When debugging change none to portable-->
+        <DebugType>none</DebugType>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -43,6 +44,10 @@
 
     <ItemGroup>
       <Content Include="icon.ico" />
+      <None Include="..\logo.png">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
       <None Include="..\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
