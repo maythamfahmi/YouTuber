@@ -46,8 +46,8 @@ jobs:
     - name: Build project # This would actually build your project, using zip for an example artifact
       run: |
         ls
-        find .
-        find . |grep -e "\.zip$"
+        cd Software
+        ls
         zip DownloadYouTube /home/runner/work/YouTuber/YouTuber/artifact/DownloadYouTube
     - name: Create Release
       id: create_release
