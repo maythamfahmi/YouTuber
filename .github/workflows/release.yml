@@ -33,10 +33,10 @@ jobs:
     - name: Upload DownloadYouTube Build Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: |
-          DownloadYouTube-win-x86
-          DownloadYouTube-win-x64
-          DownloadYouTube-linux-x64
+        name: DownloadYouTube
+          #DownloadYouTube-win-x86
+          #DownloadYouTube-win-x64
+          #DownloadYouTube-linux-x64
         path: | 
           /home/runner/work/YouTuber/YouTuber/Software/win-x86/
           /home/runner/work/YouTuber/YouTuber/Software/win-x64/
