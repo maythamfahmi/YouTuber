@@ -69,7 +69,7 @@ It will download 3 samples videos. It will create download.txt list file of the 
 
 ## Website
 
-https://github.com/maythamfahmi/YouTuber
+https://maythamfahmi.github.io/YouTuber/
 
 ## Versions
 
