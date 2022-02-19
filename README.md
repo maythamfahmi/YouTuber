@@ -1,14 +1,14 @@
-<a href="https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE.txt">
+<a href="https://github.com/maythamfahmi/YouTuber/blob/main/LICENSE.txt">
 <img 
     style="display: block; margin-left: auto; margin-right: auto; height: 140px; width: 140px;"
-    src="https://github.com/maythamfahmi/YouTuber/blob/master/logo.png" 
+    src="https://github.com/maythamfahmi/YouTuber/blob/main/logo.png" 
     alt="YouTuber logo">
 </img>
 </a>
 
 # YouTuber
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/master/LICENSE.txt)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/main/LICENSE.txt)
 [![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.4?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.4)
 
 ## Introdution
@@ -108,7 +108,7 @@ Third party packages/libraries:
 ## Create Release
 From you console:
 
-After merging to master, create tag release:
+After merging to main, create tag release:
 
 ```
 git tag v2.x.x -a -m "Release description"
