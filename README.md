@@ -15,9 +15,11 @@
 :rocket: Youtuber is a cross platform command line Open Source software for downloading YouTube content. 
 It is highly encouraged to read and respect [YouTube][1] policy and other content creators and owners copyright.
 
-## Download
+## Download and install
 
-You can download YouTuber via [Releases](https://github.com/maythamfahmi/YouTuber/releases).
+You can find downloadyoutube.zip and download YouTuber via [Releases](https://github.com/maythamfahmi/YouTuber/releases).
+
+Extract the zip file and extract the version that fits your operating system. Follow the examples below under How to use.
 
 Avaibale versions:
 - DownloadYouTube-Win32.exe for Windows 10, 11
