@@ -47,7 +47,7 @@ jobs:
       run: |
         cd artifact
         ls
-        zip DownloadYouTube .
+        zip -r DownloadYouTube .
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
