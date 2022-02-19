@@ -45,10 +45,9 @@ jobs:
         path: artifact
     - name: Build project # This would actually build your project, using zip for an example artifact
       run: |
+        cd artifact
         ls
-        cd Software
-        ls
-        zip DownloadYouTube /home/runner/work/YouTuber/YouTuber/artifact/DownloadYouTube
+        zip DownloadYouTube artifact/DownloadYouTube.zip
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
