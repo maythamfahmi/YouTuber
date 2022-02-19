@@ -45,8 +45,11 @@ jobs:
         path: artifact
     - name: Build project # This would actually build your project, using zip for an example artifact
       run: |
-        zip --junk-paths my-artifact README.md
-        zip -r downloadyoutube ./artifact/.
+        # zip --junk-paths my-artifact README.md
+        ls
+        cd artifact
+        ls
+        zip -r downloadyoutube .
         ls *.zip
     - name: Create Release
       id: create_release
