@@ -12,7 +12,7 @@
         <PackageProjectUrl>https://github.com/maythamfahmi/YouTuber</PackageProjectUrl>
         <ApplicationIcon>icon.ico</ApplicationIcon>
         <PackageIcon>logo.png</PackageIcon>
-        <PackageIconUrl>https://raw.githubusercontent.com/maythamfahmi/CryptoNet/main/logo.png</PackageIconUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/maythamfahmi/YouTuber/main/logo.png</PackageIconUrl>
         <Company>NextBix</Company>
         <Authors>Maytham Fahmi</Authors>
         <MinClientVersion>2.0.0</MinClientVersion>
@@ -30,7 +30,15 @@
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-        <DebugType>none</DebugType>
+        <DebugType>portable</DebugType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <Optimize>False</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <Optimize>True</Optimize>
     </PropertyGroup>
 
     <ItemGroup>
