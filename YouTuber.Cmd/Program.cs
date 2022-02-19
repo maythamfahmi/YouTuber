@@ -17,15 +17,18 @@ namespace YouTuber.Cmd
         public static void Main(string[] args)
         {
             bool debugMode = false;
-#if DEBUG
-            debugMode = true;
-#endif
+            if (debugMode)
+            {
+                args = new[] { "-l", "3rJfBFamlIw" };
+            }
+            
+
             var input = args.Length == 0 ? "" : args[0];
             if (string.IsNullOrEmpty(input))
             {
                 Help();
             }
-            else if (input is "-d" or "--dummy" || debugMode)
+            else if (input is "-d" or "--dummy")
             {
                 CreateSampleList();
                 Service.YoutubeToMp3(ShortVideos);
