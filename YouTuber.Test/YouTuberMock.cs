@@ -8,53 +8,63 @@ namespace YouTuber.Test
     public class YouTuberMock
     {
         [Test]
-        public void YoutubeToMp3Calls()
+        public void YoutubeToMp4Calls()
         {
-            var youTubeClient = Substitute.For<IYouTubeService>();
-            List<string> dummyUrls = new List<string>() {"", ""};
+            IYouTubeService service = Substitute.For<IYouTubeService>();
+            List<string> dummyUrls = new List<string>() { "", "" };
 
-            var counter = 0;
-            youTubeClient.When(e => e.YoutubeToMp3(Arg.Any<List<string>>()))
-                .Do(e => counter++);
+            int counter = 0;
+            service
+                .When(e => e.YoutubeToMp4(Arg.Any<List<string>>()))
+                .Do(_ => counter++);
 
-            youTubeClient.YoutubeToMp3(dummyUrls);
-            youTubeClient.YoutubeToMp3(dummyUrls);
-            youTubeClient.YoutubeToMp3(dummyUrls);
+            service.YoutubeToMp4(dummyUrls);
+            service.YoutubeToMp4(dummyUrls);
+            service.YoutubeToMp4(dummyUrls);
             counter.ShouldBe(3);
         }
 
         [Test]
-        public void YoutubeToMp3Exception()
+        public void YoutubeToMp4Exception()
         {
-            var youTubeClient = Substitute.For<IYouTubeService>();
-            youTubeClient
-                .When(x => x.YoutubeToMp3(""))
+            IYouTubeService service = Substitute.For<IYouTubeService>();
+            service
+                .When(x => x.YoutubeToMp4(""))
                 .Do(x => throw new Exception());
 
-            Action action1 = () => youTubeClient.YoutubeToMp3("");
-            action1.ShouldThrow<Exception>();
+            Action action = () => service.YoutubeToMp4("");
+            action.ShouldThrow<Exception>();
         }
 
         [Test]
         public void FileToListMock()
         {
-            var youTubeClient = Substitute.For<IYouTubeService>();
-            youTubeClient.FileToList(Arg.Any<string>()).Returns(new List<string> {"1", "2"});
+            var service = Substitute.For<IYouTubeService>();
+            service
+                .FileToList(Arg.Any<string>())
+                .Returns(new List<string> { "1", "2" });
 
-            youTubeClient.FileToList("").ShouldContain(e => e.Contains("1"));
-            youTubeClient.FileToList("").ShouldContain(e => e.Contains("2"));
+            service
+                .FileToList("")
+                .ShouldContain(e => e.Contains("1"));
+            service
+                .FileToList("")
+                .ShouldContain(e => e.Contains("2"));
         }
 
         [Test]
         public void FileToListFileMock()
         {
-            var reader = Substitute.For<YouTubeService>();
-            reader.When(x => x.FileToList("youtubelist.txt")).DoNotCallBase();
-            reader.FileToList("youtubelist.txt")
-                .Returns(new List<string>() {"1", "2", "3"}
-                );
+            var service = Substitute.For<YouTubeService>();
+            service
+                .When(e => e.FileToList("youtubelist.txt"))
+                .DoNotCallBase();
 
-            reader.YoutubeToMp3(reader.FileToList("youtubelist.txt"));
+            service
+                .FileToList("youtubelist.txt")
+                .Returns(new List<string>() { "1", "2", "3" });
+
+            _ = service.YoutubeToMp4(service.FileToList("youtubelist.txt"));
         }
     }
 }

@@ -14,14 +14,15 @@ namespace YouTuber.Cmd
             "https://www.youtube.com/watch?v=3rJfBFamlIw"
         };
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            bool debugMode = false;
+            bool debugMode = true;
             if (debugMode)
             {
                 args = new[] { "-l", "3rJfBFamlIw" };
+                //args = new[] { "-l", "3rJfBFamlIw", "dVsZm7_sqfw", "Kv3RfdHZ25c" };
+                //args = new[] { "-d" };
             }
-            
 
             var input = args.Length == 0 ? "" : args[0];
             if (string.IsNullOrEmpty(input))
@@ -31,7 +32,7 @@ namespace YouTuber.Cmd
             else if (input is "-d" or "--dummy")
             {
                 CreateSampleList();
-                Service.YoutubeToMp3(ShortVideos);
+                await Service.YoutubeToMp4(ShortVideos);
             }
             else if (input.EndsWith(".txt"))
             {
@@ -43,22 +44,24 @@ namespace YouTuber.Cmd
                 }
                 else
                 {
-                    Service.YoutubeToMp3(urls);
+                    await Service.YoutubeToMp4(urls);
                 }
             }
             else if (input is "-l" or "--list")
             {
                 if (string.IsNullOrWhiteSpace(args[1]))
                 {
+                    Help();
                 }
                 else
                 {
                     try
                     {
-                        Service.YoutubeToMp3(GetList(args[1]));
+                        await Service.YoutubeToMp4(GetList(args[1]));
                     }
-                    catch
+                    catch (Exception e)
                     {
+                        Console.WriteLine(e.Message);
                         Help("download");
                     }
                 }

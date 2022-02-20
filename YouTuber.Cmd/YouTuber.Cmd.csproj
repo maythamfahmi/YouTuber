@@ -30,16 +30,16 @@
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-        <!--When debugging change none to portable-->
-        <DebugType>none</DebugType>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
       <Optimize>False</Optimize>
+      <DebugType>portable</DebugType>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
       <Optimize>True</Optimize>
+      <DebugType>none</DebugType>
     </PropertyGroup>
 
     <ItemGroup>

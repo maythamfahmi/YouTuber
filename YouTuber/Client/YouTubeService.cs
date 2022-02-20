@@ -12,21 +12,26 @@ namespace YouTuber.Client
         private const string BaseFolder = "download";
         private readonly HashSet<string> _set = new HashSet<string>();
 
-        public virtual void YoutubeToMp3(IEnumerable<string> urls)
+        public virtual async Task YoutubeToMp4(IEnumerable<string> urls)
         {
-            var parallelOptions = new ParallelOptions();
+            var options = new ParallelOptions();
             var maxProc = Environment.ProcessorCount;
-            parallelOptions.MaxDegreeOfParallelism = Convert.ToInt32(Math.Ceiling(maxProc * 1.75));
+            options.MaxDegreeOfParallelism = Convert.ToInt32(Math.Ceiling(maxProc * 1.75));
+
             var count = 1;
-            Parallel.ForEach(urls, parallelOptions, url =>
+
+            await Parallel.ForEachAsync(urls, options, async (url, token) =>
             {
-                var result = YoutubeToMp3(url);
+                var result = await YoutubeToMp4(url);
+
                 if (!string.IsNullOrWhiteSpace(result))
+                {
                     Console.WriteLine($"{count++}- {result}");
+                }
             });
         }
 
-        public virtual string? YoutubeToMp3(string url)
+        public virtual async Task<string?> YoutubeToMp4(string url)
         {
             var uri = Url(url).ToString();
 
@@ -41,19 +46,28 @@ namespace YouTuber.Client
                 {
                     return null;
                 }
-            }
 
-            lock (_set)
-            {
                 _set.Add(url);
             }
 
-            var youtube = YouTube.Default;
-            var video = youtube.GetVideoAsync(uri);
+            YouTube youtube = YouTube.Default;
+            YouTubeVideo video = await youtube.GetVideoAsync(uri);
 
+            var validationMessage = ValidateVideo(video);
+            if (validationMessage != "OK") return validationMessage;
+            
+            CreateFolder(BaseFolder);
+            var path = Path.Combine(BaseFolder, video.FullName);
+            await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
+            return $"{CleanFilename(video.FullName)} video is ready and saved under {BaseFolder}";
+
+        }
+
+        private static string ValidateVideo(YouTubeVideo video)
+        {
             try
             {
-                var getUri = video.Result.Uri;
+                var getUri = video.Uri;
             }
             catch (AggregateException)
             {
@@ -61,21 +75,15 @@ namespace YouTuber.Client
             }
             catch (InvalidOperationException)
             {
-                return
-                    $"{CleanFilename(video.Result.FullName)} video is properly copyright protected or locked by provider!";
+                var title = CleanFilename(video.FullName);
+                return $"{title} is properly copyright protected or locked by provider!";
             }
             catch (Exception)
             {
                 return "Unknown error please report a bug!";
             }
 
-            CreateFolder(BaseFolder);
-
-            var path = Path.Combine(BaseFolder, video.Result.FullName);
-
-            File.WriteAllBytes(path, video.Result.GetBytes());
-
-            return $"{CleanFilename(video.Result.FullName)} video is ready and saved under {BaseFolder}";
+            return "OK";
         }
 
         public virtual IEnumerable<string> FileToList(string file)
