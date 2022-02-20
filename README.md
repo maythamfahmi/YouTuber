@@ -37,10 +37,15 @@ Result
 ```
 [-h | --help]        Get help
 [-d | --dummy]       Download sample files
-[-l | --list]        Download directly, use ';' as seperator for multiple urls/Ids
-example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c
-example: -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw
-[download.txt]       Create your own list
+[-l | --list]        Download directly, use ';' as separator for multiple urls/Ids
+
+examples:
+./DownloadYouTube -l https://www.youtube.com/watch?v=Kv3RfdHZ25c -> will download single video
+./DownloadYouTube -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw -> will download 3 videos
+./DownloadYouTube -d -> will create download.txt with 3 dummy videos and download them
+./DownloadYouTube ./download.txt -> will download your own list
+Note: Please read README.md for more info.
+By using this App, you agree to be bound by the terms and conditions of this Agreement
 ```
 
 ### Example 2, Download a single video based on youtube url
