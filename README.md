@@ -125,6 +125,12 @@ For pre-release, just tag with ```-pre``` like ```v2.x.x-pre```.
 
 Rememebr to update readme badge and versions.
 
+## Testing with Ubunutu on Windows environment
+
+Check this https://github.com/dotnet/sdk/issues/23627
+
+It requries docker desktop.
+
 ## Issues
 
 Please report issues [here](https://github.com/maythamfahmi/YouTuber/issues).
