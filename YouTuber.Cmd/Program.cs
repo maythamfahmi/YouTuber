@@ -97,19 +97,19 @@ namespace YouTuber.Cmd
                 case "all":
                     Console.WriteLine("[-h | --help]        Get help");
                     Console.WriteLine("[-d | --dummy]       Download sample files");
-                    Console.WriteLine(
-                        "[-l | --list]        Download directly, use ';' as seperator for multiple urls/Ids");
-                    Console.WriteLine("example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c");
-                    Console.WriteLine("example: -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw");
-                    Console.WriteLine("[download.txt]       Create your own list\n");
-                    Console.WriteLine("Note: Please read README.md.");
-                    Console.WriteLine(
-                        "By using this App, you agree to be bound by the terms and conditions of this Agreement");
+                    Console.WriteLine("[-l | --list]        Download directly, use ';' as separator for multiple urls/Ids");
+                    Console.WriteLine("");
+                    Console.WriteLine("examples:");
+                    Console.WriteLine("./DownloadYouTube -l https://www.youtube.com/watch?v=Kv3RfdHZ25c -> will download single video");
+                    Console.WriteLine("./DownloadYouTube -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw -> will download 3 videos");
+                    Console.WriteLine("./DownloadYouTube -d -> will create download.txt with 3 dummy videos and download them");
+                    Console.WriteLine("./DownloadYouTube ./download.txt -> will download your own list");
+                    Console.WriteLine("Note: Please read README.md for more info.");
+                    Console.WriteLine("By using this App, you agree to be bound by the terms and conditions of this Agreement");
                     break;
                 case "download":
                     Console.WriteLine("example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c");
-                    Console.WriteLine(
-                        "example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c;https://www.youtube.com/watch?v=dVsZm7_sqfw;https://www.youtube.com/watch?v=3rJfBFamlIw");
+                    Console.WriteLine("example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c;https://www.youtube.com/watch?v=dVsZm7_sqfw;https://www.youtube.com/watch?v=3rJfBFamlIw");
                     break;
             }
         }
