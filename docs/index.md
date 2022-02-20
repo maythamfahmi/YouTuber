@@ -4,7 +4,7 @@
 [![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.0.4?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.4)
 
 ## Introdution
-📢 **YouTuber** is a fast command line for downloading YouTube videos. 
+:rocket: **YouTuber** is a fast command line for downloading YouTube videos. 
 **YoutTuber** is a cross platform (Windows and Ubuntu) Open Source software licensed under MIT License.
 It is highly encouraged to read and respect [YouTube][1] policy and other content creators and owners copyright.
 
@@ -14,9 +14,10 @@ You can find downloadyoutube.zip and download **YouTuber** via [Releases](https:
 Extract the zip file and extract the version that fits your operating system. Follow the examples below under **How to use**.
 
 Avaibale versions:
-- DownloadYouTube-Win32.exe for Windows 10, 11
-- DownloadYouTube-Win64.exe for Windows 10, 11
-- DownloadYouTube-Linux64 for Linux 64
+- DownloadYouTube.exe from win-x86 folder for Windows OS 10, 11
+- DownloadYouTube.exe from win-x64 folder for Windows OS 10, 11 
+- DownloadYouTube from linux-x64 folder for Ubuntu OS
+- DownloadYouTube from osx-x64 folder for Mac OS
 
 ## How to use
 
@@ -59,9 +60,14 @@ https://www.youtube.com/watch?v=3rJfBFamlIw
 
 It will download 3 samples videos. It will create download.txt list file of the 3 videos (You can add your own videos).
 
+### Example 5 Download multiple videos based on youtube video url
+```./DownloadYouTube ./download.txt```
+
+It will download what ever youtube link from download.txt file.
+
 ## Website
 
-https://github.com/maythamfahmi/YouTuber
+https://maythamfahmi.github.io/YouTuber
 
 ## Versions
 
