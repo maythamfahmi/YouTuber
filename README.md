@@ -123,9 +123,19 @@ git push --tags
 
 For pre-release, just tag with ```-pre``` like ```v2.x.x-pre```.
 
+Note: remove cached tags ```git fetch -p -P origin``` in case of mistake or clean up and ```git push --tags```
+
 Rememebr to update readme badge and versions.
 
 ## Testing with Ubunutu on Windows environment
+
+```docker run -it --rm -v $pwd`:/app mcr.microsoft.com/dotnet/sdk:6.0```
+```cd /app```
+
+Example to test release
+
+```dotnet publish /p:PublishProfile=Release-win-x64 -c Release```
+
 
 Check this https://github.com/dotnet/sdk/issues/23627
 
