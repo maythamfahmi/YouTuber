@@ -1,10 +1,17 @@
-﻿using YouTuber.Client;
+﻿using System.Diagnostics;
+using YouTuber.Client;
 
 namespace YouTuber.Cmd
 {
     public class Program
     {
         private static readonly YouTubeService Service = new YouTubeService();
+
+        [Conditional("DEBUG")]
+        private static void IsDebugCheck(ref bool debugMode)
+        {
+            debugMode = true;
+        }
 
         //Sample download
         private static readonly string[] ShortVideos =
@@ -16,8 +23,9 @@ namespace YouTuber.Cmd
 
         public static async Task Main(string[] args)
         {
-            bool debugMode = true;
-            if (debugMode)
+            bool isDebug = false;
+            IsDebugCheck(ref isDebug);
+            if (isDebug)
             {
                 args = new[] { "-l", "3rJfBFamlIw" };
                 //args = new[] { "-l", "3rJfBFamlIw", "dVsZm7_sqfw", "Kv3RfdHZ25c" };

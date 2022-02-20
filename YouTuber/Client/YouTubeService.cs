@@ -14,11 +14,11 @@ namespace YouTuber.Client
 
         public virtual async Task YoutubeToMp4(IEnumerable<string> urls)
         {
-            var options = new ParallelOptions();
-            var maxProc = Environment.ProcessorCount;
+            ParallelOptions options = new ParallelOptions();
+            int maxProc = Environment.ProcessorCount;
             options.MaxDegreeOfParallelism = Convert.ToInt32(Math.Ceiling(maxProc * 1.75));
 
-            var count = 1;
+            int count = 1;
 
             await Parallel.ForEachAsync(urls, options, async (url, token) =>
             {
@@ -33,7 +33,7 @@ namespace YouTuber.Client
 
         public virtual async Task<string?> YoutubeToMp4(string url)
         {
-            var uri = Url(url).ToString();
+            string uri = Url(url).ToString();
 
             if (uri.Replace(BaseUrl, "").Length != 11)
             {
@@ -53,14 +53,13 @@ namespace YouTuber.Client
             YouTube youtube = YouTube.Default;
             YouTubeVideo video = await youtube.GetVideoAsync(uri);
 
-            var validationMessage = ValidateVideo(video);
+            string validationMessage = ValidateVideo(video);
             if (validationMessage != "OK") return validationMessage;
             
             CreateFolder(BaseFolder);
-            var path = Path.Combine(BaseFolder, video.FullName);
+            string path = Path.Combine(BaseFolder, video.FullName);
             await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
-            return $"{CleanFilename(video.FullName)} video is ready and saved under {BaseFolder}";
-
+            return $"{CleanFilename(video.FullName)} video is ready under {BaseFolder}";
         }
 
         private static string ValidateVideo(YouTubeVideo video)
@@ -76,7 +75,7 @@ namespace YouTuber.Client
             catch (InvalidOperationException)
             {
                 var title = CleanFilename(video.FullName);
-                return $"{title} is properly copyright protected or locked by provider!";
+                return $"{title} is properly copyright protected or locked!";
             }
             catch (Exception)
             {
@@ -88,9 +87,9 @@ namespace YouTuber.Client
 
         public virtual IEnumerable<string> FileToList(string file)
         {
-            using var fs = new FileStream(file, FileMode.Open, FileAccess.Read);
-            using var sr = new StreamReader(fs);
-            var results = sr.ReadToEnd()
+            using FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read);
+            using StreamReader sr = new StreamReader(fs);
+            string[] results = sr.ReadToEnd()
                 .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
             return results;
@@ -98,7 +97,7 @@ namespace YouTuber.Client
 
         private static void CreateFolder(string folder)
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), folder);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), folder);
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -116,8 +115,8 @@ namespace YouTuber.Client
 
         private static Uri Url(string url)
         {
-            var str = url.Length == 11 ? $"{BaseUrl}{url}" : url;
-            var uri = new Uri(str);
+            string str = url.Length == 11 ? $"{BaseUrl}{url}" : url;
+            Uri uri = new Uri(str);
             return uri;
         }
 
