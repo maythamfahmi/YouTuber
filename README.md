@@ -80,6 +80,11 @@ https://maythamfahmi.github.io/YouTuber
 ## Versions
 
 #### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.1.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.1.0)
+- Support Mac OS
+- Refactoring
+- Documentation improvement
+
+#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.0.4-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.4)
 - Net 6
 - Standard 2.0
 - Documentation improvement
