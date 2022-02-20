@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using VideoLibrary;
+using Xabe.FFmpeg;
+using Xabe.FFmpeg.Downloader;
 
 namespace YouTuber.Client
 {
@@ -12,7 +14,7 @@ namespace YouTuber.Client
         private const string BaseFolder = "download";
         private readonly HashSet<string> _set = new HashSet<string>();
 
-        public virtual async Task YoutubeToMp4(IEnumerable<string> urls)
+        public virtual async Task YoutubeToMp4(IEnumerable<string> urls, bool onlyAudio)
         {
             ParallelOptions options = new ParallelOptions();
             int maxProc = Environment.ProcessorCount;
@@ -22,7 +24,7 @@ namespace YouTuber.Client
 
             await Parallel.ForEachAsync(urls, options, async (url, token) =>
             {
-                var result = await YoutubeToMp4(url);
+                var result = await YoutubeToMp4(url, onlyAudio);
 
                 if (!string.IsNullOrWhiteSpace(result))
                 {
@@ -31,7 +33,7 @@ namespace YouTuber.Client
             });
         }
 
-        public virtual async Task<string?> YoutubeToMp4(string url)
+        public virtual async Task<string?> YoutubeToMp4(string url, bool onlyAudio)
         {
             string uri = Url(url).ToString();
 
@@ -59,7 +61,33 @@ namespace YouTuber.Client
             CreateFolder(BaseFolder);
             string path = Path.Combine(BaseFolder, video.FullName);
             await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
+            if (onlyAudio)
+            {
+                await ExtractAudio(path);
+                File.Delete(path);
+            }
             return $"{CleanFilename(video.FullName)} video is ready under {BaseFolder}";
+        }
+
+        private static async Task ExtractAudio(string path)
+        {
+            var currentFolder = Directory.GetCurrentDirectory();
+            var ffmpegPath = $"{currentFolder}/FFmpeg";
+            FFmpeg.SetExecutablesPath(ffmpegPath, "FFmpeg");
+            await FFmpegDownloader.GetLatestVersion(FFmpegVersion.Official, ffmpegPath);
+            FileInfo fi = new FileInfo(path);
+            string inputPath = fi.FullName;
+            string outputPath = Path.ChangeExtension(inputPath, "mp3");
+
+            if (File.Exists(outputPath))
+            {
+                File.Delete(outputPath);
+            }
+            
+            var conversion = await FFmpeg
+                .Conversions.FromSnippet
+                .ExtractAudio(inputPath, outputPath);
+            await conversion.Start();
         }
 
         private static string ValidateVideo(YouTubeVideo video)

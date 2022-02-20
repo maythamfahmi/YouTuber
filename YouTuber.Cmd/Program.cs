@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using NAudio.Wave;
 using Xabe.FFmpeg;
 using Xabe.FFmpeg.Downloader;
 using YouTuber.Client;
@@ -27,28 +26,16 @@ namespace YouTuber.Cmd
 
         public static async Task Main(string[] args)
         {
-            var FFmpegpath = "C:/FFmpeg/bin";
-            FFmpeg.SetExecutablesPath(FFmpegpath, ffmpegExeutableName: "FFmpeg");
-
-            await FFmpegDownloader.GetLatestVersion(FFmpegVersion.Official, FFmpegpath);
-
-            string outputFileName = Path.ChangeExtension("./download/test", ".mp3");
-            var conversion = await FFmpeg
-                .Conversions.FromSnippet
-                .ExtractAudio("./download/test.mp4", outputFileName);
-            await conversion.Start();
-        }
-
-        public static async Task Main1(string[] args)
-        {
             bool isDebug = false;
             IsDebugCheck(ref isDebug);
             if (isDebug)
             {
-                args = new[] { "-l", "3rJfBFamlIw" };
+                args = new[] { "-l", "3rJfBFamlIw", "-a" };
                 //args = new[] { "-l", "3rJfBFamlIw", "dVsZm7_sqfw", "Kv3RfdHZ25c" };
                 //args = new[] { "-d" };
             }
+
+            bool onlyAudio = args.Contains("-a");
 
             var input = args.Length == 0 ? "" : args[0];
             if (string.IsNullOrEmpty(input))
@@ -58,7 +45,7 @@ namespace YouTuber.Cmd
             else if (input is "-d" or "--dummy")
             {
                 CreateSampleList();
-                await Service.YoutubeToMp4(ShortVideos);
+                await Service.YoutubeToMp4(ShortVideos, onlyAudio);
             }
             else if (input.EndsWith(".txt"))
             {
@@ -70,7 +57,7 @@ namespace YouTuber.Cmd
                 }
                 else
                 {
-                    await Service.YoutubeToMp4(urls);
+                    await Service.YoutubeToMp4(urls, onlyAudio);
                 }
             }
             else if (input is "-l" or "--list")
@@ -83,7 +70,7 @@ namespace YouTuber.Cmd
                 {
                     try
                     {
-                        await Service.YoutubeToMp4(GetList(args[1]));
+                        await Service.YoutubeToMp4(GetList(args[1]), onlyAudio);
                     }
                     catch (Exception e)
                     {

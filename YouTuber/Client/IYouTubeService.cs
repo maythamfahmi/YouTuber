@@ -6,7 +6,7 @@ namespace YouTuber.Client
     public interface IYouTubeService
     {
         IEnumerable<string> FileToList(string file);
-        Task YoutubeToMp4(IEnumerable<string> urls);
-        Task<string?> YoutubeToMp4(string url);
+        Task YoutubeToMp4(IEnumerable<string> urls, bool onlyAudio);
+        Task<string?> YoutubeToMp4(string url, bool onlyAudio);
     }
 }
