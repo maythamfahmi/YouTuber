@@ -1,10 +1,17 @@
-﻿using YouTuber.Client;
+﻿using System.Diagnostics;
+using YouTuber.Client;
 
 namespace YouTuber.Cmd
 {
     public class Program
     {
         private static readonly YouTubeService Service = new YouTubeService();
+
+        [Conditional("DEBUG")]
+        private static void IsDebugCheck(ref bool debugMode)
+        {
+            debugMode = true;
+        }
 
         //Sample download
         private static readonly string[] ShortVideos =
@@ -14,14 +21,16 @@ namespace YouTuber.Cmd
             "https://www.youtube.com/watch?v=3rJfBFamlIw"
         };
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            bool debugMode = false;
-            if (debugMode)
+            bool isDebug = false;
+            IsDebugCheck(ref isDebug);
+            if (isDebug)
             {
                 args = new[] { "-l", "3rJfBFamlIw" };
+                //args = new[] { "-l", "3rJfBFamlIw", "dVsZm7_sqfw", "Kv3RfdHZ25c" };
+                //args = new[] { "-d" };
             }
-            
 
             var input = args.Length == 0 ? "" : args[0];
             if (string.IsNullOrEmpty(input))
@@ -31,7 +40,7 @@ namespace YouTuber.Cmd
             else if (input is "-d" or "--dummy")
             {
                 CreateSampleList();
-                Service.YoutubeToMp3(ShortVideos);
+                await Service.YoutubeToMp4(ShortVideos);
             }
             else if (input.EndsWith(".txt"))
             {
@@ -43,22 +52,24 @@ namespace YouTuber.Cmd
                 }
                 else
                 {
-                    Service.YoutubeToMp3(urls);
+                    await Service.YoutubeToMp4(urls);
                 }
             }
             else if (input is "-l" or "--list")
             {
                 if (string.IsNullOrWhiteSpace(args[1]))
                 {
+                    Help();
                 }
                 else
                 {
                     try
                     {
-                        Service.YoutubeToMp3(GetList(args[1]));
+                        await Service.YoutubeToMp4(GetList(args[1]));
                     }
-                    catch
+                    catch (Exception e)
                     {
+                        Console.WriteLine(e.Message);
                         Help("download");
                     }
                 }
