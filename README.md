@@ -22,9 +22,10 @@ You can find downloadyoutube.zip and download **YouTuber** via [Releases](https:
 Extract the zip file and extract the version that fits your operating system. Follow the examples below under **How to use**.
 
 Avaibale versions:
-- DownloadYouTube-Win32.exe for Windows 10, 11
-- DownloadYouTube-Win64.exe for Windows 10, 11
-- DownloadYouTube-Linux64 for Linux 64
+- DownloadYouTube.exe from win-x86 folder for Windows OS 10, 11
+- DownloadYouTube.exe from win-x64 folder for Windows OS 10, 11 
+- DownloadYouTube from linux-x64 folder for Ubuntu OS
+- DownloadYouTube from osx-x64 folder for Mac OS
 
 ## How to use
 
@@ -67,9 +68,14 @@ https://www.youtube.com/watch?v=3rJfBFamlIw
 
 It will download 3 samples videos. It will create download.txt list file of the 3 videos (You can add your own videos).
 
+### Example 5 Download multiple videos based on youtube video url
+```./DownloadYouTube ./download.txt```
+
+It will download what ever youtube link from download.txt file.
+
 ## Website
 
-https://maythamfahmi.github.io/YouTuber/
+https://maythamfahmi.github.io/YouTuber
 
 ## Versions
 
