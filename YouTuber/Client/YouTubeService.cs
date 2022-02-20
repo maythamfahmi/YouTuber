@@ -77,9 +77,9 @@ namespace YouTuber.Client
                 var title = CleanFilename(video.FullName);
                 return $"{title} is properly copyright protected or locked!";
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return "Unknown error please report a bug!";
+                return $"Unknown error\nPlease report a bug with following info:!\n{e.Message}";
             }
 
             return "OK";
