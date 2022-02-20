@@ -1,5 +1,9 @@
 ﻿using System.Diagnostics;
+using NAudio.Wave;
+using Xabe.FFmpeg;
+using Xabe.FFmpeg.Downloader;
 using YouTuber.Client;
+using Conversion = Microsoft.VisualBasic.Conversion;
 
 namespace YouTuber.Cmd
 {
@@ -22,6 +26,20 @@ namespace YouTuber.Cmd
         };
 
         public static async Task Main(string[] args)
+        {
+            var FFmpegpath = "C:/FFmpeg/bin";
+            FFmpeg.SetExecutablesPath(FFmpegpath, ffmpegExeutableName: "FFmpeg");
+
+            await FFmpegDownloader.GetLatestVersion(FFmpegVersion.Official, FFmpegpath);
+
+            string outputFileName = Path.ChangeExtension("./download/test", ".mp3");
+            var conversion = await FFmpeg
+                .Conversions.FromSnippet
+                .ExtractAudio("./download/test.mp4", outputFileName);
+            await conversion.Start();
+        }
+
+        public static async Task Main1(string[] args)
         {
             bool isDebug = false;
             IsDebugCheck(ref isDebug);
