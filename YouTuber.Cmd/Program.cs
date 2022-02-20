@@ -1,5 +1,8 @@
 ﻿using System.Diagnostics;
+using Xabe.FFmpeg;
+using Xabe.FFmpeg.Downloader;
 using YouTuber.Client;
+using Conversion = Microsoft.VisualBasic.Conversion;
 
 namespace YouTuber.Cmd
 {
@@ -27,10 +30,12 @@ namespace YouTuber.Cmd
             IsDebugCheck(ref isDebug);
             if (isDebug)
             {
-                args = new[] { "-l", "3rJfBFamlIw" };
+                //args = new[] { "-l", "3rJfBFamlIw", "-a" };
                 //args = new[] { "-l", "3rJfBFamlIw", "dVsZm7_sqfw", "Kv3RfdHZ25c" };
                 //args = new[] { "-d" };
             }
+
+            bool onlyAudio = args.Contains("-a");
 
             var input = args.Length == 0 ? "" : args[0];
             if (string.IsNullOrEmpty(input))
@@ -40,7 +45,7 @@ namespace YouTuber.Cmd
             else if (input is "-d" or "--dummy")
             {
                 CreateSampleList();
-                await Service.YoutubeToMp4(ShortVideos);
+                await Service.YoutubeToMp4(ShortVideos, onlyAudio);
             }
             else if (input.EndsWith(".txt"))
             {
@@ -52,7 +57,7 @@ namespace YouTuber.Cmd
                 }
                 else
                 {
-                    await Service.YoutubeToMp4(urls);
+                    await Service.YoutubeToMp4(urls, onlyAudio);
                 }
             }
             else if (input is "-l" or "--list")
@@ -65,7 +70,7 @@ namespace YouTuber.Cmd
                 {
                     try
                     {
-                        await Service.YoutubeToMp4(GetList(args[1]));
+                        await Service.YoutubeToMp4(GetList(args[1]), onlyAudio);
                     }
                     catch (Exception e)
                     {

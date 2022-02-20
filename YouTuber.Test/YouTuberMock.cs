@@ -15,12 +15,12 @@ namespace YouTuber.Test
 
             int counter = 0;
             service
-                .When(e => e.YoutubeToMp4(Arg.Any<List<string>>()))
+                .When(e => e.YoutubeToMp4(Arg.Any<List<string>>(), Arg.Any<bool>()))
                 .Do(_ => counter++);
 
-            service.YoutubeToMp4(dummyUrls);
-            service.YoutubeToMp4(dummyUrls);
-            service.YoutubeToMp4(dummyUrls);
+            service.YoutubeToMp4(dummyUrls, false);
+            service.YoutubeToMp4(dummyUrls, false);
+            service.YoutubeToMp4(dummyUrls, false);
             counter.ShouldBe(3);
         }
 
@@ -29,10 +29,10 @@ namespace YouTuber.Test
         {
             IYouTubeService service = Substitute.For<IYouTubeService>();
             service
-                .When(x => x.YoutubeToMp4(""))
+                .When(x => x.YoutubeToMp4("", false))
                 .Do(x => throw new Exception());
 
-            Action action = () => service.YoutubeToMp4("");
+            Action action = () => service.YoutubeToMp4("", false);
             action.ShouldThrow<Exception>();
         }
 
@@ -46,10 +46,10 @@ namespace YouTuber.Test
 
             service
                 .FileToList("")
-                .ShouldContain(e => e.Contains("1"));
+                .ShouldContain(e => e.Contains('1'));
             service
                 .FileToList("")
-                .ShouldContain(e => e.Contains("2"));
+                .ShouldContain(e => e.Contains('2'));
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace YouTuber.Test
                 .FileToList("youtubelist.txt")
                 .Returns(new List<string>() { "1", "2", "3" });
 
-            _ = service.YoutubeToMp4(service.FileToList("youtubelist.txt"));
+            _ = service.YoutubeToMp4(service.FileToList("youtubelist.txt"), false);
         }
     }
 }

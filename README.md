@@ -9,7 +9,7 @@
 # YouTuber
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/main/LICENSE.txt)
-[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.1.0?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.1.0)
+[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.2.0?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.2.0)
 
 ## Introdution
 :rocket: **YouTuber** is a fast command line for downloading YouTube videos. 
@@ -37,10 +37,15 @@ Result
 ```
 [-h | --help]        Get help
 [-d | --dummy]       Download sample files
-[-l | --list]        Download directly, use ';' as seperator for multiple urls/Ids
-example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c
-example: -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw
-[download.txt]       Create your own list
+[-l | --list]        Download directly, use ';' as separator for multiple urls/Ids
+
+examples:
+./DownloadYouTube -l https://www.youtube.com/watch?v=Kv3RfdHZ25c -> will download single video
+./DownloadYouTube -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw -> will download 3 videos
+./DownloadYouTube -d -> will create download.txt with 3 dummy videos and download them
+./DownloadYouTube ./download.txt -> will download your own list
+Note: Please read README.md for more info.
+By using this App, you agree to be bound by the terms and conditions of this Agreement
 ```
 
 ### Example 2, Download a single video based on youtube url
@@ -73,11 +78,20 @@ It will download 3 samples videos. It will create download.txt list file of the 
 
 It will download what ever youtube link from download.txt file.
 
+### Example 6 Download and extract only Audio of the youtube video
+```./DownloadYouTube ./download.txt -a```
+
+Just add ```-a``` at the end of the command line for any example above.
+
 ## Website
 
 https://maythamfahmi.github.io/YouTuber
 
 ## Versions
+
+#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.2.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.2.0)
+- Èxtracting Audio feature
+- Documentation improvement
 
 #### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.1.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.1.0)
 - Support Mac OS
@@ -128,19 +142,18 @@ git push --tags
 
 For pre-release, just tag with ```-pre``` like ```v2.x.x-pre```.
 
-Note: remove cached tags ```git fetch -p -P origin``` in case of mistake or clean up and ```git push --tags```
+**Note:** remove cached tags ```git fetch -p -P origin``` in case of mistake or clean up and ```git push --tags```
 
 Rememebr to update readme badge and versions.
 
-## Testing with Ubunutu on Windows environment
+### Testing with Ubuntu on Windows environment
 
 ```docker run -it --rm -v $pwd`:/app mcr.microsoft.com/dotnet/sdk:6.0```
 ```cd /app```
 
-Example to test release
+Example of testing release in Ubuntu docker instance:
 
 ```dotnet publish /p:PublishProfile=Release-win-x64 -c Release```
-
 
 Check this https://github.com/dotnet/sdk/issues/23627
 
