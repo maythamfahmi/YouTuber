@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using VideoLibrary;
 using Xabe.FFmpeg;
@@ -37,6 +38,8 @@ namespace YouTuber.Client
         {
             string uri = Url(url).ToString();
 
+            SemaphoreSlim semaphore = new SemaphoreSlim(1);
+
             if (uri.Replace(BaseUrl, "").Length != 11)
             {
                 return "Looks like this is invalid url/id";
@@ -57,19 +60,23 @@ namespace YouTuber.Client
 
             string validationMessage = ValidateVideo(video);
             if (validationMessage != "OK") return validationMessage;
-            
+
             CreateFolder(BaseFolder);
             string path = Path.Combine(BaseFolder, video.FullName);
             await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
             if (onlyAudio)
             {
-                await ExtractAudio(path);
-                File.Delete(path);
+                lock (_set)
+                {
+                    //todo: investigation of possible solution required
+                    //parallel is not possible hence ffmpeg.exe process need to done first.
+                    ExtractAudio(path).Wait();
+                }
             }
             return $"{CleanFilename(video.FullName)} video is ready under {BaseFolder}";
         }
 
-        private static async Task ExtractAudio(string path)
+        private async Task ExtractAudio(string path)
         {
             var currentFolder = Directory.GetCurrentDirectory();
             var ffmpegPath = $"{currentFolder}/FFmpeg";
@@ -83,11 +90,10 @@ namespace YouTuber.Client
             {
                 File.Delete(outputPath);
             }
-            
-            var conversion = await FFmpeg
-                .Conversions.FromSnippet
-                .ExtractAudio(inputPath, outputPath);
+
+            var conversion = await FFmpeg.Conversions.FromSnippet.ExtractAudio(inputPath, outputPath);
             await conversion.Start();
+            await Task.Delay(500);
         }
 
         private static string ValidateVideo(YouTubeVideo video)
