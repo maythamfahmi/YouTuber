@@ -31,7 +31,7 @@ namespace YouTuber.Cmd
             if (isDebug)
             {
                 //args = new[] { "-l", "3rJfBFamlIw", "-a" };
-                //args = new[] { "-l", "3rJfBFamlIw", "dVsZm7_sqfw", "Kv3RfdHZ25c" };
+                args = new[] { "-l", "Kv3RfdHZ25c", "dVsZm7_sqfw", "3rJfBFamlIw", "-a" };
                 //args = new[] { "-d" };
             }
 

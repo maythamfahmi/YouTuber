@@ -83,6 +83,8 @@ It will download what ever youtube link from download.txt file.
 
 Just add ```-a``` at the end of the command line for any example above.
 
+Note: Audio conversion might take longer time than downloading the video.
+
 ## Website
 
 https://maythamfahmi.github.io/YouTuber
@@ -129,6 +131,10 @@ https://maythamfahmi.github.io/YouTuber
 #### 3rd party dependency
 Third party packages/libraries:
 - VideoLibrary
+- Xabe.FFmpeg 
+- Xabe.FFmpeg.Downloader
+
+Xabe is used for audio convertion feature. It is only for none commerical use, else contact Xabe.FFmpeg
 
 ## Create Release
 From you console:
