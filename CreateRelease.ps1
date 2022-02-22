@@ -1,74 +1,46 @@
+param(
+     [Parameter()][AllowNull()]
+     [string]$Major,
+     [Parameter()][AllowNull()]
+     [string]$Minor,
+     [Parameter()][AllowNull()]
+     [string]$Patch
+ )
+
 $appVersion = (git describe --match "v*" main).replace("v", "").split(".")
 $majorDefault = $appVersion[0]
 $minorDefault = $appVersion[1]
 $patchDefault = $appVersion[2]
 
-function Func1{
-	param (	
-        [Parameter(Mandatory = $false)][Alias('major')][AllowNull()]
-        ${major[1]},
-        [Parameter(Mandatory = $false)][Alias('minor')][AllowNull()]
-        ${minor[2]},
-		[Parameter(Mandatory = $false)][Alias('patch')][AllowNull()]
-        ${patch[3]}
+Function Version{
+    param(
+        [Parameter(Mandatory=$true)] [ValidateRange(0,9)] [Int]$Major,
+        [Parameter(Mandatory=$true)] [ValidateRange(0,9)] [Int]$Minor,
+        [Parameter(Mandatory=$true)] [ValidateRange(0,9)] [Int]$Patch
     )
-    $major = 
-        if (${major[1]}) {
-            ${major[1]}
-        } else {
-            $majorDefault
+    $PatchInc = $Patch + 1;
+    $Version = "v$Major.$Minor.$PatchInc"
+    Write-Output "$Version"
+
+    $yesNo = Read-Host -prompt "Are you sure to release YouTuber ${Version}? [Y/N]"
+    if ($yesNo -eq 'y')
+    {
+        do 
+        {
+            Write-output "Cleaning unused tags" 
+            git fetch -p -P origin
+            Write-output "Create tag Release" 
+            git tag ${Version} -a -m "Release ${Version}"
+            Write-output "Push Release" 
+            #git push --tags
+            Write-output "$value" 
         }
-    $minor = 
-        if (${minor[2]}) {
-            ${minor[2]}
-        } else {
-            $minorDefault
-        }
-	$patch = 
-        if (${patch[3]}) {
-            ${patch[3]}
-        } else {
-            $patchDefault
-        }
-    [PSCustomObject]@{
-        major = $major
-        minor = $minor
-		patch = $patch
+        while($strQuit -eq 'y')
     }
+
 }
 
-#write-host $majorDefault
-#write-host $minorDefault
-#write-host $patchDefault
-
-Func1
-
-write-host $majorDefault
-
-# $MajorFromObj = "Please input Major version"
-# $majorInput = { (Read-Host $MajorFromObj) -as [int] }
-# $FromInput = & $majorInput
-
-# $FromInput = 
-# if (${Parameter1[default value]}) {
-	# ${Parameter1[default value]}
-# } else {
-	# $FromInput
-# }
-
-# # $major = { (Read-Host $Major) -as [string] }
-# # $minor = { (Read-Host $Minor) -as [int] }
-# # $patch = { (Read-Host $Patch) -as [int] }
-
-# write-host $FromInput
-# write-host $Major
-# write-host $Minor
-# write-host $Patch
-
-## https://stackoverflow.com/questions/39878202/powershell-mandatory-parameter-with-default-value-shown
-
-
-# $param1=$args[0]
-
-# git fetch -p -P origin
-# git tag v$param1 -a -m "Release $param1"
+$majorVal = If([string]::IsNullOrEmpty($Major)) {$majorDefault} else {$Major}
+$minorVal = If([string]::IsNullOrEmpty($Minor)) {$minorDefault} else {$Minor}
+$patchVal = If([string]::IsNullOrEmpty($Patch)) {$patchDefault} else {$Patch}
+Version -Major $majorVal -Minor $minorVal -Patch $patchVal
