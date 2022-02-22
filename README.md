@@ -9,7 +9,7 @@
 # YouTuber
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/main/LICENSE.txt)
-[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.2.0?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.2.0)
+[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.5.1?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.1)
 
 ## Introdution
 :rocket: **YouTuber** is a fast command line for downloading YouTube videos. 
@@ -91,8 +91,13 @@ https://maythamfahmi.github.io/YouTuber
 
 ## Versions
 
+#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.5.1-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.1)
+- Fix Multiple Audio conversion [Bug #25](https://github.com/maythamfahmi/YouTuber/issues/25)
+- Adding release tool
+- Documentation improvement
+
 #### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.2.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.2.0)
-- Èxtracting Audio feature
+- Extracting Audio feature
 - Documentation improvement
 
 #### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.1.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.1.0)
