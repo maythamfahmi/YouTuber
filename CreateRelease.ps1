@@ -37,15 +37,13 @@ function Func1{
     }
 }
 
-write-host $majorDefault
-write-host $minorDefault
-write-host $patchDefault
+#write-host $majorDefault
+#write-host $minorDefault
+#write-host $patchDefault
 
 Func1
 
-
-
-write-host $major
+write-host $majorDefault
 
 # $MajorFromObj = "Please input Major version"
 # $majorInput = { (Read-Host $MajorFromObj) -as [int] }
