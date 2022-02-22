@@ -32,7 +32,7 @@ Function Version{
             Write-output "Create tag Release" 
             git tag ${Version} -a -m "Release ${Version}"
             Write-output "Push Release" 
-            #git push --tags
+            git push --tags
             Write-output "$value" 
         }
         while($strQuit -eq 'y')
