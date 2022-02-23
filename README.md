@@ -9,7 +9,7 @@
 # YouTuber
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/main/LICENSE.txt)
-[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.5.1?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.1)
+[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.5.6?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.6)
 
 ## Introdution
 :rocket: **YouTuber** is a fast command line for downloading YouTube videos. 
@@ -99,26 +99,17 @@ https://maythamfahmi.github.io/YouTuber
 
 ## Versions
 
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.5.1-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.1)
+#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.5.6-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.6)
 - Fix Multiple Audio conversion [Bug #25](https://github.com/maythamfahmi/YouTuber/issues/25)
+- Convert to m4a audio [Feature #26](https://github.com/maythamfahmi/YouTuber/issues/25)
+- Extracting Audio feature mp3
 - Adding release tool
-- Documentation improvement
-
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.2.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.2.0)
-- Extracting Audio feature
-- Documentation improvement
-
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.1.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.1.0)
 - Support Mac OS
-- Refactoring
-- Documentation improvement
-
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.0.4-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.4)
-- Net 6
-- Standard 2.0
+- Refactored to Net 6 and Standard 2.0
 - Documentation improvement
 
 #### [![Release%20Code](https://img.shields.io/badge/release%20code-1.0.1-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/1.0.1)
+- Initial release
 
 <be />
 <be />
