@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using HeyRed.Mime;
 using YouTuber.Client;
 
 namespace YouTuber.Cmd
@@ -21,20 +22,35 @@ namespace YouTuber.Cmd
             "https://www.youtube.com/watch?v=3rJfBFamlIw"
         };
 
+        public static void Main1()
+        {
+            var file1 = @"D:\OpenSource\YouTuber\YouTuber.Cmd\bin\Debug\net6.0\download\1.m4a";
+            var file2 = @"D:\OpenSource\YouTuber\YouTuber.Cmd\bin\Debug\net6.0\download\2.mp3";
+            var x1 = MimeTypesMap.GetMimeType(file1);
+            var x2 = MimeTypesMap.GetMimeType(file2);
+
+            Console.WriteLine(x1);
+            Console.WriteLine(x2);
+        }
+
         public static async Task Main(string[] args)
         {
             bool isDebug = false;
             IsDebugCheck(ref isDebug);
             if (isDebug)
             {
-                //args = new[] { "-l", "3rJfBFamlIw", "-a" };
+                //args = new[] { "-l", "3rJfBFamlIw" };
+                args = new[] { "-l", "3rJfBFamlIw", "-a" };
+                //args = new[] { "-l", "3rJfBFamlIw", "-a:mp3" };
+                //args = new[] { "-l", "3rJfBFamlIw", "-a:m4a" };
                 //args = new[] { "-l", "Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw" };
-                args = new[] { "-l", "Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a" };
+                //args = new[] { "-l", "Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a" };
                 //args = new[] { "-d" };
                 //args = new[] { "-d", "-a };
             }
 
-            bool onlyAudio = args.Contains("-a");
+            bool onlyAudio = args.Contains("-a") || args.Contains("-a:mp3") || args.Contains("-a:m4a");
+            string codec = args.Contains("-a:m4a") ? "m4a" : "mp3";
 
             var input = args.Length == 0 ? "" : args[0];
             if (string.IsNullOrEmpty(input))
@@ -69,7 +85,7 @@ namespace YouTuber.Cmd
                 {
                     try
                     {
-                        await Service.YoutubeToMp4(GetList(args[1]), onlyAudio);
+                        await Service.YoutubeToMp4(GetList(args[1]), onlyAudio, codec);
                     }
                     catch (Exception e)
                     {

@@ -15,12 +15,12 @@ namespace YouTuber.Test
 
             int counter = 0;
             service
-                .When(e => e.YoutubeToMp4(Arg.Any<List<string>>(), Arg.Any<bool>()))
+                .When(e => e.YoutubeToMp4(Arg.Any<List<string>>(), Arg.Any<bool>(), Arg.Any<string>()))
                 .Do(_ => counter++);
 
-            service.YoutubeToMp4(dummyUrls, false);
-            service.YoutubeToMp4(dummyUrls, false);
-            service.YoutubeToMp4(dummyUrls, false);
+            service.YoutubeToMp4(dummyUrls, false, "mp3");
+            service.YoutubeToMp4(dummyUrls, false, "mp3");
+            service.YoutubeToMp4(dummyUrls, false, "mp3");
             counter.ShouldBe(3);
         }
 
@@ -29,10 +29,10 @@ namespace YouTuber.Test
         {
             IYouTubeService service = Substitute.For<IYouTubeService>();
             service
-                .When(x => x.YoutubeToMp4("", false))
+                .When(x => x.YoutubeToMp4("", false, ""))
                 .Do(x => throw new Exception());
 
-            Action action = () => service.YoutubeToMp4("", false);
+            Action action = () => service.YoutubeToMp4("", false, "");
             action.ShouldThrow<Exception>();
         }
 
