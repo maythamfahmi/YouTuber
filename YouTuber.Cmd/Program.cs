@@ -1,8 +1,5 @@
 ﻿using System.Diagnostics;
-using Xabe.FFmpeg;
-using Xabe.FFmpeg.Downloader;
 using YouTuber.Client;
-using Conversion = Microsoft.VisualBasic.Conversion;
 
 namespace YouTuber.Cmd
 {
@@ -31,8 +28,10 @@ namespace YouTuber.Cmd
             if (isDebug)
             {
                 //args = new[] { "-l", "3rJfBFamlIw", "-a" };
-                args = new[] { "-l", "Kv3RfdHZ25c", "dVsZm7_sqfw", "3rJfBFamlIw", "-a" };
+                //args = new[] { "-l", "Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw" };
+                args = new[] { "-l", "Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a" };
                 //args = new[] { "-d" };
+                //args = new[] { "-d", "-a };
             }
 
             bool onlyAudio = args.Contains("-a");

@@ -71,6 +71,7 @@ namespace YouTuber.Client
                     //todo: investigation of possible solution required
                     //parallel is not possible hence ffmpeg.exe process need to done first.
                     ExtractAudio(path).Wait();
+                    File.Delete(path);
                 }
             }
             return $"{CleanFilename(video.FullName)} video is ready under {BaseFolder}";
