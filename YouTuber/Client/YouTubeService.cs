@@ -15,7 +15,7 @@ namespace YouTuber.Client
         private const string BaseFolder = "download";
         private readonly HashSet<string> _set = new HashSet<string>();
 
-        public virtual async Task YoutubeToMp4(IEnumerable<string> urls, bool onlyAudio)
+        public virtual async Task YoutubeToMp4(IEnumerable<string> urls, bool onlyAudio, string codec = "mp3")
         {
             ParallelOptions options = new ParallelOptions();
             int maxProc = Environment.ProcessorCount;
@@ -25,7 +25,7 @@ namespace YouTuber.Client
 
             await Parallel.ForEachAsync(urls, options, async (url, token) =>
             {
-                var result = await YoutubeToMp4(url, onlyAudio);
+                var result = await YoutubeToMp4(url, onlyAudio, codec);
 
                 if (!string.IsNullOrWhiteSpace(result))
                 {
@@ -34,7 +34,7 @@ namespace YouTuber.Client
             });
         }
 
-        public virtual async Task<string?> YoutubeToMp4(string url, bool onlyAudio)
+        public virtual async Task<string?> YoutubeToMp4(string url, bool onlyAudio, string codec)
         {
             string uri = Url(url).ToString();
 
@@ -70,14 +70,14 @@ namespace YouTuber.Client
                 {
                     //todo: investigation of possible solution required
                     //parallel is not possible hence ffmpeg.exe process need to done first.
-                    ExtractAudio(path).Wait();
-                    File.Delete(path);
+                    ExtractAudio(path, codec).Wait();
+                    //File.Delete(path);
                 }
             }
             return $"{CleanFilename(video.FullName)} video is ready under {BaseFolder}";
         }
 
-        private async Task ExtractAudio(string path)
+        private async Task ExtractAudio(string path, string codec)
         {
             var currentFolder = Directory.GetCurrentDirectory();
             var ffmpegPath = $"{currentFolder}/FFmpeg";
@@ -85,7 +85,9 @@ namespace YouTuber.Client
             await FFmpegDownloader.GetLatestVersion(FFmpegVersion.Official, ffmpegPath);
             FileInfo fi = new FileInfo(path);
             string inputPath = fi.FullName;
-            string outputPath = Path.ChangeExtension(inputPath, "mp3");
+            string outputPath = Path.ChangeExtension(inputPath, codec);
+            
+            //Console.WriteLine(AudioCodec.m4a);
 
             if (File.Exists(outputPath))
             {

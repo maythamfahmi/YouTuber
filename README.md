@@ -80,10 +80,18 @@ It will download what ever youtube link from download.txt file.
 
 ### Example 6 Download and extract only Audio of the youtube video
 ```./DownloadYouTube ./download.txt -a```
+or
+```./DownloadYouTube ./download.txt -a:mp3```
 
-Just add ```-a``` at the end of the command line for any example above.
+Will convert to mp3
 
-Note: Audio conversion might take longer time than downloading the video.
+```./DownloadYouTube ./download.txt -a:m4a```
+
+Will convert to m4a
+
+Just add ```-a```, ```-a:mp3``` or ```-a:m4a``` at the end of the command line for any example above.
+
+**Note**: Audio conversion might take longer time than downloading the video.
 
 ## Website
 
