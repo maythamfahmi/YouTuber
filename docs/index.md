@@ -63,7 +63,20 @@ It will download 3 samples videos. It will create download.txt list file of the 
 ### Example 5 Download multiple videos based on youtube video url
 ```./DownloadYouTube ./download.txt```
 
-It will download what ever youtube link from download.txt file.
+### Example 6 Download and extract only Audio of the youtube video
+```./DownloadYouTube ./download.txt -a```
+or
+```./DownloadYouTube ./download.txt -a:mp3```
+
+Will convert to mp3
+
+```./DownloadYouTube ./download.txt -a:m4a```
+
+Will convert to m4a
+
+Just add ```-a```, ```-a:mp3``` or ```-a:m4a``` at the end of the command line for any example above.
+
+**Note**: Audio conversion might take longer time than downloading the video.
 
 ## Website
 
@@ -71,15 +84,16 @@ https://maythamfahmi.github.io/YouTuber
 
 ## Versions
 
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.1.0-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.1.0)
+#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.5.6-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.6)
+- Fix Multiple Audio conversion [Bug #25](https://github.com/maythamfahmi/YouTuber/issues/25)
+- Convert to m4a audio [Feature #26](https://github.com/maythamfahmi/YouTuber/issues/25)
+- Extracting Audio feature mp3
+- Adding release tool
 - Support Mac OS
-- Refactoring
+- Refactored to Net 6 and Standard 2.0
 - Documentation improvement
 
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.0.4-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.0.4)
-- Net 6
-- Standard 2.0
-- Documentation improvement
+It will download what ever youtube link from download.txt file.
 
 #### [![Release%20Code](https://img.shields.io/badge/release%20code-1.0.1-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/1.0.1)
 
