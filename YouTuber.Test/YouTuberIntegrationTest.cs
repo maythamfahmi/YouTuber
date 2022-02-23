@@ -14,7 +14,7 @@ namespace YouTuber.Test
         {
             var path = Path.Combine(RunningPath, "download");
             string[] youtubeList = new [] { "Kv3RfdHZ25c", "3rJfBFamlIw" };
-            await Service.YoutubeToMp4(youtubeList, false);
+            await Service.YoutubeToMp4(youtubeList, false, "mp3");
             var files = Directory.GetFiles(path);
             files.Length.ShouldBe(2);
             Directory.Delete(path, true);

@@ -38,8 +38,6 @@ namespace YouTuber.Client
         {
             string uri = Url(url).ToString();
 
-            SemaphoreSlim semaphore = new SemaphoreSlim(1);
-
             if (uri.Replace(BaseUrl, "").Length != 11)
             {
                 return "Looks like this is invalid url/id";
@@ -71,13 +69,13 @@ namespace YouTuber.Client
                     //todo: investigation of possible solution required
                     //parallel is not possible hence ffmpeg.exe process need to done first.
                     ExtractAudio(path, codec).Wait();
-                    //File.Delete(path);
+                    File.Delete(path);
                 }
             }
             return $"{CleanFilename(video.FullName)} video is ready under {BaseFolder}";
         }
 
-        private async Task ExtractAudio(string path, string codec)
+        private static async Task ExtractAudio(string path, string codec)
         {
             var currentFolder = Directory.GetCurrentDirectory();
             var ffmpegPath = $"{currentFolder}/FFmpeg";
