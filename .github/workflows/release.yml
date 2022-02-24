@@ -27,30 +27,34 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Publish .NET
       run: |
+        cmd /c dir /s /b
         dotnet publish /p:PublishProfile=Release-win-x86 -c Release
         #dotnet publish /p:PublishProfile=Release-win-x64 -c Release
         #dotnet publish /p:PublishProfile=Release-linux-x64 -c Release
         #dotnet publish /p:PublishProfile=Release-osx-x64 -c Release
+        cmd /c dir /s /b
     - name: Upload Published Artifact
       uses: actions/upload-artifact@v2.2.4
       with:
         name: DownloadYouTube
+        run:
+          cmd /c dir /s /b
         path: | 
           ${{ env.GITHUB_WORKSPACE }}/YouTuber/Software/win-x86/
           #/home/runner/work/YouTuber/YouTuber/Software/win-x64/
           #/home/runner/work/YouTuber/YouTuber/Software/linux-x64/
           #/home/runner/work/YouTuber/YouTuber/Software/osx-x64/
-    - name: Download Published Artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: DownloadYouTube
-        path: artifact
-    - name: Build project
-      run: |
-        cd artifact
-        dir
-        zip -r downloadyoutube ./
-        dir
+    #- name: Download Published Artifact
+    #  uses: actions/download-artifact@v2
+    #  with:
+    #    name: DownloadYouTube
+    #    path: artifact
+    #- name: Build project
+    #  run: |
+    #    cd artifact
+    #    dir
+    #    zip -r downloadyoutube ./
+    #    dir
 
     #- name: Create Release
     #  id: create_release
