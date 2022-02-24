@@ -1,9 +1,11 @@
-name: .NET-Release
+#work but retried
+
+name: .NET-Release-Using-Linux-OS
 
 on:
   push:
     tags:
-      - 'v*'
+      - 'none'
 
 jobs:
   build:
