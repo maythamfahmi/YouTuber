@@ -55,17 +55,17 @@ jobs:
           #${{ env.GITHUB_WORKSPACE }}\Software\win-x64
           #${{ env.GITHUB_WORKSPACE }}\Software\linux-x64
           #${{ env.GITHUB_WORKSPACE }}\Software\osx-x64
-    #- name: Download Published Artifact
-    #  uses: actions/download-artifact@v2
-    #  with:
-    #    name: DownloadYouTube
-    #    path: artifact
-    #- name: Build project
-    #  run: |
-    #    cd artifact
-    #    dir
-    #    zip -r downloadyoutube ./
-    #    dir
+    - name: Download Published Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: DownloadYouTube
+        path: artifact
+    - name: Build project
+      run: |
+        cd artifact
+        dir
+        #zip -r downloadyoutube ./
+        #dir
 
     #- name: Create Release
     #  id: create_release
