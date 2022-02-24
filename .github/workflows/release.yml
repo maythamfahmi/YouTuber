@@ -33,6 +33,7 @@ jobs:
         #dotnet publish /p:PublishProfile=Release-osx-x64 -c Release
         echo "folder"
         cd Software
+        cd win-x86
         dir
     - name: Upload Published Artifact
       uses: actions/upload-artifact@v2.2.4
