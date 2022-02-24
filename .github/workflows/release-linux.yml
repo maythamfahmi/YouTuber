@@ -1,0 +1,70 @@
+#work but retried
+
+name: .NET-Release-Using-Linux-OS
+
+on:
+  push:
+    tags:
+      - 'none'
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore .NET dependencies
+      run: dotnet restore
+    - name: Build .NET
+      run: dotnet build --no-restore
+    - name: Test .NET
+      run: dotnet test --no-build --verbosity normal
+    - name: Publish .NET
+      run: |
+        dotnet publish /p:PublishProfile=Release-win-x86 -c Release
+        dotnet publish /p:PublishProfile=Release-win-x64 -c Release
+        dotnet publish /p:PublishProfile=Release-linux-x64 -c Release
+        dotnet publish /p:PublishProfile=Release-osx-x64 -c Release
+    - name: Upload Published Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: DownloadYouTube
+        path: | 
+          /home/runner/work/YouTuber/YouTuber/Software/win-x86/
+          /home/runner/work/YouTuber/YouTuber/Software/win-x64/
+          /home/runner/work/YouTuber/YouTuber/Software/linux-x64/
+          /home/runner/work/YouTuber/YouTuber/Software/osx-x64/
+    - name: Download Published Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: DownloadYouTube
+        path: artifact
+    - name: Build project
+      run: |
+        cd artifact
+        zip -r downloadyoutube ./
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./artifact/downloadyoutube.zip
+        asset_name: downloadyoutube.zip
+        asset_content_type: application/zip

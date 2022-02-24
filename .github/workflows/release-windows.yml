@@ -1,9 +1,9 @@
-name: .NET-Release
+name: .NET-Release-Using-Windows-OS
 
 on:
   push:
     branches:
-      - "feature/cd*"
+      - 'feature/cd*'
     tags:
       - 'v*'
 
@@ -29,12 +29,21 @@ jobs:
       run: |
         dotnet publish /p:PublishProfile=Release-win-x86 -c Release
         dotnet publish /p:PublishProfile=Release-win-x64 -c Release
-        dotnet publish /p:PublishProfile=Release-linux-x64 -c Release
-        dotnet publish /p:PublishProfile=Release-osx-x64 -c Release
-        echo "folder"
+        #dotnet publish /p:PublishProfile=Release-linux-x64 -c Release
+        #dotnet publish /p:PublishProfile=Release-osx-x64 -c Release
         cd Software
         cd win-x86
         dir
+        cd ..
+        cd win-x64
+        dir
+        cd ..
+        cd linux-x64
+        dir
+        cd ..
+        cd osx-x64
+        dir
+        cd ..
     - name: Upload Published Artifact
       uses: actions/upload-artifact@v2.2.4
       with:
@@ -42,8 +51,8 @@ jobs:
         path: | 
           ${{ env.GITHUB_WORKSPACE }}\Software\win-x86
           ${{ env.GITHUB_WORKSPACE }}\Software\win-x64
-          ${{ env.GITHUB_WORKSPACE }}\Software\linux-x64
-          ${{ env.GITHUB_WORKSPACE }}\Software\osx-x64
+          #${{ env.GITHUB_WORKSPACE }}\Software\linux-x64
+          #${{ env.GITHUB_WORKSPACE }}\Software\osx-x64
     - name: Download Published Artifact
       uses: actions/download-artifact@v2
       with:

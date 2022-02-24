@@ -13,7 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devops", "devops", "{434E09
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\ci.yml = .github\workflows\ci.yml
 		CreateRelease.ps1 = CreateRelease.ps1
-		.github\workflows\release.yml = .github\workflows\release.yml
+		.github\workflows\release-linux.yml = .github\workflows\release-linux.yml
+		.github\workflows\release-windows.yml = .github\workflows\release-windows.yml
 	EndProjectSection
 EndProject
 Global
