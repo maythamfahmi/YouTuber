@@ -40,7 +40,8 @@ jobs:
       with:
         name: DownloadYouTube
         path: | 
-          ${{ env.GITHUB_WORKSPACE }}\Software\win-x86\
+          D:\a\YouTuber\YouTuber\Software\win-x86
+          #${{ env.GITHUB_WORKSPACE }}\Software\win-x86\
           #/home/runner/work/YouTuber/YouTuber/Software/win-x64/
           #/home/runner/work/YouTuber/YouTuber/Software/linux-x64/
           #/home/runner/work/YouTuber/YouTuber/Software/osx-x64/
