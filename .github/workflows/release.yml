@@ -32,7 +32,7 @@ jobs:
         #dotnet publish /p:PublishProfile=Release-osx-x64 -c Release
         run
     - name: Upload Published Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v2.2.4
       with:
         name: DownloadYouTube
         path: | 
