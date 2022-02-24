@@ -3,7 +3,7 @@ name: .NET-Release
 on:
   push:
     branches:
-      - "feature/21*"
+      - "feature/cd*"
     tags:
       - 'v*'
 
