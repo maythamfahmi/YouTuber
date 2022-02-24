@@ -36,10 +36,8 @@ jobs:
       uses: actions/upload-artifact@v2.2.4
       with:
         name: DownloadYouTube
-        run:
-          dir
         path: | 
-          ${{ env.GITHUB_WORKSPACE }}\YouTuber\Software\win-x86\
+          ${{ env.GITHUB_WORKSPACE }}\Software\win-x86\
           #/home/runner/work/YouTuber/YouTuber/Software/win-x64/
           #/home/runner/work/YouTuber/YouTuber/Software/linux-x64/
           #/home/runner/work/YouTuber/YouTuber/Software/osx-x64/
