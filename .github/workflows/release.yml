@@ -28,18 +28,18 @@ jobs:
     - name: Publish .NET
       run: |
         dotnet publish /p:PublishProfile=Release-win-x86 -c Release
-        dotnet publish /p:PublishProfile=Release-win-x64 -c Release
-        dotnet publish /p:PublishProfile=Release-linux-x64 -c Release
-        dotnet publish /p:PublishProfile=Release-osx-x64 -c Release
+        #dotnet publish /p:PublishProfile=Release-win-x64 -c Release
+        #dotnet publish /p:PublishProfile=Release-linux-x64 -c Release
+        #dotnet publish /p:PublishProfile=Release-osx-x64 -c Release
     - name: Upload Published Artifact
       uses: actions/upload-artifact@v2.2.4
       with:
         name: DownloadYouTube
         path: | 
-          /home/runner/work/YouTuber/YouTuber/Software/win-x86/
-          /home/runner/work/YouTuber/YouTuber/Software/win-x64/
-          /home/runner/work/YouTuber/YouTuber/Software/linux-x64/
-          /home/runner/work/YouTuber/YouTuber/Software/osx-x64/
+          .\home\runner\work\YouTuber\YouTuber\Software\win-x86\
+          #/home/runner/work/YouTuber/YouTuber/Software/win-x64/
+          #/home/runner/work/YouTuber/YouTuber/Software/linux-x64/
+          #/home/runner/work/YouTuber/YouTuber/Software/osx-x64/
     - name: Download Published Artifact
       uses: actions/download-artifact@v2
       with:
