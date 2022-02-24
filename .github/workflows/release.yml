@@ -2,13 +2,15 @@ name: .NET-Release
 
 on:
   push:
+    branches:
+      - "feature/21*"
     tags:
       - 'v*'
 
 jobs:
   build:
     name: Create Release
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -20,8 +22,8 @@ jobs:
       run: dotnet restore
     - name: Build .NET
       run: dotnet build --no-restore
-    - name: Test .NET
-      run: dotnet test --no-build --verbosity normal
+    #- name: Test .NET
+    #  run: dotnet test --no-build --verbosity normal
     - name: Publish .NET
       run: |
         dotnet publish /p:PublishProfile=Release-win-x86 -c Release
@@ -45,24 +47,26 @@ jobs:
     - name: Build project
       run: |
         cd artifact
+        dir
         zip -r downloadyoutube ./
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./artifact/downloadyoutube.zip
-        asset_name: downloadyoutube.zip
-        asset_content_type: application/zip
+        dir
+    #- name: Create Release
+    #  id: create_release
+    #  uses: actions/create-release@v1
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  with:
+    #    tag_name: ${{ github.ref }}
+    #    release_name: Release ${{ github.ref }}
+    #    draft: false
+    #    prerelease: false
+    #- name: Upload Release Asset
+    #  id: upload-release-asset 
+    #  uses: actions/upload-release-asset@v1
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  with:
+    #    upload_url: ${{ steps.create_release.outputs.upload_url }}
+    #    asset_path: ./artifact/downloadyoutube.zip
+    #    asset_name: downloadyoutube.zip
+    #    asset_content_type: application/zip
