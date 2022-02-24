@@ -27,18 +27,17 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Publish .NET
       run: |
-        dir /s /b
         dotnet publish /p:PublishProfile=Release-win-x86 -c Release
         #dotnet publish /p:PublishProfile=Release-win-x64 -c Release
         #dotnet publish /p:PublishProfile=Release-linux-x64 -c Release
         #dotnet publish /p:PublishProfile=Release-osx-x64 -c Release
-        dir /s /b
+        dir
     - name: Upload Published Artifact
       uses: actions/upload-artifact@v2.2.4
       with:
         name: DownloadYouTube
         run:
-          dir /s /b
+          dir
         path: | 
           ${{ env.GITHUB_WORKSPACE }}\YouTuber\Software\win-x86\
           #/home/runner/work/YouTuber/YouTuber/Software/win-x64/
