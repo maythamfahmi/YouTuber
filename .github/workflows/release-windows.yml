@@ -49,8 +49,9 @@ jobs:
       with:
         name: DownloadYouTube
         path: | 
-          ${{ env.GITHUB_WORKSPACE }}\Software\win-x86
-          ${{ env.GITHUB_WORKSPACE }}\Software\win-x64
+          ${{ env.GITHUB_WORKSPACE }}\Software
+          #${{ env.GITHUB_WORKSPACE }}\Software\win-x86
+          #${{ env.GITHUB_WORKSPACE }}\Software\win-x64
           #${{ env.GITHUB_WORKSPACE }}\Software\linux-x64
           #${{ env.GITHUB_WORKSPACE }}\Software\osx-x64
     - name: Download Published Artifact
