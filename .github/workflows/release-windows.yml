@@ -60,11 +60,11 @@ jobs:
       with:
         name: DownloadYouTube
         path: artifact
-    - name: Build project
+    - name: Zip project
       run: |
         cd artifact
         dir
-        zip -r downloadyoutube ./
+        7z a downloadyoutube ./
         dir
 
     #- name: Create Release
