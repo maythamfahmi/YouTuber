@@ -64,8 +64,8 @@ jobs:
       run: |
         cd artifact
         dir
-        #zip -r downloadyoutube ./
-        #dir
+        zip -r downloadyoutube ./
+        dir
 
     #- name: Create Release
     #  id: create_release
