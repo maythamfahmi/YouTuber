@@ -2,8 +2,6 @@ name: .NET-Release-Using-Windows-OS
 
 on:
   push:
-    branches:
-      - 'feature/cd*'
     tags:
       - 'v*'
 
@@ -46,7 +44,7 @@ jobs:
       with:
         name: DownloadYouTube
         path: artifact
-    - name: Zip project
+    - name: Compress and pack project
       run: |
         cd artifact
         7z a downloadyoutube ./
