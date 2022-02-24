@@ -10,6 +10,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/main/LICENSE.txt)
 [![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.5.6?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.6)
+[![.NET-CI](https://github.com/maythamfahmi/YouTuber/actions/workflows/ci.yml/badge.svg)](https://github.com/maythamfahmi/YouTuber/actions/workflows/ci.yml)
+[![.NET-CD](https://github.com/maythamfahmi/YouTuber/actions/workflows/release-windows.yml/badge.svg)](https://github.com/maythamfahmi/YouTuber/actions/workflows/release-windows.yml)
 
 ## Introdution
 :rocket: **YouTuber** is a fast command line for downloading YouTube videos. 
