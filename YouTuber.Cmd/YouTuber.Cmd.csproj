@@ -1,68 +1,60 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <PackageId>YouTuber.Cmd</PackageId>
-        <RepositoryType>git</RepositoryType>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <RepositoryUrl>https://github.com/maythamfahmi/YouTuber</RepositoryUrl>
-        <PackageProjectUrl>https://github.com/maythamfahmi/YouTuber</PackageProjectUrl>
-        <ApplicationIcon>icon.ico</ApplicationIcon>
-        <PackageIcon>logo.png</PackageIcon>
-        <PackageIconUrl>https://raw.githubusercontent.com/maythamfahmi/YouTuber/main/logo.png</PackageIconUrl>
-        <Company>NextBix</Company>
-        <Authors>Maytham Fahmi</Authors>
-        <MinClientVersion>2.0.0</MinClientVersion>
-        <Version>2.0.0</Version>
-        <Title>YouTuber.Cmd</Title>
-        <Product>YouTuber.Cmd</Product>
-        <RootNamespace>YouTuber.Cmd</RootNamespace>
-        <AssemblyName>DownloadYouTube</AssemblyName>
-        <PackageDescription>Simple and fast command line to download youtube videos.</PackageDescription>
-        <PackageTags>YouTube; Download</PackageTags>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>Copyright © 2018</Copyright>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <IncludeSymbols>true</IncludeSymbols>
-        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <Optimize>False</Optimize>
-      <DebugType>portable</DebugType>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <Optimize>True</Optimize>
-      <DebugType>none</DebugType>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <Content Include="icon.ico" />
-      <None Include="..\logo.png">
-        <Pack>True</Pack>
-        <PackagePath>\</PackagePath>
-      </None>
-      <None Include="..\README.md" Pack="true" PackagePath="\" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="..\README.md">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="MimeTypesMap" Version="1.0.8" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\YouTuber\YouTuber.csproj" />
-    </ItemGroup>
-
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>YouTuber.Cmd</PackageId>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/maythamfahmi/YouTuber</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/maythamfahmi/YouTuber</PackageProjectUrl>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageIconUrl>https://raw.githubusercontent.com/maythamfahmi/YouTuber/main/logo.png</PackageIconUrl>
+    <Company>NextBix</Company>
+    <Authors>Maytham Fahmi</Authors>
+    <MinClientVersion>2.0.0</MinClientVersion>
+    <Version>2.0.0</Version>
+    <Title>YouTuber.Cmd</Title>
+    <Product>YouTuber.Cmd</Product>
+    <RootNamespace>YouTuber.Cmd</RootNamespace>
+    <AssemblyName>DownloadYouTube</AssemblyName>
+    <PackageDescription>Simple and fast command line to download youtube videos.</PackageDescription>
+    <PackageTags>YouTube; Download</PackageTags>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright © 2018</Copyright>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>True</Optimize>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+    <None Include="..\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MimeTypesMap" Version="1.0.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YouTuber\YouTuber.csproj" />
+  </ItemGroup>
 </Project>
