@@ -17,7 +17,7 @@ Function Version{
     param(
         [Parameter(Mandatory=$true)] [ValidateRange(0,9)] [Int]$Major,
         [Parameter(Mandatory=$true)] [ValidateRange(0,9)] [Int]$Minor,
-        [Parameter(Mandatory=$true)] [ValidateRange(0,9)] [Int]$Patch
+        [Parameter(Mandatory=$true)] [ValidateRange(0,20)] [Int]$Patch
     )
     [int]$PatchInc  = ($Patch + 3) -as [int];
     if($PatchInc -gt 20){
