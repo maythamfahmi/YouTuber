@@ -7,6 +7,7 @@ on:
       - "feature/*"
       - "!feature/ci*"
       - "!feature/cd*"
+      - "!feature/36*"
     paths-ignore:
       - "**/README.md"
   pull_request:
