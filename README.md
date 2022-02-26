@@ -9,9 +9,9 @@
 # YouTuber
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/main/LICENSE.txt)
-[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.5.6?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.6)
+[![GitHub commits since latest release (by date including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/latest?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/latest)
 [![.NET-CI](https://github.com/maythamfahmi/YouTuber/actions/workflows/ci.yml/badge.svg)](https://github.com/maythamfahmi/YouTuber/actions/workflows/ci.yml)
-[![.NET-CD](https://github.com/maythamfahmi/YouTuber/actions/workflows/release-windows.yml/badge.svg)](https://github.com/maythamfahmi/YouTuber/actions/workflows/release-windows.yml)
+[![Release](https://github.com/maythamfahmi/YouTuber/actions/workflows/windows-release.yml/badge.svg)](https://github.com/maythamfahmi/YouTuber/actions/workflows/windows-release.yml)
 
 ## Introdution
 :rocket: **YouTuber** is a fast command line for downloading YouTube videos. 
@@ -95,6 +95,8 @@ Will convert to m4a
 https://maythamfahmi.github.io/YouTuber
 
 ## Versions
+
+![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/latest?style=social)
 
 #### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.5.6-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.6)
 - Fix Multiple Audio conversion [Bug #25](https://github.com/maythamfahmi/YouTuber/issues/25)
