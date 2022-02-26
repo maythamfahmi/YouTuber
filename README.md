@@ -148,7 +148,7 @@ From you console:
 After merging to main, create tag release:
 
 ```
-git tag v2.x.x -a -m "Release description"
+git tag 2.x.x -a -m "Release version 2.x.x"
 git push --tags
 ```
 
