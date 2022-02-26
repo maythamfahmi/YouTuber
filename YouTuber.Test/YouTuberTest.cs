@@ -1,6 +1,6 @@
 ﻿using Shouldly;
-using YouTuber.Client;
 using NUnit.Framework;
+using YouTuber.Service;
 
 namespace YouTuber.Test
 {
@@ -16,7 +16,7 @@ namespace YouTuber.Test
         {
             IList<string> youtubeList = Service.FileToList(FromFile).ToList();
 
-            youtubeList.Count().ShouldBe(3);
+            youtubeList.Count.ShouldBe(3);
             youtubeList.ShouldContain("https://www.youtube.com/watch?v=Kv3RfdHZ25c");
             youtubeList.ShouldAllBe(e => e.StartsWith("https://www.youtube.com/watch?v="));
         }

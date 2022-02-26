@@ -32,22 +32,21 @@ Avaibale versions:
 ## How to use
 
 ### Example 1, Help
-```./DownloadYouTube -h```
+```./DownloadYouTube --help```
 
 Result
 
 ```
-[-h | --help]        Get help
-[-d | --dummy]       Download sample files
-[-l | --list]        Download directly, use ';' as separator for multiple urls/Ids
+  -a, --audio    Extract only audio. -a mp3 or -a m4a.
 
-examples:
-./DownloadYouTube -l https://www.youtube.com/watch?v=Kv3RfdHZ25c -> will download single video
-./DownloadYouTube -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw -> will download 3 videos
-./DownloadYouTube -d -> will create download.txt with 3 dummy videos and download them
-./DownloadYouTube ./download.txt -> will download your own list
-Note: Please read README.md for more info.
-By using this App, you agree to be bound by the terms and conditions of this Agreement
+  -l, --list     Required. Download single or multiple youtube by url or id, use
+                 ; as separator.
+                 ./DownloadYouTube -l xxxxxxxxxxx;xxxxxxxxxxx;xxxxxxxxxxx
+                 ./DownloadYouTube -l xxxxxxxxxxx
+
+  --help         Display this help screen.
+
+  --version      Display version information.
 ```
 
 ### Example 2, Download a single video based on youtube url
@@ -71,27 +70,23 @@ https://www.youtube.com/watch?v=3rJfBFamlIw
 ```
 
 ### Example 4 Download multiple videos based on youtube video url
-```./DownloadYouTube -d```
+```./DownloadYouTube -l dummy```
 
 It will download 3 samples videos. It will create download.txt list file of the 3 videos (You can add your own videos).
 
 ### Example 5 Download multiple videos based on youtube video url
-```./DownloadYouTube ./download.txt```
+```./DownloadYouTube -l ./download.txt```
 
 It will download what ever youtube link from download.txt file.
 
 ### Example 6 Download and extract only Audio of the youtube video
-```./DownloadYouTube ./download.txt -a```
-or
-```./DownloadYouTube ./download.txt -a:mp3```
+```./DownloadYouTube -l ./download.txt -a mp3```
 
 Will convert to mp3
 
-```./DownloadYouTube ./download.txt -a:m4a```
+```./DownloadYouTube -l ./download.txt -a m4a```
 
 Will convert to m4a
-
-Just add ```-a```, ```-a:mp3``` or ```-a:m4a``` at the end of the command line for any example above.
 
 **Note**: Audio conversion might take longer time than downloading the video.
 

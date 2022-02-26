@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using VideoLibrary;
 using Xabe.FFmpeg;
 using Xabe.FFmpeg.Downloader;
 
-namespace YouTuber.Client
+namespace YouTuber.Service
 {
     public class YouTubeService : IYouTubeService
     {
@@ -15,7 +14,7 @@ namespace YouTuber.Client
         private const string BaseFolder = "download";
         private readonly HashSet<string> _set = new HashSet<string>();
 
-        public virtual async Task YoutubeToMp4(IEnumerable<string> urls, bool onlyAudio, string codec = "mp3")
+        public virtual async Task YoutubeToMp4(IEnumerable<string> urls, string? audioCodec = null)
         {
             ParallelOptions options = new ParallelOptions();
             int maxProc = Environment.ProcessorCount;
@@ -25,7 +24,7 @@ namespace YouTuber.Client
 
             await Parallel.ForEachAsync(urls, options, async (url, token) =>
             {
-                var result = await YoutubeToMp4(url, onlyAudio, codec);
+                var result = await YoutubeToMp4(url, audioCodec);
 
                 if (!string.IsNullOrWhiteSpace(result))
                 {
@@ -34,9 +33,9 @@ namespace YouTuber.Client
             });
         }
 
-        public virtual async Task<string?> YoutubeToMp4(string url, bool onlyAudio, string codec)
+        public virtual async Task<string?> YoutubeToMp4(string url, string? audioCodec)
         {
-            string uri = Url(url).ToString();
+            string uri = Url(url.Trim()).ToString();
 
             if (uri.Replace(BaseUrl, "").Length != 11)
             {
@@ -62,13 +61,13 @@ namespace YouTuber.Client
             CreateFolder(BaseFolder);
             string path = Path.Combine(BaseFolder, video.FullName);
             await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
-            if (onlyAudio)
+            if (!string.IsNullOrEmpty(audioCodec))
             {
                 lock (_set)
                 {
                     //todo: investigation of possible solution required
                     //parallel is not possible hence ffmpeg.exe process need to done first.
-                    ExtractAudio(path, codec).Wait();
+                    ExtractAudio(path, audioCodec).Wait();
                     File.Delete(path);
                 }
             }
@@ -85,8 +84,6 @@ namespace YouTuber.Client
             string inputPath = fi.FullName;
             string outputPath = Path.ChangeExtension(inputPath, codec);
             
-            //Console.WriteLine(AudioCodec.m4a);
-
             if (File.Exists(outputPath))
             {
                 File.Delete(outputPath);
