@@ -98,17 +98,7 @@ https://maythamfahmi.github.io/YouTuber
 
 ![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/latest?style=social)
 
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.5.6-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.6)
-- Fix Multiple Audio conversion [Bug #25](https://github.com/maythamfahmi/YouTuber/issues/25)
-- Convert to m4a audio [Feature #26](https://github.com/maythamfahmi/YouTuber/issues/25)
-- Extracting Audio feature mp3
-- Adding release tool
-- Support Mac OS
-- Refactored to Net 6 and Standard 2.0
-- Documentation improvement
-
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-1.0.1-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/1.0.1)
-- Initial release
+[List of improvement](https://github.com/maythamfahmi/YouTuber/issues?q=is%3Aissue+is%3Aclosed)
 
 <be />
 <be />
