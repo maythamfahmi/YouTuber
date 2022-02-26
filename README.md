@@ -136,6 +136,7 @@ Third party packages/libraries:
 - VideoLibrary
 - Xabe.FFmpeg 
 - Xabe.FFmpeg.Downloader
+- CommandLineParser
 
 Xabe is used for audio convertion feature. It is only for none commerical use, else contact Xabe.FFmpeg
 
