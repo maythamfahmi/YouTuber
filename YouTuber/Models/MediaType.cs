@@ -1,4 +1,4 @@
-﻿namespace YouTuber.Model
+﻿namespace YouTuber.Models
 {
     public class MediaType
     {
