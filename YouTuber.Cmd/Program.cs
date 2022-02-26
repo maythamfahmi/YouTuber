@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using CommandLine;
-using YouTuber.Model;
+using YouTuber.Helpers;
+using YouTuber.Models;
 using YouTuber.Service;
 using Parser = CommandLine.Parser;
 
@@ -26,17 +27,20 @@ namespace YouTuber.Cmd
 
         public class Options
         {
-            [Option('a', "audio", Required = false,
-                HelpText = "Extract only audio. -a mp3 or -a m4a.")]
-            public string? Audio { get; set; }
-
             [Option('l', "list", Required = true, Separator = ';',
                 HelpText = "Download single or multiple youtube by url or id, use ; as separator.\n" +
                            "./DownloadYouTube -l xxxxxxxxxxx;xxxxxxxxxxx;xxxxxxxxxxx\n" +
                            "./DownloadYouTube -l xxxxxxxxxxx")]
             public IEnumerable<string>? List { get; set; }
+
+            [Option('a', "audio", Required = false,
+                HelpText = "Extract only audio. -a mp3 or -a m4a.")]
+            public string? Audio { get; set; }
         }
-        
+
+        private static Timer? _timer;
+        private static int _count;
+
         public static async Task Main(string[] args)
         {
             bool isDebug = false;
@@ -46,7 +50,7 @@ namespace YouTuber.Cmd
                 //working
                 //args = new[] { "--help" };
                 //args = new[] { "--version" };
-                //args = new[] { "-l dummy" };
+                args = new[] { "-l dummy" };
                 //args = new[] { "-l dummy", "-a mp3" };
                 //args = new[] { "-l 3rJfBFamlIw" };
                 //args = new[] { "-l https://www.youtube.com/watch?v=Kv3RfdHZ25c" };
@@ -72,9 +76,16 @@ namespace YouTuber.Cmd
                      if (o.List != null)
                      {
                          var downloadList = GetDownloadList(o.List);
+                         _timer = new Timer(TimerCallback!, null, 0, 100);
                          await DownloadYouTube(downloadList, audioCodec);
                      }
                  });
+        }
+
+        private static void TimerCallback(Object o)
+        {
+            _count++;
+            ConsoleUtility.WriteProgress(_count, true);
         }
 
         private static IEnumerable<string> GetDownloadList(IEnumerable<string> youtubeList)
@@ -123,5 +134,4 @@ namespace YouTuber.Cmd
         }
 
     }
-
 }
