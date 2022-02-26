@@ -1,18 +1,19 @@
-name: .NET-Release-Using-Windows-OS
+#works fine, not required right now, check windows version
+
+name: .NET-Release-Using-Linux-OS
 
 on:
   push:
     tags:
-      - 'v*'
+      - 'none'
 
 jobs:
   build:
     name: Create Release
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Setup Checkout
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -30,24 +31,23 @@ jobs:
         dotnet publish /p:PublishProfile=Release-linux-x64 -c Release
         dotnet publish /p:PublishProfile=Release-osx-x64 -c Release
     - name: Upload Published Artifact
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v2
       with:
         name: DownloadYouTube
         path: | 
-          # ${{ github.workspace }} => D:\a\YouTuber\YouTuber\
-          ${{ github.workspace }}\Software\win-x86
-          ${{ github.workspace }}\Software\win-x64
-          ${{ github.workspace }}\Software\linux-x64
-          ${{ github.workspace }}\Software\osx-x64
+          /home/runner/work/YouTuber/YouTuber/Software/win-x86/
+          /home/runner/work/YouTuber/YouTuber/Software/win-x64/
+          /home/runner/work/YouTuber/YouTuber/Software/linux-x64/
+          /home/runner/work/YouTuber/YouTuber/Software/osx-x64/
     - name: Download Published Artifact
       uses: actions/download-artifact@v2
       with:
         name: DownloadYouTube
         path: artifact
-    - name: Compress and pack project
+    - name: Build project
       run: |
         cd artifact
-        7z a downloadyoutube ./
+        zip -r downloadyoutube ./
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -56,8 +56,8 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
-        draft: false  
-        prerelease: true
+        draft: false
+        prerelease: false
     - name: Upload Release Asset
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
@@ -65,6 +65,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./artifact/downloadyoutube.7z
-        asset_name: downloadyoutube.7z
+        asset_path: ./artifact/downloadyoutube.zip
+        asset_name: downloadyoutube.zip
         asset_content_type: application/zip

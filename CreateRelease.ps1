@@ -37,10 +37,10 @@ Function Version{
             git fetch -p -P origin
             Write-Output ${Version}
             Write-output "Create tag Release" 
-            git tag ${Version} -a -m "Release ${Version}"
-            Write-output "Push Release" 
-            git push --tags
-            Write-output "$value" 
+            #git tag ${Version} -a -m "Release ${Version}"
+            #Write-output "Push Release" 
+            #git push --tags
+            #Write-output "$value" 
         }
         while($strQuit -eq 'y')
     }
