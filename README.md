@@ -19,7 +19,7 @@
 It is highly encouraged to read and respect [YouTube][1] policy and other content creators and owners copyright.
 
 ## Download and install
-You can find downloadyoutube.zip and download **YouTuber** via [Releases](https://github.com/maythamfahmi/YouTuber/releases).
+You can find downloadyoutube.7z and download **YouTuber** via [Releases](https://github.com/maythamfahmi/YouTuber/releases).
 
 Extract the zip file and extract the version that fits your operating system. Follow the examples below under **How to use**.
 
