@@ -148,11 +148,18 @@ From you console:
 After merging to main, create tag release:
 
 ```
-git tag v2.x.x -a -m "Release description"
+git tag 2.x.x -a -m "Release version 2.x.x"
 git push --tags
 ```
 
-For pre-release, just tag with ```-pre``` like ```v2.x.x-pre```.
+For pre-release, just tag with ```.0-pre``` like ```v2.x.x.0-pre```.
+
+Example:
+
+```
+git tag 2.x.x.0-pre -a -m "Release version 2.x.x.0-pre"
+git push --tags
+```
 
 **Note:** remove cached tags ```git fetch -p -P origin``` in case of mistake or clean up and ```git push --tags```
 
