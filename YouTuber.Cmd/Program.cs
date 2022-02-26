@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
-using HeyRed.Mime;
-using YouTuber.Client;
+using CommandLine;
+using YouTuber.Model;
+using YouTuber.Service;
+using Parser = CommandLine.Parser;
 
 namespace YouTuber.Cmd
 {
@@ -22,116 +24,104 @@ namespace YouTuber.Cmd
             "https://www.youtube.com/watch?v=3rJfBFamlIw"
         };
 
-        public static void Main1()
+        public class Options
         {
-            var file1 = @"D:\OpenSource\YouTuber\YouTuber.Cmd\bin\Debug\net6.0\download\1.m4a";
-            var file2 = @"D:\OpenSource\YouTuber\YouTuber.Cmd\bin\Debug\net6.0\download\2.mp3";
-            var x1 = MimeTypesMap.GetMimeType(file1);
-            var x2 = MimeTypesMap.GetMimeType(file2);
+            [Option('a', "audio", Required = false,
+                HelpText = "Extract only audio. -a mp3 or -a m4a.")]
+            public string? Audio { get; set; }
 
-            Console.WriteLine(x1);
-            Console.WriteLine(x2);
+            [Option('l', "list", Required = true, Separator = ';',
+                HelpText = "Download single or multiple youtube by url or id, use ; as separator.\n" +
+                           "./DownloadYouTube -l xxxxxxxxxxx;xxxxxxxxxxx;xxxxxxxxxxx\n" +
+                           "./DownloadYouTube -l xxxxxxxxxxx")]
+            public IEnumerable<string>? List { get; set; }
         }
-
+        
         public static async Task Main(string[] args)
         {
             bool isDebug = false;
             IsDebugCheck(ref isDebug);
             if (isDebug)
             {
-                //args = new[] { "-l", "3rJfBFamlIw" };
-                args = new[] { "-l", "3rJfBFamlIw", "-a" };
-                //args = new[] { "-l", "3rJfBFamlIw", "-a:mp3" };
-                //args = new[] { "-l", "3rJfBFamlIw", "-a:m4a" };
-                //args = new[] { "-l", "Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw" };
-                //args = new[] { "-l", "Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a" };
-                //args = new[] { "-d" };
-                //args = new[] { "-d", "-a };
+                //working
+                //args = new[] { "--help" };
+                //args = new[] { "--version" };
+                //args = new[] { "-l dummy" };
+                //args = new[] { "-l dummy", "-a mp3" };
+                //args = new[] { "-l 3rJfBFamlIw" };
+                //args = new[] { "-l https://www.youtube.com/watch?v=Kv3RfdHZ25c" };
+                //args = new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw" };
+                //args = new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a mp3" };
+                //args = new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a m4a" };
+                //args = new[] { "-a m4a", "-l Kv3RfdHZ25c" };
+                //args = new[] { "-l download.txt", "-a mp3" };
+
+                //not working
+                //args = new[] { "-h" };
+                //args = new[] { "-v" };
+                //args = new[] { "-l dummy", "-a" };
+                //args = new[] { "-l Kv3RfdHZ25c,dVsZm7_sqfw;3rJfBFamlIw" };
+                //args = new[] { "-l", "-a mp3" };
             }
 
-            bool onlyAudio = args.Contains("-a") || args.Contains("-a:mp3") || args.Contains("-a:m4a");
-            string codec = args.Contains("-a:m4a") ? "m4a" : "mp3";
+            await Parser.Default.ParseArguments<Options>(args)
+                 .WithParsedAsync<Options>(async o =>
+                 {
+                     string? audioCodec = GetAudioType(o.Audio);
 
-            var input = args.Length == 0 ? "" : args[0];
-            if (string.IsNullOrEmpty(input))
+                     if (o.List != null)
+                     {
+                         var downloadList = GetDownloadList(o.List);
+                         await DownloadYouTube(downloadList, audioCodec);
+                     }
+                 });
+        }
+
+        private static IEnumerable<string> GetDownloadList(IEnumerable<string> youtubeList)
+        {
+            string[] list = youtubeList as string[] ?? youtubeList.ToArray();
+            string param = list[0].Trim();
+
+            if (param.EndsWith(".txt"))
             {
-                Help();
+                list = Service.FileToList(param).ToArray();
             }
-            else if (input is "-d" or "--dummy")
+            else if (param == "dummy")
             {
                 CreateSampleList();
-                await Service.YoutubeToMp4(ShortVideos, onlyAudio);
+                list = ShortVideos;
             }
-            else if (input.EndsWith(".txt"))
+
+            return list;
+        }
+
+        private static async Task DownloadYouTube(IEnumerable<string> youtubeList, string? audioCodec)
+        {
+            try
             {
-                var enumerable = Service.FileToList(input);
-                var urls = enumerable as IList<string> ?? enumerable.ToList();
-                if (!urls.Any())
-                {
-                    Console.WriteLine("Your list is empty");
-                }
-                else
-                {
-                    await Service.YoutubeToMp4(urls, onlyAudio);
-                }
+                await Service.YoutubeToMp4(youtubeList, audioCodec);
             }
-            else if (input is "-l" or "--list")
+            catch (Exception e)
             {
-                if (string.IsNullOrWhiteSpace(args[1]))
-                {
-                    Help();
-                }
-                else
-                {
-                    try
-                    {
-                        await Service.YoutubeToMp4(GetList(args[1]), onlyAudio, codec);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                        Help("download");
-                    }
-                }
-            }
-            else if (input is "-h" or "--help" || input.Any())
-            {
-                Help();
+                Console.WriteLine(e.Message);
             }
         }
 
-        public static void CreateSampleList()
+        private static string? GetAudioType(string? audioCodec)
+        {
+            if (string.IsNullOrEmpty(audioCodec)) return null;
+            var audio = audioCodec.Trim();
+            return audio == MediaType.MediaCodec.mp3.ToString() ||
+                   audio == MediaType.MediaCodec.m4a.ToString()
+                ? audio
+                : null;
+        }
+
+        private static void CreateSampleList()
         {
             File.WriteAllLines("download.txt", ShortVideos);
         }
 
-        public static IEnumerable<string> GetList(string input)
-        {
-            return input.Split(';').ToList();
-        }
-
-        public static void Help(string help = "all")
-        {
-            switch (help)
-            {
-                case "all":
-                    Console.WriteLine("[-h | --help]        Get help");
-                    Console.WriteLine("[-d | --dummy]       Download sample files");
-                    Console.WriteLine("[-l | --list]        Download directly, use ';' as separator for multiple urls/Ids");
-                    Console.WriteLine("");
-                    Console.WriteLine("examples:");
-                    Console.WriteLine("./DownloadYouTube -l https://www.youtube.com/watch?v=Kv3RfdHZ25c -> will download single video");
-                    Console.WriteLine("./DownloadYouTube -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw -> will download 3 videos");
-                    Console.WriteLine("./DownloadYouTube -d -> will create download.txt with 3 dummy videos and download them");
-                    Console.WriteLine("./DownloadYouTube ./download.txt -> will download your own list");
-                    Console.WriteLine("Note: Please read README.md for more info.");
-                    Console.WriteLine("By using this App, you agree to be bound by the terms and conditions of this Agreement");
-                    break;
-                case "download":
-                    Console.WriteLine("example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c");
-                    Console.WriteLine("example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c;https://www.youtube.com/watch?v=dVsZm7_sqfw;https://www.youtube.com/watch?v=3rJfBFamlIw");
-                    break;
-            }
-        }
     }
+
 }

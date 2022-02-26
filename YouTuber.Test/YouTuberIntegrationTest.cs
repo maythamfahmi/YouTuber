@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using Shouldly;
-using YouTuber.Client;
+using YouTuber.Service;
 
 namespace YouTuber.Test
 {
@@ -14,7 +14,7 @@ namespace YouTuber.Test
         {
             var path = Path.Combine(RunningPath, "download");
             string[] youtubeList = new [] { "Kv3RfdHZ25c", "3rJfBFamlIw" };
-            await Service.YoutubeToMp4(youtubeList, false, "mp3");
+            await Service.YoutubeToMp4(youtubeList, "mp3");
             var files = Directory.GetFiles(path);
             files.Length.ShouldBe(2);
             Directory.Delete(path, true);
