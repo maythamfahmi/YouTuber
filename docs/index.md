@@ -1,7 +1,9 @@
 # YouTuber
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/main/LICENSE.txt)
-[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/v2.1.0?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.1.0)
+[![GitHub commits since latest release (by date including pre-releases)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/latest?include_prereleases)](https://github.com/maythamfahmi/YouTuber/releases/latest)
+[![.NET-CI](https://github.com/maythamfahmi/YouTuber/actions/workflows/ci.yml/badge.svg)](https://github.com/maythamfahmi/YouTuber/actions/workflows/ci.yml)
+[![Release](https://github.com/maythamfahmi/YouTuber/actions/workflows/windows-release.yml/badge.svg)](https://github.com/maythamfahmi/YouTuber/actions/workflows/windows-release.yml)
 
 ## Introdution
 :rocket: **YouTuber** is a fast command line for downloading YouTube videos. 
@@ -9,7 +11,7 @@
 It is highly encouraged to read and respect [YouTube][1] policy and other content creators and owners copyright.
 
 ## Download and install
-You can find downloadyoutube.zip and download **YouTuber** via [Releases](https://github.com/maythamfahmi/YouTuber/releases).
+You can find downloadyoutube.7z and download **YouTuber** via [Releases](https://github.com/maythamfahmi/YouTuber/releases).
 
 Extract the zip file and extract the version that fits your operating system. Follow the examples below under **How to use**.
 
@@ -22,17 +24,21 @@ Avaibale versions:
 ## How to use
 
 ### Example 1, Help
-```./DownloadYouTube -h```
+```./DownloadYouTube --help```
 
 Result
 
 ```
-[-h | --help]        Get help
-[-d | --dummy]       Download sample files
-[-l | --list]        Download directly, use ';' as seperator for multiple urls/Ids
-example: -l https://www.youtube.com/watch?v=Kv3RfdHZ25c
-example: -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw
-[download.txt]       Create your own list
+  -a, --audio    Extract only audio. -a mp3 or -a m4a.
+
+  -l, --list     Required. Download single or multiple youtube by url or id, use
+                 ; as separator.
+                 ./DownloadYouTube -l xxxxxxxxxxx;xxxxxxxxxxx;xxxxxxxxxxx
+                 ./DownloadYouTube -l xxxxxxxxxxx
+
+  --help         Display this help screen.
+
+  --version      Display version information.
 ```
 
 ### Example 2, Download a single video based on youtube url
@@ -56,25 +62,23 @@ https://www.youtube.com/watch?v=3rJfBFamlIw
 ```
 
 ### Example 4 Download multiple videos based on youtube video url
-```./DownloadYouTube -d```
+```./DownloadYouTube -l dummy```
 
 It will download 3 samples videos. It will create download.txt list file of the 3 videos (You can add your own videos).
 
 ### Example 5 Download multiple videos based on youtube video url
-```./DownloadYouTube ./download.txt```
+```./DownloadYouTube -l ./download.txt```
+
+It will download what ever youtube link from download.txt file.
 
 ### Example 6 Download and extract only Audio of the youtube video
-```./DownloadYouTube ./download.txt -a```
-or
-```./DownloadYouTube ./download.txt -a:mp3```
+```./DownloadYouTube -l ./download.txt -a mp3```
 
 Will convert to mp3
 
-```./DownloadYouTube ./download.txt -a:m4a```
+```./DownloadYouTube -l ./download.txt -a m4a```
 
 Will convert to m4a
-
-Just add ```-a```, ```-a:mp3``` or ```-a:m4a``` at the end of the command line for any example above.
 
 **Note**: Audio conversion might take longer time than downloading the video.
 
@@ -84,17 +88,6 @@ https://maythamfahmi.github.io/YouTuber
 
 ## Versions
 
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-v2.5.6-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/v2.5.6)
-- Fix Multiple Audio conversion [Bug #25](https://github.com/maythamfahmi/YouTuber/issues/25)
-- Convert to m4a audio [Feature #26](https://github.com/maythamfahmi/YouTuber/issues/25)
-- Extracting Audio feature mp3
-- Adding release tool
-- Support Mac OS
-- Refactored to Net 6 and Standard 2.0
-- Documentation improvement
+![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/maythamfahmi/youtuber/latest?style=social)
 
-It will download what ever youtube link from download.txt file.
-
-#### [![Release%20Code](https://img.shields.io/badge/release%20code-1.0.1-blue?style=social)](https://github.com/maythamfahmi/YouTuber/releases/tag/1.0.1)
-
-[1]: http://youtube.com
+[List of improvement](https://github.com/maythamfahmi/YouTuber/issues?q=is%3Aissue+is%3Aclosed)
