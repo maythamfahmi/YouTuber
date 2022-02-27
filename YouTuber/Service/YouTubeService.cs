@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using VideoLibrary;
 using Xabe.FFmpeg;
 using Xabe.FFmpeg.Downloader;
+using YouTuber.Models;
 
 namespace YouTuber.Service
 {
@@ -14,7 +17,7 @@ namespace YouTuber.Service
         private const string BaseFolder = "download";
         private readonly HashSet<string> _set = new HashSet<string>();
 
-        public virtual async Task YoutubeToMp4(IEnumerable<string> urls, string? audioCodec = null)
+        public virtual async Task YoutubeToMp4(IEnumerable<string> urls, MediaType.MediaCodec audioCodec = MediaType.MediaCodec.none)
         {
             ParallelOptions options = new ParallelOptions();
             int maxProc = Environment.ProcessorCount;
@@ -33,7 +36,14 @@ namespace YouTuber.Service
             });
         }
 
-        public virtual async Task<string?> YoutubeToMp4(string url, string? audioCodec)
+        public sealed class SynchronousProgress<T> : IProgress<T>
+        {
+            private readonly Action<T> _callback;
+            public SynchronousProgress(Action<T> callback) { _callback = callback; }
+            void IProgress<T>.Report(T data) => _callback(data);
+        }
+
+        public virtual async Task<string?> YoutubeToMp4(string url, MediaType.MediaCodec audioCodec)
         {
             string uri = Url(url.Trim()).ToString();
 
@@ -53,28 +63,55 @@ namespace YouTuber.Service
             }
 
             YouTube youtube = YouTube.Default;
-            YouTubeVideo video = await youtube.GetVideoAsync(uri);
+            IEnumerable<YouTubeVideo> videos = await youtube.GetAllVideosAsync(uri);
 
-            string validationMessage = ValidateVideo(video);
-            if (validationMessage != "OK") return validationMessage;
+            //YouTubeVideo video = await youtube.GetVideoAsync(uri);
+            var info = videos.ToList();
+            //YouTubeVideo? video1 = videos.MinBy(e => e.Resolution);
+            //YouTubeVideo? video = info[15];
+
+            //string validationMessage = ValidateVideo(video);
+            //if (validationMessage != "OK") return validationMessage;
 
             CreateFolder(BaseFolder);
-            string path = Path.Combine(BaseFolder, video.FullName);
-            await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
-            if (!string.IsNullOrEmpty(audioCodec))
+
+            //VideoClient vc = new VideoClient();
+            //Stream source = vc.Stream(info[0]);
+
+            for (var i = 0; i < info.Count; i++)
             {
-                lock (_set)
+                var x = info[i].ContentLength;
+                if (x == null || info[i].AudioBitrate == -1) continue;
+                string path;
+                if (!string.IsNullOrEmpty(info[i].FileExtension))
                 {
-                    //todo: investigation of possible solution required
-                    //parallel is not possible hence ffmpeg.exe process need to done first.
-                    ExtractAudio(path, audioCodec).Wait();
-                    File.Delete(path);
+                    path = Path.Combine(BaseFolder, $"{i}-{info[i].Info.Title}.{info[i].FileExtension}");
                 }
+                else
+                {
+                    path = Path.Combine(BaseFolder, $"{i}-{info[i].Info.Title}.{info[i].AudioFormat}");
+                }
+
+                await File.WriteAllBytesAsync(path, await info[i].GetBytesAsync());
             }
-            return $"{CleanFilename(video.FullName)} video is ready under {BaseFolder}";
+
+            //string path = Path.Combine(BaseFolder, video.FullName);
+            //await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
+            //if (audioCodec != MediaType.MediaCodec.none)
+            //{
+            //    lock (_set)
+            //    {
+            //        //todo: investigation of possible solution required
+            //        //parallel is not possible hence ffmpeg.exe process need to done first.
+            //        ExtractAudio(path, audioCodec).Wait();
+            //        File.Delete(path);
+            //    }
+            //}
+            //return $"{CleanFilename(video.FullName)} video is ready under {BaseFolder}";
+            return $"video is ready under {BaseFolder}";
         }
 
-        private static async Task ExtractAudio(string path, string codec)
+        private static async Task ExtractAudio(string path, MediaType.MediaCodec codec)
         {
             var currentFolder = Directory.GetCurrentDirectory();
             var ffmpegPath = $"{currentFolder}/FFmpeg";
@@ -82,8 +119,8 @@ namespace YouTuber.Service
             await FFmpegDownloader.GetLatestVersion(FFmpegVersion.Official, ffmpegPath);
             FileInfo fi = new FileInfo(path);
             string inputPath = fi.FullName;
-            string outputPath = Path.ChangeExtension(inputPath, codec);
-            
+            string outputPath = Path.ChangeExtension(inputPath, codec.ToString());
+
             if (File.Exists(outputPath))
             {
                 File.Delete(outputPath);
@@ -94,8 +131,13 @@ namespace YouTuber.Service
             await Task.Delay(500);
         }
 
-        private static string ValidateVideo(YouTubeVideo video)
+        private static string ValidateVideo(YouTubeVideo? video)
         {
+            if (video == null)
+            {
+                return "video is null";
+            }
+
             try
             {
                 var getUri = video.Uri;

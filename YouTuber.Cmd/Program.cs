@@ -38,7 +38,7 @@ namespace YouTuber.Cmd
             public string? Audio { get; set; }
         }
 
-        private static Timer? _timer;
+        public static Timer? Timer { get; private set; }
         private static int _count;
 
         public static async Task Main(string[] args)
@@ -71,12 +71,12 @@ namespace YouTuber.Cmd
             await Parser.Default.ParseArguments<Options>(args)
                  .WithParsedAsync<Options>(async o =>
                  {
-                     string? audioCodec = GetAudioType(o.Audio);
+                     MediaType.MediaCodec audioCodec = GetAudioType(o.Audio);
 
                      if (o.List != null)
                      {
                          var downloadList = GetDownloadList(o.List);
-                         _timer = new Timer(TimerCallback!, null, 0, 100);
+                         Timer = new Timer(TimerCallback!, null, 0, 100);
                          await DownloadYouTube(downloadList, audioCodec);
                      }
                  });
@@ -106,7 +106,7 @@ namespace YouTuber.Cmd
             return list;
         }
 
-        private static async Task DownloadYouTube(IEnumerable<string> youtubeList, string? audioCodec)
+        private static async Task DownloadYouTube(IEnumerable<string> youtubeList, MediaType.MediaCodec audioCodec)
         {
             try
             {
@@ -118,14 +118,16 @@ namespace YouTuber.Cmd
             }
         }
 
-        private static string? GetAudioType(string? audioCodec)
+        private static MediaType.MediaCodec GetAudioType(string? audioCodec)
         {
-            if (string.IsNullOrEmpty(audioCodec)) return null;
+            if (string.IsNullOrEmpty(audioCodec)) return MediaType.MediaCodec.none;
             var audio = audioCodec.Trim();
-            return audio == MediaType.MediaCodec.mp3.ToString() ||
-                   audio == MediaType.MediaCodec.m4a.ToString()
-                ? audio
-                : null;
+            return audio switch
+            {
+                "mp3" => MediaType.MediaCodec.mp3,
+                "m4a" => MediaType.MediaCodec.m4a,
+                _ => MediaType.MediaCodec.none
+            };
         }
 
         private static void CreateSampleList()

@@ -1,6 +1,7 @@
 ﻿using Shouldly;
 using NSubstitute;
 using NUnit.Framework;
+using YouTuber.Models;
 using YouTuber.Service;
 
 namespace YouTuber.Test
@@ -15,12 +16,12 @@ namespace YouTuber.Test
 
             int counter = 0;
             service
-                .When(e => e.YoutubeToMp4(Arg.Any<List<string>>(), Arg.Any<string>()))
+                .When(e => e.YoutubeToMp4(Arg.Any<List<string>>(), Arg.Any<MediaType.MediaCodec>()))
                 .Do(_ => counter++);
 
-            service.YoutubeToMp4(dummyUrls, "mp3");
-            service.YoutubeToMp4(dummyUrls, "mp3");
-            service.YoutubeToMp4(dummyUrls, "mp3");
+            service.YoutubeToMp4(dummyUrls, MediaType.MediaCodec.mp3);
+            service.YoutubeToMp4(dummyUrls, MediaType.MediaCodec.mp3);
+            service.YoutubeToMp4(dummyUrls, MediaType.MediaCodec.mp3);
             counter.ShouldBe(3);
         }
 
@@ -29,10 +30,10 @@ namespace YouTuber.Test
         {
             IYouTubeService service = Substitute.For<IYouTubeService>();
             service
-                .When(x => x.YoutubeToMp4("", ""))
+                .When(x => x.YoutubeToMp4("", MediaType.MediaCodec.none))
                 .Do(x => throw new Exception());
 
-            Action action = () => service.YoutubeToMp4("", "");
+            Action action = () => service.YoutubeToMp4("", MediaType.MediaCodec.none);
             action.ShouldThrow<Exception>();
         }
 
@@ -64,7 +65,7 @@ namespace YouTuber.Test
                 .FileToList("youtubelist.txt")
                 .Returns(new List<string>() { "1", "2", "3" });
 
-            _ = service.YoutubeToMp4(service.FileToList("youtubelist.txt"), null);
+            _ = service.YoutubeToMp4(service.FileToList("youtubelist.txt"));
         }
     }
 }
