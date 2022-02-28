@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Shouldly;
+using YouTuber.Models;
 using YouTuber.Service;
 
 namespace YouTuber.Test
@@ -13,12 +14,14 @@ namespace YouTuber.Test
         public async Task TryToDownloadTwoVideoFromYoutube()
         {
             var path = Path.Combine(RunningPath, "download");
-            string[] youtubeList = new [] { "Kv3RfdHZ25c", "3rJfBFamlIw" };
-            await Service.YoutubeToMp4(youtubeList, "mp3");
+            Directory.Delete(path, true);
+            string[] youtubeList = new[] { "Kv3RfdHZ25c", "3rJfBFamlIw" };
+            await Service.YoutubeToMp4(youtubeList, MediaType.MediaCodec.none);
             var files = Directory.GetFiles(path);
             files.Length.ShouldBe(2);
             Directory.Delete(path, true);
         }
 
     }
+
 }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using VideoLibrary;
 using Xabe.FFmpeg;
 using Xabe.FFmpeg.Downloader;
+using YouTuber.Models;
 
 namespace YouTuber.Service
 {
@@ -14,7 +16,7 @@ namespace YouTuber.Service
         private const string BaseFolder = "download";
         private readonly HashSet<string> _set = new HashSet<string>();
 
-        public virtual async Task YoutubeToMp4(IEnumerable<string> urls, string? audioCodec = null)
+        public virtual async Task YoutubeToMp4(IEnumerable<string> urls, MediaType.MediaCodec audioCodec = MediaType.MediaCodec.none)
         {
             ParallelOptions options = new ParallelOptions();
             int maxProc = Environment.ProcessorCount;
@@ -33,7 +35,7 @@ namespace YouTuber.Service
             });
         }
 
-        public virtual async Task<string?> YoutubeToMp4(string url, string? audioCodec)
+        public virtual async Task<string?> YoutubeToMp4(string url, MediaType.MediaCodec audioCodec)
         {
             string uri = Url(url.Trim()).ToString();
 
@@ -54,14 +56,13 @@ namespace YouTuber.Service
 
             YouTube youtube = YouTube.Default;
             YouTubeVideo video = await youtube.GetVideoAsync(uri);
-
             string validationMessage = ValidateVideo(video);
             if (validationMessage != "OK") return validationMessage;
 
             CreateFolder(BaseFolder);
             string path = Path.Combine(BaseFolder, video.FullName);
             await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
-            if (!string.IsNullOrEmpty(audioCodec))
+            if (audioCodec != MediaType.MediaCodec.none)
             {
                 lock (_set)
                 {
@@ -74,7 +75,7 @@ namespace YouTuber.Service
             return $"{CleanFilename(video.FullName)} video is ready under {BaseFolder}";
         }
 
-        private static async Task ExtractAudio(string path, string codec)
+        private static async Task ExtractAudio(string path, MediaType.MediaCodec codec)
         {
             var currentFolder = Directory.GetCurrentDirectory();
             var ffmpegPath = $"{currentFolder}/FFmpeg";
@@ -82,8 +83,8 @@ namespace YouTuber.Service
             await FFmpegDownloader.GetLatestVersion(FFmpegVersion.Official, ffmpegPath);
             FileInfo fi = new FileInfo(path);
             string inputPath = fi.FullName;
-            string outputPath = Path.ChangeExtension(inputPath, codec);
-            
+            string outputPath = Path.ChangeExtension(inputPath, codec.ToString());
+
             if (File.Exists(outputPath))
             {
                 File.Delete(outputPath);
@@ -94,8 +95,13 @@ namespace YouTuber.Service
             await Task.Delay(500);
         }
 
-        private static string ValidateVideo(YouTubeVideo video)
+        private static string ValidateVideo(YouTubeVideo? video)
         {
+            if (video == null)
+            {
+                return "video is null";
+            }
+
             try
             {
                 var getUri = video.Uri;

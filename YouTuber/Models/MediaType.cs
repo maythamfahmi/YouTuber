@@ -4,6 +4,7 @@
     {
         public enum MediaCodec
         {
+            none,
             mp4,
             m4a,
             mp3
