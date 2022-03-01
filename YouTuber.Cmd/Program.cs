@@ -10,8 +10,18 @@ namespace YouTuber.Cmd
 {
     public class Program
     {
-        private static readonly YouTubeService Service = new YouTubeService();
+        private readonly YouTubeService _service;
 
+        public Program()
+        {
+            _service = new YouTubeService();
+        }
+
+        public static async Task Main(string[] args)
+        {
+            await new Program().Start(args);
+        }
+        
         [Conditional("DEBUG")]
         private static void IsDebugCheck(ref bool debugMode)
         {
@@ -20,7 +30,36 @@ namespace YouTuber.Cmd
 
         private static int _count;
 
-        public static async Task Main(string[] args)
+        private static string[] DebuggingTest(int test)
+        {
+            return test switch
+            {
+                //working
+                1 => new[] { "--help" },
+                2 => new[] { "--version" },
+                3 => new[] { "-l dummy" },
+                4 => new[] { "-l dummy", "-a mp3" },
+                5 => new[] { "-l 3rJfBFamlIw" },
+                6 => new[] { "-l https://www.youtube.com/watch?v=Kv3RfdHZ25c" },
+                7 => new[] { "-l https://youtu.be/Kv3RfdHZ25c" },
+                8 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw" },
+                9 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a mp3" },
+                10 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a m4a" },
+                11 => new[] { "-a m4a", "-l Kv3RfdHZ25c" },
+                12 => new[] { "-l download.txt", "-a mp3" },
+                //not working
+                20 => new[] { "-h" },
+                21 => new[] { "-v" },
+                22 => new[] { "-l dummy", "-a" },
+                23 => new[] { "-l Kv3RfdHZ25c,dVsZm7_sqfw;3rJfBFamlIw" },
+                24 => new[] { "-l", "-a mp3" },
+                25 => new[] { "-l https://www.youtube.com/Kv3RfdHZ25c" },
+                //default
+                _ => new[] { "" }
+            };
+        }
+
+        public async Task Start(string[] args)
         {
             bool isDebug = false;
             IsDebugCheck(ref isDebug);
@@ -37,7 +76,7 @@ namespace YouTuber.Cmd
                      if (o.List != null)
                      {
                          var downloadList = GetDownloadList(o.List);
-                         new Timer(TimerCallback!, null, 0, 100);
+                         var timer = new Timer(TimerCallback!, null, 0, 100);
                          await TryDownloadYouTubeAsync(downloadList, audioCodec);
                      }
                  });
@@ -67,45 +106,17 @@ namespace YouTuber.Cmd
             return list;
         }
 
-        private static async Task TryDownloadYouTubeAsync(IEnumerable<string> youtubeList, MediaType.MediaCodec audioCodec)
+        private async Task TryDownloadYouTubeAsync(IEnumerable<string> youtubeList, MediaType.MediaCodec audioCodec)
         {
             try
             {
-                await Service.DownloadYouTubeAsync(youtubeList, audioCodec);
+                await _service.DownloadYouTubeAsync(youtubeList, audioCodec);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-
-        private static string[] DebuggingTest(int test)
-        {
-            return test switch
-            {
-                //working
-                1 => new[] { "--help" },
-                2 => new[] { "--version" },
-                3 => new[] { "-l dummy" },
-                4 => new[] { "-l dummy", "-a mp3" },
-                5 => new[] { "-l 3rJfBFamlIw" },
-                6 => new[] { "-l https://www.youtube.com/watch?v=Kv3RfdHZ25c" },
-                7 => new[] { "-l https://www.youtube.com/Kv3RfdHZ25c" },
-                8 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw" },
-                9 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a mp3" },
-                10 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a m4a" },
-                11 => new[] { "-a m4a", "-l Kv3RfdHZ25c" },
-                12 => new[] { "-l download.txt", "-a mp3" },
-                //not working
-                20 => new[] { "-h" },
-                21 => new[] { "-v" },
-                22 => new[] { "-l dummy", "-a" },
-                23 => new[] { "-l Kv3RfdHZ25c,dVsZm7_sqfw;3rJfBFamlIw" },
-                24 => new[] { "-l", "-a mp3" },
-                //default
-                _ => new[] { "" }
-            };
-        }
-
+        
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using VideoLibrary;
 using Xabe.FFmpeg;
 using Xabe.FFmpeg.Downloader;
+using YouTuber.Client;
 using YouTuber.Helpers;
 using YouTuber.Models;
 
@@ -13,8 +14,14 @@ namespace YouTuber.Service
     public class YouTubeService : IYouTubeService
     {
         private readonly HashSet<string> _set = new HashSet<string>();
+        private readonly IYouTubeClient _client;
 
-        public virtual async Task DownloadYouTubeAsync(IEnumerable<string> urls, MediaType.MediaCodec audioCodec = MediaType.MediaCodec.none)
+        public YouTubeService()
+        {
+            _client = new YouTubeClient();
+        }
+
+        public virtual async Task DownloadYouTubeAsync(IEnumerable<string> urls, MediaType.MediaCodec codec = MediaType.MediaCodec.none)
         {
             ParallelOptions options = new ParallelOptions();
             int maxProc = Environment.ProcessorCount;
@@ -24,7 +31,7 @@ namespace YouTuber.Service
 
             await Parallel.ForEachAsync(urls, options, async (url, token) =>
             {
-                var result = await DownloadYouTubeAsync(url, audioCodec);
+                var result = await DownloadYouTubeAsync(url, codec);
 
                 if (!string.IsNullOrWhiteSpace(result))
                 {
@@ -46,9 +53,8 @@ namespace YouTuber.Service
             {
                 return Config.DuplicateYouTube;
             }
-            
-            YouTube youtube = YouTube.Default;
-            YouTubeVideo video = await youtube.GetVideoAsync(url);
+
+            YouTubeVideo video = await _client.DownloadYouTubeAsync(url);
 
             string validationMessage = ValidateVideo(video);
             

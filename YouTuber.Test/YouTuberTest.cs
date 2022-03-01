@@ -1,4 +1,5 @@
-﻿using Shouldly;
+﻿using System.Xml;
+using Shouldly;
 using NUnit.Framework;
 using YouTuber.Helpers;
 using YouTuber.Models;
@@ -61,47 +62,15 @@ namespace YouTuber.Test
         }
 
 
-        //[Test]
-        //public void ResourceFileTest()
-        //{
-        //    string[] stringSeparators = { "\r\n" };
-        //    var fileContent = File.ReadAllText(FromFile);
-        //    var lines = fileContent
-        //        .Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries).ToList();
-        //    IList<string> youtubeList = Service.FileToList(FromFile).ToList();
+        [Test]
+        public void FileToListFileTest()
+        {
+            YouTuberHelpers.CreateSampleList();
+            var fileToList= YouTuberHelpers.FileToList(Config.DownloadFile);
+            fileToList.Count().ShouldBe(3);
+            File.Delete(Config.DownloadFile);
+        }
 
-        //    lines.ForEach(e => { youtubeList.ShouldContain(e); });
-        //}
-
-        //[Test]
-        //public void FileToListMock()
-        //{
-        //    var service = Substitute.For<IYouTubeService>();
-        //    service
-        //        .FileToList(Arg.Any<string>())
-        //        .Returns(new List<string> { "1", "2" });
-
-        //    service
-        //        .FileToList("")
-        //        .ShouldContain(e => e.Contains('1'));
-        //    service
-        //        .FileToList("")
-        //        .ShouldContain(e => e.Contains('2'));
-        //}
-
-        //[Test]
-        //public void FileToListFileMock()
-        //{
-        //    var service = Substitute.For<YouTubeService>();
-        //    service
-        //        .When(e => e.FileToList("youtubelist.txt"))
-        //        .DoNotCallBase();
-
-        //    service
-        //        .FileToList("youtubelist.txt")
-        //        .Returns(new List<string>() { "1", "2", "3" });
-
-        //    _ = service.YoutubeToMp4(service.FileToList("youtubelist.txt"));
-        //}
     }
+
 }

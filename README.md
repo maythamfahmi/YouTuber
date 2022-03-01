@@ -59,7 +59,7 @@ https://www.youtube.com/watch?v=Kv3RfdHZ25c
 ```
 
 ### Example 3 Download multiple videos based on youtube video id
-```./DownloadYouTube -l y9ajRIgTJNA;pYlYt9iuJdc;NcumhqTDPpE```
+```./DownloadYouTube -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw```
 
 It will download 3 youtube videos of following link:
 
@@ -89,6 +89,17 @@ Will convert to mp3
 Will convert to m4a
 
 **Note**: Audio conversion might take longer time than downloading the video.
+
+### Example 7 Download multiple videos of different variation
+```./DownloadYouTube -l Kv3RfdHZ25c;https://www.youtube.com/watch?v=dVsZm7_sqfw;https://youtu.be/3rJfBFamlIw```
+
+It will download 3 youtube videos of following link:
+
+```           
+https://www.youtube.com/watch?v=Kv3RfdHZ25c
+https://www.youtube.com/watch?v=dVsZm7_sqfw
+https://www.youtube.com/watch?v=3rJfBFamlIw
+```
 
 ## Website
 

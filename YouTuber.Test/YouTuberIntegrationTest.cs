@@ -21,15 +21,15 @@ namespace YouTuber.Test
             Directory.Delete(path, true);
         }
 
-        [Test]
-        public async Task TryToDownloadTwoVideoFromYoutube1()
+        [Ignore("Playground")]
+        public async Task TryToDownloadVideoFromYoutube()
         {
-            var path = Path.Combine(RunningPath, "download");
-            string[] youtubeList = new[] { "https://www.youtube.com/watch?v=Kv3RfdHZ25c", "3rJfBFamlIw", "https://youtu.be/3rJfBFamlIw" };
+            string[] youtubeList = new[]
+                { "https://www.youtube.com/watch?v=Kv3RfdHZ25c",
+                    "https://youtu.be/3rJfBFamlIw",
+                    "3rJfBFamlIw"
+                };
             await Service.DownloadYouTubeAsync(youtubeList, MediaType.MediaCodec.none);
-            var files = Directory.GetFiles(path);
-            files.Length.ShouldBe(2);
-            Directory.Delete(path, true);
         }
 
     }
