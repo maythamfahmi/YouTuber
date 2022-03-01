@@ -2,6 +2,8 @@
 {
     public static class Config
     {
+        public const string BaseUrl = "https://www.youtube.com/watch?v=";
+        public const string BaseUrlShare = "https://youtu.be/";
         public const string DownloadFile = "download.txt";
         public const string BaseFolder = "download";
 

@@ -35,7 +35,7 @@ namespace YouTuber.Service
 
         public virtual async Task<string?> DownloadYouTubeAsync(string url, MediaType.MediaCodec codec)
         {
-            string uri = YouTuberHelpers.Url(url.Trim()).ToString();
+            string uri = YouTuberHelpers.UnifyYouTubeUrl(url.Trim()).ToString();
 
             if (IsDuplicate(url))
             {
@@ -44,6 +44,7 @@ namespace YouTuber.Service
             
             YouTube youtube = YouTube.Default;
             YouTubeVideo video = await youtube.GetVideoAsync(uri);
+
             string validationMessage = ValidateVideo(video);
             
             if (validationMessage != "OK")

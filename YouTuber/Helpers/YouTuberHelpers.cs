@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Resources;
 using YouTuber.Models;
 
 namespace YouTuber.Helpers
 {
     public class YouTuberHelpers
     {
-        private const string BaseUrl = "https://www.youtube.com/watch?v=";
-        private const string BaseUrlShare = "https://youtu.be/";
-
         public static IEnumerable<string> FileToList(string file)
         {
             using FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read);
@@ -29,21 +27,20 @@ namespace YouTuber.Helpers
             }
         }
 
-        public static Uri Url(string url)
+        public static Uri UnifyYouTubeUrl(string input)
         {
-            if (url.StartsWith(BaseUrl))
-            {
+            string? id = null;
 
-            }
+            if (input.StartsWith(Config.BaseUrl))
+                id = input.Substring(input.IndexOf("v=", StringComparison.Ordinal) + 2, 11);
 
-            if (url.StartsWith(BaseUrlShare))
-            {
+            if (input.StartsWith(Config.BaseUrlShare))
+                id = input.Substring(input.IndexOf("be/", StringComparison.Ordinal) + 3, 11);
 
-            }
+            if (input.Length == 11)
+                id = input;
 
-            string str = url.Length == 11 ? $"{BaseUrl}{url}" : url;
-            Uri uri = new Uri(str);
-            return uri;
+            return new Uri($"{Config.BaseUrl}{id}");
         }
 
         public static MediaType.MediaCodec MapAudioType(string? audioCodec)

@@ -37,5 +37,17 @@ namespace YouTuber.Test
             action.ShouldThrow<Exception>();
         }
 
+        [Test]
+        public void PreventDuplicationTest()
+        {
+            IYouTubeService service = Substitute.For<IYouTubeService>();
+            service
+                .When(x => x.DownloadYouTubeAsync("", MediaType.MediaCodec.none))
+                .Do(x => throw new Exception());
+
+            Action action = () => service.DownloadYouTubeAsync("", MediaType.MediaCodec.none);
+            action.ShouldThrow<Exception>();
+        }
+
     }
 }

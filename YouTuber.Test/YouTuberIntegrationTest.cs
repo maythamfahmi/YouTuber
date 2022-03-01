@@ -14,7 +14,7 @@ namespace YouTuber.Test
         public async Task TryToDownloadTwoVideoFromYoutube()
         {
             var path = Path.Combine(RunningPath, "download");
-            string[] youtubeList = new[] { "Kv3RfdHZ25c", "3rJfBFamlIw" };
+            string[] youtubeList = { "Kv3RfdHZ25c", "3rJfBFamlIw" };
             await Service.DownloadYouTubeAsync(youtubeList, MediaType.MediaCodec.none);
             var files = Directory.GetFiles(path);
             files.Length.ShouldBe(2);

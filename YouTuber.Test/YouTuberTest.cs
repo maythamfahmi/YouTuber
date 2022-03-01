@@ -17,6 +17,15 @@ namespace YouTuber.Test
             youtubeList.ShouldAllBe(e => e.StartsWith("https://www.youtube.com/watch?v="));
         }
 
+        [TestCase("https://www.youtube.com/watch?v=3rJfBFamlIw", "https://www.youtube.com/watch?v=3rJfBFamlIw")]
+        [TestCase("https://youtu.be/3rJfBFamlIw", "https://www.youtube.com/watch?v=3rJfBFamlIw")]
+        [TestCase("3rJfBFamlIw", "https://www.youtube.com/watch?v=3rJfBFamlIw")]
+        public void GetYouTubeIdTest(string input, string expected)
+        {
+                var youTubeUrl = YouTuberHelpers.UnifyYouTubeUrl(input);
+                youTubeUrl.AbsoluteUri.ShouldBe(expected);
+        }
+
         //[Test]
         //public void ResourceFileTest()
         //{
