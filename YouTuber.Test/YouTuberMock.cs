@@ -16,12 +16,12 @@ namespace YouTuber.Test
 
             int counter = 0;
             service
-                .When(e => e.YoutubeToMp4(Arg.Any<List<string>>(), Arg.Any<MediaType.MediaCodec>()))
+                .When(e => e.DownloadYouTubeAsync(Arg.Any<List<string>>(), Arg.Any<MediaType.MediaCodec>()))
                 .Do(_ => counter++);
 
-            service.YoutubeToMp4(dummyUrls, MediaType.MediaCodec.mp3);
-            service.YoutubeToMp4(dummyUrls, MediaType.MediaCodec.mp3);
-            service.YoutubeToMp4(dummyUrls, MediaType.MediaCodec.mp3);
+            service.DownloadYouTubeAsync(dummyUrls, MediaType.MediaCodec.mp3);
+            service.DownloadYouTubeAsync(dummyUrls, MediaType.MediaCodec.mp3);
+            service.DownloadYouTubeAsync(dummyUrls, MediaType.MediaCodec.mp3);
             counter.ShouldBe(3);
         }
 
@@ -30,42 +30,12 @@ namespace YouTuber.Test
         {
             IYouTubeService service = Substitute.For<IYouTubeService>();
             service
-                .When(x => x.YoutubeToMp4("", MediaType.MediaCodec.none))
+                .When(x => x.DownloadYouTubeAsync("", MediaType.MediaCodec.none))
                 .Do(x => throw new Exception());
 
-            Action action = () => service.YoutubeToMp4("", MediaType.MediaCodec.none);
+            Action action = () => service.DownloadYouTubeAsync("", MediaType.MediaCodec.none);
             action.ShouldThrow<Exception>();
         }
 
-        [Test]
-        public void FileToListMock()
-        {
-            var service = Substitute.For<IYouTubeService>();
-            service
-                .FileToList(Arg.Any<string>())
-                .Returns(new List<string> { "1", "2" });
-
-            service
-                .FileToList("")
-                .ShouldContain(e => e.Contains('1'));
-            service
-                .FileToList("")
-                .ShouldContain(e => e.Contains('2'));
-        }
-
-        [Test]
-        public void FileToListFileMock()
-        {
-            var service = Substitute.For<YouTubeService>();
-            service
-                .When(e => e.FileToList("youtubelist.txt"))
-                .DoNotCallBase();
-
-            service
-                .FileToList("youtubelist.txt")
-                .Returns(new List<string>() { "1", "2", "3" });
-
-            _ = service.YoutubeToMp4(service.FileToList("youtubelist.txt"));
-        }
     }
 }
