@@ -27,20 +27,35 @@ namespace YouTuber.Helpers
             }
         }
 
-        public static Uri UnifyYouTubeUrl(string input)
+        public static string UnifyYouTubeUrl(string input)
         {
-            string? id = null;
+            string id = string.Empty;
 
-            if (input.StartsWith(Config.BaseUrl))
-                id = input.Substring(input.IndexOf("v=", StringComparison.Ordinal) + 2, 11);
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return id;
+            }
 
-            if (input.StartsWith(Config.BaseUrlShare))
-                id = input.Substring(input.IndexOf("be/", StringComparison.Ordinal) + 3, 11);
+            string url = input.Trim();
 
-            if (input.Length == 11)
-                id = input;
+            if (url.StartsWith(Config.BaseUrl))
+            {
+                id = url.Substring(url.IndexOf("v=", StringComparison.Ordinal) + 2, 11);
+            }
+            else if (url.StartsWith(Config.BaseUrlShare))
+            {
+                id = url.Substring(url.IndexOf("be/", StringComparison.Ordinal) + 3, 11);
+            }
+            else if (url.Length == 11)
+            {
+                id = url;
+            }
+            else
+            {
+                return id;
+            }
 
-            return new Uri($"{Config.BaseUrl}{id}");
+            return $"{Config.BaseUrl}{id}";
         }
 
         public static MediaType.MediaCodec MapAudioType(string? audioCodec)
@@ -49,6 +64,7 @@ namespace YouTuber.Helpers
             var audio = audioCodec.Trim();
             return audio switch
             {
+                "mp4" => MediaType.MediaCodec.mp4,
                 "mp3" => MediaType.MediaCodec.mp3,
                 "m4a" => MediaType.MediaCodec.m4a,
                 _ => MediaType.MediaCodec.none

@@ -33,17 +33,22 @@ namespace YouTuber.Service
             });
         }
 
-        public virtual async Task<string?> DownloadYouTubeAsync(string url, MediaType.MediaCodec codec)
+        public virtual async Task<string?> DownloadYouTubeAsync(string input, MediaType.MediaCodec codec)
         {
-            string uri = YouTuberHelpers.UnifyYouTubeUrl(url.Trim()).ToString();
+            string url = YouTuberHelpers.UnifyYouTubeUrl(input);
+
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                return Config.InvalidYouTube;
+            }
 
             if (IsDuplicate(url))
             {
-                return null;
+                return Config.DuplicateYouTube;
             }
             
             YouTube youtube = YouTube.Default;
-            YouTubeVideo video = await youtube.GetVideoAsync(uri);
+            YouTubeVideo video = await youtube.GetVideoAsync(url);
 
             string validationMessage = ValidateVideo(video);
             
@@ -62,7 +67,7 @@ namespace YouTuber.Service
             return $"{video.Title} is ready under {Config.BaseFolder}";
         }
 
-        private bool IsDuplicate(string url)
+        public virtual bool IsDuplicate(string url)
         {
             lock (_set)
             {

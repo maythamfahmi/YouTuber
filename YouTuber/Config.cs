@@ -6,6 +6,8 @@
         public const string BaseUrlShare = "https://youtu.be/";
         public const string DownloadFile = "download.txt";
         public const string BaseFolder = "download";
+        public const string InvalidYouTube = "Invalid YouTube Url/Id";
+        public const string DuplicateYouTube = "Duplicate YouTube Url/Id";
 
         public static readonly string[] SampleVideoList =
         {
