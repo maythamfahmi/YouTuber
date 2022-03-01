@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using VideoLibrary;
 using Xabe.FFmpeg;
 using Xabe.FFmpeg.Downloader;
+using YouTuber.Client;
+using YouTuber.Helpers;
 using YouTuber.Models;
 
 namespace YouTuber.Service
 {
     public class YouTubeService : IYouTubeService
     {
-        private const string BaseUrl = "https://www.youtube.com/watch?v=";
-        private const string BaseFolder = "download";
         private readonly HashSet<string> _set = new HashSet<string>();
+        private readonly IYouTubeClient _client;
 
-        public virtual async Task YoutubeToMp4(IEnumerable<string> urls, MediaType.MediaCodec audioCodec = MediaType.MediaCodec.none)
+        public YouTubeService()
+        {
+            _client = new YouTubeClient();
+        }
+
+        public virtual async Task DownloadYouTubeAsync(IEnumerable<string> urls, MediaType.MediaCodec codec = MediaType.MediaCodec.none)
         {
             ParallelOptions options = new ParallelOptions();
             int maxProc = Environment.ProcessorCount;
@@ -26,7 +31,7 @@ namespace YouTuber.Service
 
             await Parallel.ForEachAsync(urls, options, async (url, token) =>
             {
-                var result = await YoutubeToMp4(url, audioCodec);
+                var result = await DownloadYouTubeAsync(url, codec);
 
                 if (!string.IsNullOrWhiteSpace(result))
                 {
@@ -35,44 +40,61 @@ namespace YouTuber.Service
             });
         }
 
-        public virtual async Task<string?> YoutubeToMp4(string url, MediaType.MediaCodec audioCodec)
+        public virtual async Task<string?> DownloadYouTubeAsync(string input, MediaType.MediaCodec codec)
         {
-            string uri = Url(url.Trim()).ToString();
+            string url = YouTuberHelpers.UnifyYouTubeUrl(input);
 
-            if (uri.Replace(BaseUrl, "").Length != 11)
+            if (string.IsNullOrWhiteSpace(url))
             {
-                return "Looks like this is invalid url/id";
+                return Config.InvalidYouTube;
             }
 
+            if (IsDuplicate(url))
+            {
+                return Config.DuplicateYouTube;
+            }
+
+            YouTubeVideo video = await _client.DownloadYouTubeAsync(url);
+
+            string validationMessage = ValidateVideo(video);
+            
+            if (validationMessage != "OK")
+            {
+                return validationMessage;
+            }
+
+            YouTuberHelpers.CreateFolder(Config.BaseFolder);
+            string path = Path.Combine(Config.BaseFolder, video.FullName);
+            
+            await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
+            
+            GetAudio(path, codec);
+            
+            return $"{video.Title} is ready under {Config.BaseFolder}";
+        }
+
+        public virtual bool IsDuplicate(string url)
+        {
             lock (_set)
             {
                 if (_set.Contains(url))
                 {
-                    return null;
+                    return true;
                 }
 
                 _set.Add(url);
+                return false;
             }
+        }
 
-            YouTube youtube = YouTube.Default;
-            YouTubeVideo video = await youtube.GetVideoAsync(uri);
-            string validationMessage = ValidateVideo(video);
-            if (validationMessage != "OK") return validationMessage;
-
-            CreateFolder(BaseFolder);
-            string path = Path.Combine(BaseFolder, video.FullName);
-            await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
-            if (audioCodec != MediaType.MediaCodec.none)
+        private void GetAudio(string path, MediaType.MediaCodec codec)
+        {
+            if (codec == MediaType.MediaCodec.none) return;
+            lock (_set)
             {
-                lock (_set)
-                {
-                    //todo: investigation of possible solution required
-                    //parallel is not possible hence ffmpeg.exe process need to done first.
-                    ExtractAudio(path, audioCodec).Wait();
-                    File.Delete(path);
-                }
+                ExtractAudio(path, codec).Wait();
+                File.Delete(path);
             }
-            return $"{CleanFilename(video.FullName)} video is ready under {BaseFolder}";
         }
 
         private static async Task ExtractAudio(string path, MediaType.MediaCodec codec)
@@ -112,8 +134,7 @@ namespace YouTuber.Service
             }
             catch (InvalidOperationException)
             {
-                var title = CleanFilename(video.FullName);
-                return $"{title} is properly copyright protected or locked!";
+                return $"{video.Title} is properly copyright protected or locked!";
             }
             catch (Exception e)
             {
@@ -121,41 +142,6 @@ namespace YouTuber.Service
             }
 
             return "OK";
-        }
-
-        public virtual IEnumerable<string> FileToList(string file)
-        {
-            using FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read);
-            using StreamReader sr = new StreamReader(fs);
-            string[] results = sr.ReadToEnd()
-                .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-
-            return results;
-        }
-
-        private static void CreateFolder(string folder)
-        {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), folder);
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-        }
-
-        private static string CleanFilename(string rawFilename)
-        {
-            return rawFilename
-                .Replace(" - YouTube", "")
-                .Replace(".webm", "")
-                .Replace(".mp3", "")
-                .Replace(".mp4", "");
-        }
-
-        private static Uri Url(string url)
-        {
-            string str = url.Length == 11 ? $"{BaseUrl}{url}" : url;
-            Uri uri = new Uri(str);
-            return uri;
         }
 
     }
