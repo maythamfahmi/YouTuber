@@ -35,15 +35,15 @@ namespace YouTuber.Cmd
             return test switch
             {
                 //working
-                1 => new[] { "--help" },
-                2 => new[] { "--version" },
-                3 => new[] { "-l dummy" },
-                4 => new[] { "-l dummy", "-a mp3" },
-                5 => new[] { "-l 3rJfBFamlIw" },
-                6 => new[] { "-l https://www.youtube.com/watch?v=Kv3RfdHZ25c" },
-                7 => new[] { "-l https://youtu.be/Kv3RfdHZ25c" },
-                8 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw" },
-                9 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a mp3" },
+                01 => new[] { "--help" },
+                02 => new[] { "--version" },
+                03 => new[] { "-l dummy" },
+                04 => new[] { "-l dummy", "-a mp3" },
+                05 => new[] { "-l 3rJfBFamlIw" },
+                06 => new[] { "-l https://www.youtube.com/watch?v=Kv3RfdHZ25c" },
+                07 => new[] { "-l https://youtu.be/Kv3RfdHZ25c" },
+                08 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw" },
+                09 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a mp3" },
                 10 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw", "-a m4a" },
                 11 => new[] { "-a m4a", "-l Kv3RfdHZ25c" },
                 12 => new[] { "-l download.txt", "-a mp3" },
@@ -54,6 +54,8 @@ namespace YouTuber.Cmd
                 23 => new[] { "-l Kv3RfdHZ25c,dVsZm7_sqfw;3rJfBFamlIw" },
                 24 => new[] { "-l", "-a mp3" },
                 25 => new[] { "-l https://www.youtube.com/Kv3RfdHZ25c" },
+                //custom test
+                30 => new[] { "-l xxxxxxxxxxx" },
                 //default
                 _ => new[] { "" }
             };
@@ -106,7 +108,8 @@ namespace YouTuber.Cmd
             return list;
         }
 
-        private async Task TryDownloadYouTubeAsync(IEnumerable<string> youtubeList, MediaType.MediaCodec audioCodec)
+        private async Task TryDownloadYouTubeAsync(IEnumerable<string> youtubeList, 
+            MediaType.MediaCodec audioCodec)
         {
             try
             {

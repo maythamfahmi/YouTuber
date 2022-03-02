@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using VideoLibrary;
 
 namespace YouTuber.Client
@@ -12,6 +13,11 @@ namespace YouTuber.Client
             return await youtube.GetVideoAsync(input);
         }
 
+        public virtual async Task<IEnumerable<YouTubeVideo>> GetAllAvailableFormatAsync(string input)
+        {
+            YouTube youtube = YouTube.Default;
+            return await youtube.GetAllVideosAsync(input);
+        }
     }
 
 }
