@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using VideoLibrary;
 using Xabe.FFmpeg;
@@ -21,7 +22,8 @@ namespace YouTuber.Service
             _client = new YouTubeClient();
         }
 
-        public virtual async Task DownloadYouTubeAsync(IEnumerable<string> urls, MediaType.MediaCodec codec = MediaType.MediaCodec.none)
+        public virtual async Task DownloadYouTubeAsync(IEnumerable<string> urls,
+            MediaType.MediaCodec codec = MediaType.MediaCodec.none)
         {
             ParallelOptions options = new ParallelOptions();
             int maxProc = Environment.ProcessorCount;
@@ -40,36 +42,38 @@ namespace YouTuber.Service
             });
         }
 
-        public virtual async Task<string?> DownloadYouTubeAsync(string input, MediaType.MediaCodec codec)
+        public virtual async Task<string?> DownloadYouTubeAsync(string url, MediaType.MediaCodec codec)
         {
-            string url = YouTuberHelpers.UnifyYouTubeUrl(input);
+            string unified = YouTuberHelpers.UnifyYouTubeUrl(url);
 
-            if (string.IsNullOrWhiteSpace(url))
+            if (string.IsNullOrWhiteSpace(unified))
             {
                 return Config.InvalidYouTube;
             }
 
-            if (IsDuplicate(url))
+            if (IsDuplicate(unified))
             {
                 return Config.DuplicateYouTube;
             }
 
-            YouTubeVideo video = await _client.DownloadYouTubeAsync(url);
+            IEnumerable<YouTubeVideo> videos = await _client.GetAllAvailableFormatAsync(unified);
+            
+            var video = FilterOnlyVideoFormats(videos).MaxBy(e => e.Resolution);
 
             string validationMessage = ValidateVideo(video);
-            
+
             if (validationMessage != "OK")
             {
                 return validationMessage;
             }
 
             YouTuberHelpers.CreateFolder(Config.BaseFolder);
-            string path = Path.Combine(Config.BaseFolder, video.FullName);
-            
+            string path = Path.Combine(Config.BaseFolder, video!.FullName);
+
             await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
-            
+
             GetAudio(path, codec);
-            
+
             return $"{video.Title} is ready under {Config.BaseFolder}";
         }
 
@@ -95,6 +99,25 @@ namespace YouTuber.Service
                 ExtractAudio(path, codec).Wait();
                 File.Delete(path);
             }
+        }
+
+        private static IEnumerable<YouTubeVideo> FilterOnlyValidFormats(IEnumerable<YouTubeVideo> videos){
+            return videos
+                .Where(e => e.ContentLength != null)
+                .Where(e => e.ContentLength != 0)
+                .Where(e => e.AudioBitrate != -1);
+        }
+
+        private IEnumerable<YouTubeVideo> FilterOnlyVideoFormats(IEnumerable<YouTubeVideo> videos)
+        {
+            return FilterOnlyValidFormats(videos)
+                .Where(e => !string.IsNullOrEmpty(e.FileExtension));
+        }
+
+        private IEnumerable<YouTubeVideo> FilterOnlyAudioFormats(IEnumerable<YouTubeVideo> videos)
+        {
+            return FilterOnlyValidFormats(videos)
+                .Where(e => string.IsNullOrEmpty(e.FileExtension));
         }
 
         private static async Task ExtractAudio(string path, MediaType.MediaCodec codec)

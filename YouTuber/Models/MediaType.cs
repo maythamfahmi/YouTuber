@@ -9,5 +9,14 @@
             m4a,
             mp3
         }
+
+        public enum VideoQuality
+        {
+            low,
+            standard,
+            high
+        }
+
     }
+
 }
