@@ -1,11 +1,3 @@
-<a href="https://github.com/maythamfahmi/YouTuber/blob/main/LICENSE.txt">
-<img 
-    style="display: block; margin-left: auto; margin-right: auto; height: 140px; width: 140px;"
-    src="https://maythamfahmi.github.io/YouTuber/images/youtuber.png" 
-    alt="YouTuber logo">
-</img>
-</a>
-
 # YouTuber
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/maythamfahmi/YouTuber/blob/main/LICENSE.txt)
