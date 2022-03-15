@@ -1,7 +1,7 @@
 <a href="https://github.com/maythamfahmi/YouTuber/blob/main/LICENSE.txt">
 <img 
     style="display: block; margin-left: auto; margin-right: auto; height: 140px; width: 140px;"
-    src="https://github.com/maythamfahmi/YouTuber/blob/main/logo.png" 
+    src="https://maythamfahmi.github.io/YouTuber/images/youtuber.png" 
     alt="YouTuber logo">
 </img>
 </a>
