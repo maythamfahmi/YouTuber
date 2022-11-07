@@ -108,16 +108,10 @@ namespace YouTuber.Service
                 .Where(e => e.AudioBitrate != -1);
         }
 
-        private IEnumerable<YouTubeVideo> FilterOnlyVideoFormats(IEnumerable<YouTubeVideo> videos)
+        private static IEnumerable<YouTubeVideo> FilterOnlyVideoFormats(IEnumerable<YouTubeVideo> videos)
         {
             return FilterOnlyValidFormats(videos)
                 .Where(e => !string.IsNullOrEmpty(e.FileExtension));
-        }
-
-        private IEnumerable<YouTubeVideo> FilterOnlyAudioFormats(IEnumerable<YouTubeVideo> videos)
-        {
-            return FilterOnlyValidFormats(videos)
-                .Where(e => string.IsNullOrEmpty(e.FileExtension));
         }
 
         private static async Task ExtractAudio(string path, MediaType.MediaCodec codec)

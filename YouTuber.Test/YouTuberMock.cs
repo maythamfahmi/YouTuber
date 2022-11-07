@@ -1,9 +1,6 @@
-﻿using NiL.JS.Statements;
-using Shouldly;
+﻿using Shouldly;
 using NSubstitute;
 using NUnit.Framework;
-using VideoLibrary;
-using YouTuber.Client;
 using YouTuber.Models;
 using YouTuber.Service;
 
@@ -39,21 +36,6 @@ namespace YouTuber.Test
             Action action = () => service.DownloadYouTubeAsync("", MediaType.MediaCodec.none);
             action.ShouldThrow<Exception>();
         }
-
-        //[Test]
-        //public async Task PreventDuplicationTest()
-        //{
-        //    YouTube youtube = YouTube.Default;
-        //    var video = await youtube.GetVideoAsync(Config.SampleVideoList[0]);
-
-        //    IYouTubeClient client = Substitute.For<IYouTubeClient>();
-        //    YouTubeService service = Substitute.For<YouTubeService>();
-        //    client.DownloadYouTubeAsync(Arg.Any<string>()).Returns(video);
-
-        //    var @async = await service.DownloadYouTubeAsync("", MediaType.MediaCodec.none);
-
-        //    Console.WriteLine(@async);
-        //}
 
     }
 }
