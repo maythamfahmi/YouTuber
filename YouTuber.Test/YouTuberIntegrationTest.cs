@@ -10,7 +10,7 @@ namespace YouTuber.Test
         private static readonly string RunningPath = AppDomain.CurrentDomain.BaseDirectory;
         private static readonly IYouTubeService Service = new YouTubeService();
 
-        [Test]
+        [Ignore("Test only while development")]
         public async Task TryToDownloadVideoFromYoutube()
         {
             var path = Path.Combine(RunningPath, "download");
@@ -21,7 +21,7 @@ namespace YouTuber.Test
             Directory.Delete(path, true);
         }
 
-        [Ignore("Playground")]
+        [Ignore("Test only while development")]
         public async Task TryToDownloadVideoFromYoutubePlayground()
         {
             string[] youtubeList = new[]
