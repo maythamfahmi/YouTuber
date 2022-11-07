@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Resources;
 using YouTuber.Models;
 
 namespace YouTuber.Helpers
@@ -20,7 +19,7 @@ namespace YouTuber.Helpers
 
         public static void CreateFolder(string folder)
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), folder);
+            string path = Path.Combine(Environment.CurrentDirectory, folder);
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
