@@ -19,7 +19,7 @@ namespace YouTuber.Helpers
 
         public static void CreateFolder(string folder)
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), folder);
+            string path = Path.Combine(Environment.CurrentDirectory, folder);
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
