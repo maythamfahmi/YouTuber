@@ -143,7 +143,7 @@ git tag 3.x.x -a -m "Release version 3.x.x"
 git push --tags
 ```
 
-For pre-release, just tag with ```.0-pre``` like ```v3.x.x.0-pre```.
+For pre-release, just tag with ```.0-pre``` like ```3.x.x.0-pre```.
 
 Example:
 
@@ -151,6 +151,8 @@ Example:
 git tag 3.x.x.0-pre -a -m "Release version 3.x.x.0-pre"
 git push --tags
 ```
+
+Or use the PowerShell command line Create Release.ps1 and it will automatically generate the next version, if you need to change the major or minor version, you need to pass the value manually.
 
 **Note:** remove cached tags ```git fetch -p -P origin``` in case of mistake or clean up and ```git push --tags```
 
