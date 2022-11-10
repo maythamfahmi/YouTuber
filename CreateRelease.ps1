@@ -10,7 +10,10 @@ param(
 $appVersion = (git describe --match "*" main).replace("v", "").split(".")
 $majorDefault = $appVersion[0]
 $minorDefault = $appVersion[1]
-$patchDefault = $appVersion[2] #.substring(0, $appVersion[2].Indexof("-"));
+$patchDefault = $appVersion[2]
+if($patchDefault.Contains("-")){
+    $patchDefault = $appVersion[2].substring(0, $appVersion[2].Indexof("-"));
+}
 
 Function Version{
     param(
@@ -24,7 +27,7 @@ Function Version{
         $Minor = $Minor + 1;
     }
 
-    $Version = "v$Major.$Minor.$PatchInc"
+    $Version = "$Major.$Minor.$PatchInc"
     Write-Output "$Version"
 
     $yesNo = Read-Host -prompt "Are you sure to release YouTuber ${Version}? [Y/N]"
