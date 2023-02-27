@@ -57,7 +57,7 @@ namespace YouTuber.Cmd
                 //custom test
                 30 => new[] { "-l xxxxxxxxxxx" },
                 //default
-                _ => new[] { "-l https://youtu.be/4r454dad7tc" }
+                _ => new[] { "" }
             };
         }
 
