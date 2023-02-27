@@ -57,8 +57,8 @@ namespace YouTuber.Service
             }
 
             IEnumerable<YouTubeVideo> videos = await _client.GetAllAvailableFormatAsync(unified);
-            
-            var video = FilterOnlyVideoFormats(videos).MaxBy(e => e.Resolution);
+
+            var video = FilterOnlyVideoFormats(videos);
 
             string validationMessage = ValidateVideo(video);
 
@@ -68,7 +68,22 @@ namespace YouTuber.Service
             }
 
             YouTuberHelpers.CreateFolder(Config.BaseFolder);
-            string path = Path.Combine(Config.BaseFolder, video!.FullName);
+
+            var fileName = string.Empty;
+
+            if (video!.FileExtension == "")
+            {
+                if (video.AdaptiveKind == AdaptiveKind.Audio)
+                {
+                    fileName = $"{video!.FullName}.mp3";
+                }
+                if (video.AdaptiveKind == AdaptiveKind.Video)
+                {
+                    fileName = $"{video!.FullName}.mp4";
+                }
+            }
+
+            string path = Path.Combine(Config.BaseFolder, fileName);
 
             await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
 
@@ -101,17 +116,36 @@ namespace YouTuber.Service
             }
         }
 
-        private static IEnumerable<YouTubeVideo> FilterOnlyValidFormats(IEnumerable<YouTubeVideo> videos){
+        private static IEnumerable<YouTubeVideo> FilterOnlyValidFormats(IEnumerable<YouTubeVideo> videos)
+        {
             return videos
                 .Where(e => e.ContentLength != null)
                 .Where(e => e.ContentLength != 0)
                 .Where(e => e.AudioBitrate != -1);
         }
 
-        private static IEnumerable<YouTubeVideo> FilterOnlyVideoFormats(IEnumerable<YouTubeVideo> videos)
+        private static YouTubeVideo? FilterOnlyVideoFormats(IEnumerable<YouTubeVideo> videos)
         {
-            return FilterOnlyValidFormats(videos)
+            YouTubeVideo? youTubeVideo = null;
+
+            IEnumerable<YouTubeVideo> list = FilterOnlyValidFormats(videos)
                 .Where(e => !string.IsNullOrEmpty(e.FileExtension));
+
+            if (list == null || !list.Any())
+            {
+                list = FilterOnlyValidFormats(videos);
+
+                if (list.All(e => e.AdaptiveKind == AdaptiveKind.Audio))
+                {
+                    youTubeVideo = list.MaxBy(e => e.ContentLength);
+                }
+            }
+            else
+            {
+                youTubeVideo = list.MaxBy(e => e.Resolution);
+            }
+
+            return youTubeVideo;
         }
 
         private static async Task ExtractAudio(string path, MediaType.MediaCodec codec)
