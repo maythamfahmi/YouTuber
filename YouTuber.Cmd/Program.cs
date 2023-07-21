@@ -39,7 +39,7 @@ namespace YouTuber.Cmd
                 02 => new[] { "--version" },
                 03 => new[] { "-l dummy" },
                 04 => new[] { "-l dummy", "-a mp3" },
-                05 => new[] { "-l 3rJfBFamlIw" },
+                05 => new[] { "-l Kv3RfdHZ25c" },
                 06 => new[] { "-l https://www.youtube.com/watch?v=Kv3RfdHZ25c" },
                 07 => new[] { "-l https://youtu.be/Kv3RfdHZ25c" },
                 08 => new[] { "-l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw" },
@@ -67,7 +67,7 @@ namespace YouTuber.Cmd
             IsDebugCheck(ref isDebug);
             if (isDebug)
             {
-                args = DebuggingTest(0);
+                args = DebuggingTest(5);
             }
 
             await Parser.Default.ParseArguments<Options>(args)
