@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using VideoLibrary;
 using Xabe.FFmpeg;
@@ -9,6 +10,7 @@ using Xabe.FFmpeg.Downloader;
 using YouTuber.Client;
 using YouTuber.Helpers;
 using YouTuber.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace YouTuber.Service
 {
@@ -82,9 +84,13 @@ namespace YouTuber.Service
                     fileName = $"{video!.FullName}.mp4";
                 }
             }
+            else
+            {
+                fileName = $"{video!.FullName}";
+            }
 
             string path = Path.Combine(Config.BaseFolder, fileName);
-
+            
             await File.WriteAllBytesAsync(path, await video.GetBytesAsync());
 
             GetAudio(path, codec);

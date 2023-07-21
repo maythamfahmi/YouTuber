@@ -7,7 +7,7 @@
 
 ## Introdution
 :rocket: **YouTuber** is a fast command line for downloading YouTube videos. 
-**YoutTuber** is a cross platform (Windows and Ubuntu) Open Source software licensed under MIT License.
+**YouTuber** is a cross platform (Windows and Ubuntu) Open Source software licensed under MIT License.
 It is highly encouraged to read and respect [YouTube][1] policy and other content creators and owners copyright.
 
 ## Download and install
@@ -15,7 +15,7 @@ You can find downloadyoutube.7z and download **YouTuber** via [Releases](https:/
 
 Extract the zip file and extract the version that fits your operating system. Follow the examples below under **How to use**.
 
-Avaibale versions:
+Available versions:
 - DownloadYouTube.exe from win-x86 folder for Windows OS 10, 11
 - DownloadYouTube.exe from win-x64 folder for Windows OS 10, 11 
 - DownloadYouTube from linux-x64 folder for Ubuntu OS
@@ -131,7 +131,7 @@ Third party packages/libraries:
 - Xabe.FFmpeg.Downloader
 - CommandLineParser
 
-Xabe is used for audio convertion feature. It is only for none commerical use, else contact Xabe.FFmpeg
+Xabe is used for audio conversion feature. It is only for none commercial use, else contact Xabe.FFmpeg
 
 ## Create Release
 From you console:
@@ -156,7 +156,7 @@ Or use the PowerShell command line Create Release.ps1 and it will automatically 
 
 **Note:** remove cached tags ```git fetch -p -P origin``` in case of mistake or clean up and ```git push --tags```
 
-Rememebr to update readme badge and versions.
+Remember to update readme badge and versions.
 
 ### Testing with Ubuntu on Windows environment
 
@@ -169,7 +169,7 @@ Example of testing release in Ubuntu docker instance:
 
 Check this https://github.com/dotnet/sdk/issues/23627
 
-It requries docker desktop.
+It requires docker desktop.
 
 ## Issues
 
@@ -178,7 +178,7 @@ Please report issues [here](https://github.com/maythamfahmi/YouTuber/issues).
 ## Contributing
 
 I need your help, so if you have good knowledge of C# and Cryptography just grab one of the issues and add a pull request.
-The same is valid, if you have idea for improvement, adding new feature or even documentation improvement and enhancemnet, you are more than welcome to contribute.
+The same is valid, if you have idea for improvement, adding new feature or even documentation improvement and enhancement, you are more than welcome to contribute.
 
 ### How to contribute:
 
