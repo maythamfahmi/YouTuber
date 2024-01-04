@@ -34,11 +34,13 @@ namespace YouTuber.Cmd
         {
             return test switch
             {
+                //For testing
+                00 => new[] { "-l DZg5e1GnvO0" },
                 //working
                 01 => new[] { "--help" },
                 02 => new[] { "--version" },
-                03 => new[] { "-l dummy" },
-                04 => new[] { "-l dummy", "-a mp3" },
+                03 => new[] { "-d" },
+                04 => new[] { "-d", "-a mp3" },
                 05 => new[] { "-l Kv3RfdHZ25c" },
                 06 => new[] { "-l https://www.youtube.com/watch?v=Kv3RfdHZ25c" },
                 07 => new[] { "-l https://youtu.be/Kv3RfdHZ25c" },
@@ -50,7 +52,7 @@ namespace YouTuber.Cmd
                 //not working
                 20 => new[] { "-h" },
                 21 => new[] { "-v" },
-                22 => new[] { "-l dummy", "-a" },
+                22 => new[] { "-dummy", "-a" },
                 23 => new[] { "-l Kv3RfdHZ25c,dVsZm7_sqfw;3rJfBFamlIw" },
                 24 => new[] { "-l", "-a mp3" },
                 25 => new[] { "-l https://www.youtube.com/Kv3RfdHZ25c" },
@@ -71,14 +73,14 @@ namespace YouTuber.Cmd
             }
 
             await Parser.Default.ParseArguments<Options>(args)
-                 .WithParsedAsync<Options>(async o =>
+                 .WithParsedAsync(async o =>
                  {
                      MediaType.MediaCodec audioCodec = YouTuberHelpers.MapAudioType(o.Audio);
 
                      if (o.List != null)
                      {
                          var downloadList = GetDownloadList(o.List);
-                         var timer = new Timer(TimerCallback!, null, 0, 100);
+                         _ = new Timer(TimerCallback!, null, 0, 100);
                          await TryDownloadYouTubeAsync(downloadList, audioCodec);
                      }
                  });
