@@ -160,12 +160,16 @@ Remember to update readme badge and versions.
 
 ### Testing with Ubuntu on Windows environment
 
-```docker run -it --rm -v $pwd`:/app mcr.microsoft.com/dotnet/sdk:6.0```
-```cd /app```
+```
+docker run -it --rm -v $pwd`:/app mcr.microsoft.com/dotnet/sdk:6.0
+cd /app
+```
 
 Example of testing release in Ubuntu docker instance:
 
-```dotnet publish /p:PublishProfile=Release-win-x64 -c Release```
+```
+dotnet publish /p:PublishProfile=Release-win-x64 -c Release
+```
 
 Check this https://github.com/dotnet/sdk/issues/23627
 
