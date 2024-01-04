@@ -2,8 +2,10 @@
 {
     public static class Config
     {
+#pragma warning disable S1075
         public const string BaseUrl = "https://www.youtube.com/watch?v=";
         public const string BaseUrlShare = "https://youtu.be/";
+#pragma warning restore S1075
         public const string DownloadFile = "download.txt";
         public const string BaseFolder = "download";
         public const string InvalidYouTube = "Invalid YouTube Url/Id";
