@@ -31,10 +31,10 @@ Result
 ```
   -a, --audio    Extract only audio. -a mp3 or -a m4a.
 
-  -l, --list     Required. Download single or multiple youtube by url or id, use
-                 ; as separator.
-                 ./DownloadYouTube -l xxxxxxxxxxx;xxxxxxxxxxx;xxxxxxxxxxx
-                 ./DownloadYouTube -l xxxxxxxxxxx
+  -l, --list     Required. Download single or multiple youtube by url or id, use ; as separator.
+                 DownloadYouTube -l xxxxxxxxxxx;xxxxxxxxxxx;xxxxxxxxxxx
+                 DownloadYouTube -l xxxxxxxxxxx
+                 DownloadYouTube -l dummy will download 3 preselected videos using download.txt file, for demo purpose.
 
   --help         Display this help screen.
 
@@ -172,6 +172,8 @@ Check this https://github.com/dotnet/sdk/issues/23627
 It requires docker desktop.
 
 ## Issues
+
+Known issue: You might experience slow downloads, which is normal. Just be patient.
 
 Please report issues [here](https://github.com/maythamfahmi/YouTuber/issues).
 

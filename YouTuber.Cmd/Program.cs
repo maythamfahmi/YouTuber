@@ -19,9 +19,14 @@ namespace YouTuber.Cmd
 
         public static async Task Main(string[] args)
         {
+            if (args.Length == 0)
+            {
+                args = new[] { "--help" };
+            }
+
             await new Program().Start(args);
         }
-        
+
         [Conditional("DEBUG")]
         private static void IsDebugCheck(ref bool debugMode)
         {
@@ -39,8 +44,8 @@ namespace YouTuber.Cmd
                 //working
                 01 => new[] { "--help" },
                 02 => new[] { "--version" },
-                03 => new[] { "-d" },
-                04 => new[] { "-d", "-a mp3" },
+                03 => new[] { "-l dummy" },
+                04 => new[] { "-l dummy", "-a mp3" },
                 05 => new[] { "-l Kv3RfdHZ25c" },
                 06 => new[] { "-l https://www.youtube.com/watch?v=Kv3RfdHZ25c" },
                 07 => new[] { "-l https://youtu.be/Kv3RfdHZ25c" },
@@ -52,7 +57,7 @@ namespace YouTuber.Cmd
                 //not working
                 20 => new[] { "-h" },
                 21 => new[] { "-v" },
-                22 => new[] { "-dummy", "-a" },
+                22 => new[] { "-l dummy", "-a" },
                 23 => new[] { "-l Kv3RfdHZ25c,dVsZm7_sqfw;3rJfBFamlIw" },
                 24 => new[] { "-l", "-a mp3" },
                 25 => new[] { "-l https://www.youtube.com/Kv3RfdHZ25c" },
@@ -110,7 +115,7 @@ namespace YouTuber.Cmd
             return list;
         }
 
-        private async Task TryDownloadYouTubeAsync(IEnumerable<string> youtubeList, 
+        private async Task TryDownloadYouTubeAsync(IEnumerable<string> youtubeList,
             MediaType.MediaCodec audioCodec)
         {
             try
@@ -122,6 +127,6 @@ namespace YouTuber.Cmd
                 Console.WriteLine(e.Message);
             }
         }
-        
+
     }
 }
