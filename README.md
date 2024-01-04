@@ -5,10 +5,10 @@
 [![.NET-CI](https://github.com/maythamfahmi/YouTuber/actions/workflows/ci.yml/badge.svg)](https://github.com/maythamfahmi/YouTuber/actions/workflows/ci.yml)
 [![Release](https://github.com/maythamfahmi/YouTuber/actions/workflows/windows-release.yml/badge.svg)](https://github.com/maythamfahmi/YouTuber/actions/workflows/windows-release.yml)
 
-## Introdution
+## Introduction
 :rocket: **YouTuber** is a fast command line for downloading YouTube videos. 
-**YouTuber** is a cross platform (Windows and Ubuntu) Open Source software licensed under MIT License.
-It is highly encouraged to read and respect [YouTube][1] policy and other content creators and owners copyright.
+**YouTuber** is a cross-platform (Windows and Ubuntu) Open Source software licensed under MIT License.
+It is highly encouraged to read and respect [YouTube][1] policy and other content creators' and owners' copyrights.
 
 ## Download and install
 You can find downloadyoutube.7z and download **YouTuber** via [Releases](https://github.com/maythamfahmi/YouTuber/releases).
@@ -44,16 +44,16 @@ Result
 ### Example 2, Download a single video based on youtube url
 ```./DownloadYouTube -l https://www.youtube.com/watch?v=Kv3RfdHZ25c```
 
-It will download following link:
+It will download the following link:
 
 ```
 https://www.youtube.com/watch?v=Kv3RfdHZ25c
 ```
 
-### Example 3 Download multiple videos based on youtube video id
+### Example 3 Download multiple videos based on YouTube video ID
 ```./DownloadYouTube -l Kv3RfdHZ25c;dVsZm7_sqfw;3rJfBFamlIw```
 
-It will download 3 youtube videos of following link:
+It will download 3 YouTube videos from the following link:
 
 ```
 https://www.youtube.com/watch?v=Kv3RfdHZ25c
@@ -61,17 +61,17 @@ https://www.youtube.com/watch?v=dVsZm7_sqfw
 https://www.youtube.com/watch?v=3rJfBFamlIw
 ```
 
-### Example 4 Download multiple videos based on youtube video url
+### Example 4 Download multiple videos based on the YouTube video URL
 ```./DownloadYouTube -l dummy```
 
-It will download 3 samples videos. It will create download.txt list file of the 3 videos (You can add your own videos).
+It will download 3 sample videos. It will create a download.txt list file of the 3 videos (You can add your own videos).
 
-### Example 5 Download multiple videos based on youtube video url
+### Example 5 Download multiple videos based on the YouTube video URL
 ```./DownloadYouTube -l ./download.txt```
 
-It will download what ever youtube link from download.txt file.
+It will download whatever youtube link from the download.txt file.
 
-### Example 6 Download and extract only Audio of the youtube video
+### Example 6 Download and extract only Audio of the YouTube video
 ```./DownloadYouTube -l ./download.txt -a mp3```
 
 Will convert to mp3
@@ -85,7 +85,7 @@ Will convert to m4a
 ### Example 7 Download multiple videos of different variation
 ```./DownloadYouTube -l Kv3RfdHZ25c;https://www.youtube.com/watch?v=dVsZm7_sqfw;https://youtu.be/3rJfBFamlIw```
 
-It will download 3 youtube videos of following link:
+It will download 3 YouTube videos of the following link:
 
 ```           
 https://www.youtube.com/watch?v=Kv3RfdHZ25c
@@ -123,20 +123,20 @@ https://maythamfahmi.github.io/YouTuber
 #### Language
 - C# Sharp
 - Standard 2
-- Dotnet 6
+- Dotnet 8
 #### 3rd party dependency
-Third party packages/libraries:
+Third-party packages/libraries:
 - VideoLibrary
 - Xabe.FFmpeg 
 - Xabe.FFmpeg.Downloader
 - CommandLineParser
 
-Xabe is used for audio conversion feature. It is only for none commercial use, else contact Xabe.FFmpeg
+Xabe is used for the audio conversion feature. It is only for none non-commercial use, else contact Xabe.FFmpeg
 
 ## Create Release
-From you console:
+From your console:
 
-After merging to main, create tag release:
+After merging to the main, create a tag release:
 
 ```
 git tag 3.x.x -a -m "Release version 3.x.x"
@@ -156,7 +156,7 @@ Or use the PowerShell command line Create Release.ps1 and it will automatically 
 
 **Note:** remove cached tags ```git fetch -p -P origin``` in case of mistake or clean up and ```git push --tags```
 
-Remember to update readme badge and versions.
+Remember to update the readme badge and versions.
 
 ### Testing with Ubuntu on Windows environment
 
@@ -173,7 +173,7 @@ dotnet publish /p:PublishProfile=Release-win-x64 -c Release
 
 Check this https://github.com/dotnet/sdk/issues/23627
 
-It requires docker desktop.
+It requires a docker desktop.
 
 ## Issues
 
@@ -184,7 +184,7 @@ Please report issues [here](https://github.com/maythamfahmi/YouTuber/issues).
 ## Contributing
 
 I need your help, so if you have good knowledge of C# and Cryptography just grab one of the issues and add a pull request.
-The same is valid, if you have idea for improvement, adding new feature or even documentation improvement and enhancement, you are more than welcome to contribute.
+The same is valid, if you have ideas for improvement, adding new features, or even documentation improvement and enhancement, you are more than welcome to contribute.
 
 ### How to contribute:
 
