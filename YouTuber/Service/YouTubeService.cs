@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using VideoLibrary;
 using Xabe.FFmpeg;
@@ -10,7 +9,6 @@ using Xabe.FFmpeg.Downloader;
 using YouTuber.Client;
 using YouTuber.Helpers;
 using YouTuber.Models;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace YouTuber.Service
 {
@@ -25,7 +23,7 @@ namespace YouTuber.Service
         }
 
         public virtual async Task DownloadYouTubeAsync(IEnumerable<string> urls,
-            MediaType.MediaCodec codec = MediaType.MediaCodec.none)
+            MediaType.MediaCodec codec)
         {
             ParallelOptions options = new ParallelOptions();
             int maxProc = Environment.ProcessorCount;
@@ -77,6 +75,7 @@ namespace YouTuber.Service
             {
                 if (video.AdaptiveKind == AdaptiveKind.Audio)
                 {
+                    Console.WriteLine($"Can only download mp3");
                     fileName = $"{video!.FullName}.mp3";
                 }
                 if (video.AdaptiveKind == AdaptiveKind.Video)
@@ -137,7 +136,7 @@ namespace YouTuber.Service
             IEnumerable<YouTubeVideo> list = FilterOnlyValidFormats(videos)
                 .Where(e => !string.IsNullOrEmpty(e.FileExtension));
 
-            if (list == null || !list.Any())
+            if (!list.Any())
             {
                 list = FilterOnlyValidFormats(videos);
 
@@ -183,7 +182,7 @@ namespace YouTuber.Service
 
             try
             {
-                var getUri = video.Uri;
+                _ = video.Uri;
             }
             catch (AggregateException)
             {
