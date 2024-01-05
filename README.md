@@ -161,7 +161,7 @@ Remember to update the readme badge and versions.
 ### Testing with Ubuntu on Windows environment
 
 ```
-docker run -it --rm -v $pwd`:/app mcr.microsoft.com/dotnet/sdk:6.0
+docker run -it --rm -v $pwd`:/app mcr.microsoft.com/dotnet/sdk:8.0
 cd /app
 ```
 
